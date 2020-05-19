@@ -71,7 +71,7 @@ function editTower(torre){
   console.log(torre);
   Swal.fire({
     title: 'Agregar Torre',
-    html:@include('sweetalert2.TowerLayout'),
+    html:@include('sweetAlert2.TowerLayout'),
     width:'60%',
     showClass: {
       popup: 'animated fadeInDown faster'
@@ -111,7 +111,7 @@ $('#torrePoint').val(torre.wt_lat+','+torre.wt_lng);
 function addTower(){
 Swal.fire({
   title: 'Agregar Torre',
-  html:@include('sweetalert2.TowerLayout'),
+  html:@include('sweetAlert2.TowerLayout'),
   width:'60%',
   showClass: {
     popup: 'animated fadeInDown faster'

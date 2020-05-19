@@ -67,7 +67,7 @@ $(function () {
     function addPkg(){
       Swal.fire({
       title: 'Agregar Paquete',
-        html:@include('sweetalert2.PaquetesLayout'),
+        html:@include('sweetAlert2.PaquetesLayout'),
 
       showClass: {
         popup: 'animated fadeInDown faster'
@@ -89,7 +89,7 @@ $(function () {
     function editPkg(json){
       Swal.fire({
       title: 'Editar Paquete',
-      html:@include('sweetalert2.PaquetesLayout') ,
+      html:@include('sweetAlert2.PaquetesLayout') ,
 
       showClass: {
         popup: 'animated fadeInDown faster'

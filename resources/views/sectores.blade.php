@@ -65,7 +65,7 @@
     function addSector(){
     Swal.fire({
       title: 'Agregar Sector',
-      html:@include('sweetalert2.SectorLayout'),
+      html:@include('sweetAlert2.SectorLayout'),
       width:'60%',
       showClass: {
         popup: 'animated fadeInDown faster'
@@ -91,7 +91,7 @@
 
       Swal.fire({
         title: 'Agregar Sector',
-        html:@include('sweetalert2.SectorLayout'),
+        html:@include('sweetAlert2.SectorLayout'),
         width:'60%',
         showClass: {
           popup: 'animated fadeInDown faster'

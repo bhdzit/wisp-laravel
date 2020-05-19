@@ -68,7 +68,7 @@
     function addClient(){
       Swal.fire({
       title: 'Agregar Cliente',
-      html:@include('sweetalert2.ClienteLayout'),
+      html:@include('sweetAlert2.ClienteLayout'),
       width:'60%',
       showClass: {
         popup: 'animated fadeInDown faster'
@@ -99,7 +99,7 @@
 
           Swal.fire({
             title: 'Editar Cliente',
-            html:@include('sweetalert2.ClienteLayout'),
+            html:@include('sweetAlert2.ClienteLayout'),
             width:'60%',
             showClass: {
               popup: 'animated fadeInDown faster'

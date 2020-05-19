@@ -14,7 +14,7 @@ class TorresController extends Controller
      */
     public function index()
     {
-    //  Alert::html(@include('sweetalert2.TowerLayout'),'asdsa');
+    //  Alert::html(@include('sweetAlert2.TowerLayout'),'asdsa');
 
         return view('torres',['torres'=>Torres::get(['wt_id','ST_X(\'wt_point\')'])]);
     }
