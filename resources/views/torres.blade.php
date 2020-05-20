@@ -6,6 +6,7 @@
   <div class="col-xs-12">
         <div class="box">
       <div class="box-header">
+      
         <h3 class="box-title">Tabla de Torres</h3>
         <button class="btn btn-primary pull-right" onclick="addTower()">Agregar Torres</button>
       </div>
@@ -83,6 +84,7 @@ function editTower(torre){
     },
     preConfirm:function(){
       document.getElementById("send_btn").click();
+      return false;
     }
   });
   var url="{{url('torres/')}}";
@@ -123,6 +125,7 @@ Swal.fire({
   },
   preConfirm:function(){
     document.getElementById("send_btn").click();
+    return false;
   }
 });
 
@@ -136,5 +139,10 @@ map.addEventListener('tap',function(evt){
 });
 
 }
+@if($errors->any())
+  addTower();
+@endif
+
+
 </script>
 @stop

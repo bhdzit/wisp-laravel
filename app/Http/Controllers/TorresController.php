@@ -5,8 +5,13 @@ use App\Torres;
 use Illuminate\Http\Request;
 use DB;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 class TorresController extends Controller
 {
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -27,6 +32,11 @@ class TorresController extends Controller
      */
     public function store(Request $request)
     {
+      request()->validate([
+        'wt_nombre'=>['required'],
+        'wt_altura'=>['required'],
+        'wt_point'=>['required','min:8'],
+      ]);
       $torre=new Torres();
       $torre->wt_nombre=$request->get('wt_nombre');
       $torre->wt_altura=$request->get('wt_altura');
