@@ -15,16 +15,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('dashbord');
-});
+})->middleware('auth');
 
 Route::get('home', function () {
     return view('dashbord');
 })->name("home.index");
 
-Route::resource('clientes','ClienteController');
-Route::resource('torres','TorresController');
-Route::resource('sectores', 'SectoresController');
-Route::resource('paquetes','PaquetesController');
-Route::resource('pagos/agregarpago','AddPayController');
-Route::resource('pagos/reportepagos','ReporteController');
-Route::resource('pagos','PagosController');
+Route::resource('clientes','ClienteController')->middleware('auth');
+Route::resource('torres','TorresController')->middleware('auth');
+Route::resource('sectores', 'SectoresController')->middleware('auth');
+Route::resource('paquetes','PaquetesController')->middleware('auth');
+Route::resource('pagos/agregarpago','AddPayController')->middleware('auth');
+Route::resource('pagos/reportepagos','ReporteController')->middleware('auth');
+Route::resource('pagos','PagosController')->middleware('auth');
+
+Auth::routes();
+
+#Route::get('/home', 'HomeController@index')->name('home');
