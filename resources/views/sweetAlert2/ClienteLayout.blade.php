@@ -1,5 +1,5 @@
 '<form  id="ClienteForm" method="POST" action="{{route('clientes.store')}}" >'+
-  '{{$errors}}'+
+  '<input type="hidden" id="wc_id" name="wc_id" value="{{old("wc_id")}}">'+
   '@csrf'+
 '<div class="form-group row">'+
     '  <div class="col-sm-6">'+
@@ -120,7 +120,7 @@
         '</div>'+
         '  @enderror'+
     '  </div>'+
-    '<input type="hidden" class="form-control swal2-input" id="wc_point" name="wc_point" required  >'+
+    '<input type="hidden" class="form-control swal2-input" id="wc_point" name="wc_point" required value="{{old("wc_point")}}" >'+
     '  <div class="col-sm-12 ">'+
     '<div style="width: 100%; height: 380px" id="mapContainer"></div>'+
     '   @error("wc_point")'+

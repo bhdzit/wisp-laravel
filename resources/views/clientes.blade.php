@@ -1,6 +1,7 @@
 @extends('admin.layout')
 
     @section('content')
+{{var_dump(old())}}
     <div class="row">
       <div class="col-xs-12">
             <div class="box">
@@ -119,7 +120,8 @@
 
              $('#ClienteForm').append('{{ method_field("PATCH") }}');
             setMap();
-            console.log(json);
+
+              $("#wc_id").val(json.ws_id);
               $("#wc_name").val(json.wc_name);
               $("#wc_last_name").val(json.wc_last_name);
               $("#wc_phone").val(json.wc_phone);
@@ -149,7 +151,17 @@
 
     }
     @if($errors->any())
-      addClient();
+      @if(old('_method'))
+              addClient();
+              var url="{{url('clientes/')}}";
+              url+="/"+$("#wc_id").val();
+              console.log(url);
+
+               $('#ClienteForm').attr('action', url);
+
+               $('#ClienteForm').append('{{ method_field("PATCH") }}');
+      @endif
+
       $("#wc_pkg").val({{old("wc_pkg")}});
         $("#wc_contract").val({{old("wc_pkg")}});
           $("#wc_sector").val({{old("wc_sector")}});
