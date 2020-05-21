@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Route::get('home', function () {
     return view('dashbord');
-})->name("home.index");
+})->name("home.index")->middleware('auth');
 
 Route::resource('clientes','ClienteController')->middleware('auth');
 Route::resource('torres','TorresController')->middleware('auth');
