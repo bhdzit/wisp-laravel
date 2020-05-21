@@ -77,7 +77,7 @@ $(function () {
       },
       preConfirm:function(){
     document.getElementById("send_btn").click();
-
+    return false;
           }
 
 
@@ -99,6 +99,7 @@ $(function () {
       },
       preConfirm:function(){
             document.getElementById("send_btn").click();
+            return false;
         }
 
     });
@@ -114,5 +115,8 @@ $(function () {
     $("#pkg_price").val(json.wp_price);
     $("#pkg_description").val(json.wp_description);
     }
+    @if($errors->any())
+      addPkg();
+    @endif
     </script>
     @stop

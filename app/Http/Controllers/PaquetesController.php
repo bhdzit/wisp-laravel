@@ -25,6 +25,14 @@ class PaquetesController extends Controller
      */
     public function store(Request $request)
     {
+      request()->validate([
+        "pkg_name" => ['required'],
+        "pkg_tx" => ['required','numeric'],
+        "pkg_rx" => ['required','numeric'],
+        "pkg_price" => ['required','numeric'],
+        "pkg_description" => ['required'],
+
+      ]);
         $paquete= new Paquetes;
         $paquete->wp_name=$request->get('pkg_name');
         $paquete->wp_tx=$request->get('pkg_tx');
@@ -55,6 +63,14 @@ class PaquetesController extends Controller
      */
     public function update(Request $request, $id)
     {
+      request()->validate([
+        "pkg_name" => ['required'],
+        "pkg_tx" => ['required','numeric'],
+        "pkg_rx" => ['required','numeric'],
+        "pkg_price" => ['required','numeric'],
+        "pkg_description" => ['required'],
+
+      ]);
         $paquete = Paquetes::find($id);
         $paquete->wp_name=$request->get('pkg_name');
         $paquete->wp_tx=$request->get('pkg_tx');
