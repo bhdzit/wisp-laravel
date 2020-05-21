@@ -20,7 +20,7 @@
     '  </div>'+
     '</div><div class="form-group row">'+
     '  <div class="col-sm-3">'+
-    '<input style="margin-bottom:0" type="text" class="form-control swal2-input" id="wc_phone" name="wc_phone" placeholder="Telefono" required value="{{old('wc_phone')}}">'+
+    '<input style="margin-bottom:0" type="text" class="form-control swal2-input" id="wc_phone" name="wc_phone" placeholder="Telefono"  value="{{old('wc_phone')}}">'+
     '   @error("wc_phone")'+
     '<div  class=" alert-danger" role="alert">'+
     '  <strong>¡Error al Cargar Cliente!</strong>Telefono de Cliente requerido'+

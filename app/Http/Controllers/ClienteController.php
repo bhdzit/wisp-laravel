@@ -40,8 +40,8 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
       request()->validate([
-        "wc_name"=>["required","min:8"],
-        "wc_last_name"=>["required","min:8"],
+        "wc_name"=>["required"],
+        "wc_last_name"=>["required"],
         "wc_phone"=>["required","numeric"],
         "wc_phone2"=>["nullable","numeric"],
         "wc_date"=>["required","date_format:Y-m-d"],
@@ -50,8 +50,6 @@ class ClienteController extends Controller
         "wc_point"=>["required"],
         "wc_contract"=>["required","numeric"],
         "wc_sector"=>["required","numeric"],
-        "wc_ssid"=>["required"],
-        "wc_pass"=>["required"],
         "wc_ip"=>["required",'regex:/^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/' ]
       ]);
       $cliente= new Clientes();
@@ -106,8 +104,6 @@ class ClienteController extends Controller
         "wc_point"=>["required"],
         "wc_contract"=>["required","numeric"],
         "wc_sector"=>["required","numeric"],
-        "wc_ssid"=>["required"],
-        "wc_pass"=>["required"],
         "wc_ip"=>["required",'regex:/^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/' ]
       ]);
       $servicio= Servicios::find($id);
