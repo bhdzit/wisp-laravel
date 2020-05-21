@@ -109,11 +109,16 @@ function setSectorTowerAndAntennasEvents(json){
           map.addObject(object);
       });
 
-      $("#wsct_antennatype").change(function(){
-          $("#apperdiv").toggleClass( "hide",function(evt){
-            if(evt)$(this).addClass("hide");
-            else $(this).removeClass("hide");
-          });
+      $("#wsct_antennatype").change(function(evt){
+        if(evt.target.value==1){
+          $("#apperdiv").removeClass("hide");
+        }
+        else{
+            $("#apperdiv").addClass("hide");
+        }
+
+
+
         var antennatype=$("#wsct_antennatype").val();
         if(object!=null){
           map.removeObject(object);

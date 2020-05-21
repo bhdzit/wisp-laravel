@@ -29,7 +29,7 @@
                           <td>{{$sector->wt_nombre}} </td>
                           <td>{{$sector->wa_name}} </td>
                           <td>
-                                <button class="btn btn-success" onclick="editSector({{json_encode($sector)}},{{json_encode(DB::select('select * from wisp_sec_ant where wsec_id=?',[$sector->wsct_id]))}})"><i class="fa fa-btn fa-edit"></i></button>
+                                <button class="btn btn-success" onclick="editSector({{json_encode($sector)}})"><i class="fa fa-btn fa-edit"></i></button>
                           </td>
                           <td>
                             <form action="{{ url('sectores/'.$sector->wsct_id) }}" method="POST">
@@ -40,7 +40,7 @@
                           </td>
                         </tr>
                     @empty
-            
+
                     @endforelse
                   </tbody>
               <tfoot>
@@ -77,6 +77,7 @@
       },
       preConfirm:function(){
         document.getElementById("send_btn").click();
+        return false;
       }
     });
 
@@ -87,7 +88,7 @@
 
 
     }
-    function editSector(sector,sec){
+    function editSector(sector){
 
       Swal.fire({
         title: 'Agregar Sector',
@@ -103,6 +104,7 @@
         },
         preConfirm:function(){
           document.getElementById("send_btn").click();
+          return false;
         }
       });
       var url="{{url('sectores/')}}";
@@ -117,17 +119,28 @@
        a=JSON.parse(a.replace(/&quot;/g,"\""));
       setSectorTowerAndAntennasEvents(a);
         if(sector.wsct_antenna==1){
-            $('#deg').val(sec[0].wsec_deg);
-            $('#apper').val(sec[0].wsec_rank);
+    
+            $('#deg').val(sector.wsec_deg);
+            $('#apper').val(sector.wsec_rank);
         }
     $('#wsct_name').val(sector.wsct_name);
     $("#wsct_antennatype").val(sector.wsct_antenna);
     $("#wsct_tower").val(sector.wsct_tower);
-    $("#wsct_address").val(sector.wsct_address);
+    $("#wsct_address").val(sector.wsct_ip+"/"+sector.wsct_segment);
     $("#wsct_description").val(sector.wsct_description);
     $("#wsct_dist").val(sector.wsct_dist);
     $("#wsct_tower").trigger('change');
     $("#wsct_antennatype").trigger('change');
     }
+    @if($errors->any())
+      addSector();
+     $("#wsct_antennatype").val({{ old('wsct_antennatype')}});
+
+
+     $("#wsct_tower").val({{ old('wsct_tower')}});
+     $("#apper").val({{old('apper')}});
+        $("#wsct_antennatype").trigger('change');
+    @endif
+
     </script>
     @stop

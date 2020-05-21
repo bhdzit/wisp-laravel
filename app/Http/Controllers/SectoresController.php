@@ -15,13 +15,15 @@ class SectoresController extends Controller
      */
     public function index()
     {
-        return view('sectores',[
+       return view('sectores',[
         'sectores'=>DB::table('wisp_sector')
         ->join('wisp_tower','wsct_tower','=','wt_id')
-        ->join('wisp_antenna_type','wsct_antenna','=','wa_id')
-        ->select('wisp_sector.*','wt_nombre','wa_name')
+        ->leftjoin('wisp_antenna_type','wsct_antenna','=','wa_id')
+        ->leftjoin('wisp_sec_ant','wsec_id','=','wsct_id')
+        ->select(DB::raw(' INET_NTOA(wsct_address) as wsct_ip'),'wisp_sector.*','wt_nombre','wa_name','wisp_sec_ant.*')
         ->get(),
       'towers'=>Torres::get(['wt_id','ST_X(\'wt_point\')'])]);
+
     }
 
     /**
@@ -33,13 +35,29 @@ class SectoresController extends Controller
     public function store(Request $request)
     {
 
+      request()->validate([
+        "wsct_name" => ['required'],
+        "wsct_dist" => ['required'],
+        "wsct_antennatype" => ['required'],
+        "wsct_address" => ['required','regex:/^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\/[0-9]+$/ '],
+        "wsct_tower" => ['required'],
+        "wsct_description" => ['required'],
+      ]);
+      if(request("wsct_antennatype")==1){
+        request()->validate([
+          "apper"=>["required",'numeric']
+        ]);
+      }
+
+      $ip =  explode('/',$request->get('wsct_address'));
      $sector=new Sectores();
-      $sector->wsct_name="\"".$request->get('wsct_name')."\"";
+      $sector->wsct_name=$request->get('wsct_name');
       $sector->wsct_dist=$request->get('wsct_dist');
       $sector->wsct_antenna=$request->get('wsct_antennatype');
-      $sector->wsct_address=\DB::raw("INET_ATON('".$request->get('wsct_address')."')");
+      $sector->wsct_address=\DB::raw("INET_ATON('$ip[0]')");
+      $sector->wsct_segment=$ip[1];
       $sector->wsct_tower=$request->get('wsct_tower');
-      $sector->wsct_description="\"".$request->get('wsct_description')."\"";
+      $sector->wsct_description=$request->get('wsct_description');
 
       $sector->save();
           #'2952861463'
@@ -69,11 +87,27 @@ class SectoresController extends Controller
      */
     public function update(Request $request, $id)
     {
+      request()->validate([
+        "wsct_name" => ['required'],
+        "wsct_dist" => ['required'],
+        "wsct_antennatype" => ['required'],
+        "wsct_address" => ['required','regex:/^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\/[0-9]+$/ '],
+        "wsct_tower" => ['required'],
+        "wsct_description" => ['required'],
+      ]);
+      if(request("wsct_antennatype")==1){
+        request()->validate([
+          "apper"=>["required",'numeric']
+        ]);
+      }
+      $ip =  explode('/',$request->get('wsct_address'));
+
       $sector = Sectores::find($id);
       $sector->wsct_name=$request->get('wsct_name');
       $sector->wsct_dist=$request->get('wsct_dist');
       $sector->wsct_antenna=$request->get('wsct_antennatype');
-      $sector->wsct_address=$request->get('wsct_address');
+      $sector->wsct_address=\DB::raw("INET_ATON('$ip[0]')");
+      $sector->wsct_segment=$ip[1];
       $sector->wsct_tower=$request->get('wsct_tower');
       $sector->wsct_description=$request->get('wsct_description');
       $sector->save();
