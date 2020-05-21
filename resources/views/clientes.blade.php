@@ -1,7 +1,7 @@
 @extends('admin.layout')
 
     @section('content')
-{{var_dump(old())}}
+
     <div class="row">
       <div class="col-xs-12">
             <div class="box">
@@ -151,8 +151,9 @@
 
     }
     @if($errors->any())
+        addClient();
       @if(old('_method'))
-              addClient();
+
               var url="{{url('clientes/')}}";
               url+="/"+$("#wc_id").val();
 
