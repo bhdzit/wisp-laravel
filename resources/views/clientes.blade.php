@@ -155,7 +155,6 @@
               addClient();
               var url="{{url('clientes/')}}";
               url+="/"+$("#wc_id").val();
-              console.log(url);
 
                $('#ClienteForm').attr('action', url);
 

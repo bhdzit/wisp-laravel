@@ -1,5 +1,5 @@
 '<form  id="PaquetesForm" method="POST" action="{{route('paquetes.store')}}" >'+
-
+  '<input type="hidden" id="wp_id" name="wp_id" value="{{old("wp_id")}}">'+
   '{{ csrf_field() }}'+
 '<div class="form-group row">'+
           '<div class="col-sm-12">'+

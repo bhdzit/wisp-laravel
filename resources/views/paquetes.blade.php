@@ -108,7 +108,7 @@ $(function () {
 
     $('#PaquetesForm').attr('action', url);
     $('#PaquetesForm').append('{{ method_field("PATCH") }}');
-
+    $("#wp_id").val(json.wp_id);
     $("#pkg_name").val(json.wp_name);
     $("#pkg_tx").val(json.wp_tx);
     $("#pkg_rx").val(json.wp_rx);
@@ -116,7 +116,16 @@ $(function () {
     $("#pkg_description").val(json.wp_description);
     }
     @if($errors->any())
-      addPkg();
+        addPkg();
+    @if(old('_method'))
+
+              var url="{{url('paquetes/')}}";
+            url+="/"+$("#wp_id").val();
+
+            $('#PaquetesForm').attr('action', url);
+            $('#PaquetesForm').append('{{ method_field("PATCH") }}');
+    @endif
+
     @endif
     </script>
     @stop
