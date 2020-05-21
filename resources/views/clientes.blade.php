@@ -78,6 +78,7 @@
       },
       preConfirm: function(){
             document.getElementById("send_btn").click();
+            return false;
           }
 
     });
@@ -91,8 +92,7 @@
           $("#wc_point").val(coord.lng+","+coord.lat);
           addMarck({lat:coord.lat,lng:coord.lng});
       });
-      setSectorData($("#wc_sector"));
-      setPkgData($("#wc_pkg"));
+
 
     }
     function editClient(json){
@@ -109,7 +109,7 @@
             },
             preConfirm:function(){
             document.getElementById("send_btn").click();
-
+            return false;
             }
             });
             var url="{{url('clientes/')}}";
@@ -119,11 +119,14 @@
 
              $('#ClienteForm').append('{{ method_field("PATCH") }}');
             setMap();
+            console.log(json);
               $("#wc_name").val(json.wc_name);
               $("#wc_last_name").val(json.wc_last_name);
               $("#wc_phone").val(json.wc_phone);
+              $("#wc_phone2").val(json.wc_phone2);
               $("#wc_mail").val(json.wc_mail);
               $("#wc_date").val(json.ws_date);
+              $("#wc_pay_date").val(json.ws_first_pay_date);
               $("#wc_pkg").val(json.wp_id);
               $("#wc_ip").val(json.ws_ip);
               $("#wc_ssid").val(json.ws_ssid);
@@ -145,5 +148,11 @@
 
 
     }
+    @if($errors->any())
+      addClient();
+      $("#wc_pkg").val({{old("wc_pkg")}});
+        $("#wc_contract").val({{old("wc_pkg")}});
+          $("#wc_sector").val({{old("wc_sector")}});
+    @endif
     </script>
     @stop
