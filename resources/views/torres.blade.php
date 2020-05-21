@@ -6,7 +6,7 @@
   <div class="col-xs-12">
         <div class="box">
       <div class="box-header">
-      
+
         <h3 class="box-title">Tabla de Torres</h3>
         <button class="btn btn-primary pull-right" onclick="addTower()">Agregar Torres</button>
       </div>
@@ -94,7 +94,7 @@ function editTower(torre){
 
    $('#towerForm').append('{{ method_field("PATCH") }}');
 
-
+$("#wt_id").val(torre.wt_id);
 $('#torreNombre').val(torre.wt_nombre);
 $('#torreAltura').val(torre.wt_altura);
 $('#torrePoint').val(torre.wt_lat+','+torre.wt_lng);
@@ -141,6 +141,15 @@ map.addEventListener('tap',function(evt){
 }
 @if($errors->any())
   addTower();
+  @if(old('_method'))
+
+  var url="{{url('torres/')}}";
+  url+="/"+$("#wt_id").val();
+
+   $('#towerForm').attr('action', url);
+
+   $('#towerForm').append('{{ method_field("PATCH") }}');
+  @endif
 @endif
 
 

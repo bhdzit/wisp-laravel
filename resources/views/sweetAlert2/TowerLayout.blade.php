@@ -1,4 +1,5 @@
 '<form method="POST" id="towerForm" action={{route("torres.store")}}>'+
+      '<input type="hidden" id="wt_id" name="wt_id" value="{{old("wt_id")}}">'+
 '@csrf'+
 '<div class="form-group row">'+
 '  <div class="col-sm-6">'+
