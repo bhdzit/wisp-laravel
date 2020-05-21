@@ -119,10 +119,11 @@
        a=JSON.parse(a.replace(/&quot;/g,"\""));
       setSectorTowerAndAntennasEvents(a);
         if(sector.wsct_antenna==1){
-    
+
             $('#deg').val(sector.wsec_deg);
             $('#apper').val(sector.wsec_rank);
         }
+    $('#wsct_id').val(sector.wsct_id);
     $('#wsct_name').val(sector.wsct_name);
     $("#wsct_antennatype").val(sector.wsct_antenna);
     $("#wsct_tower").val(sector.wsct_tower);
@@ -134,12 +135,22 @@
     }
     @if($errors->any())
       addSector();
+      @if(old('_method'))
+
+      var url="{{url('sectores/')}}";
+      url+="/"+$('#wsct_id').val();
+
+       $('#SectorForm').attr('action', url);
+       $('#SectorForm').append('{{ method_field("PATCH") }}');
+      @endif
      $("#wsct_antennatype").val({{ old('wsct_antennatype')}});
 
 
      $("#wsct_tower").val({{ old('wsct_tower')}});
      $("#apper").val({{old('apper')}});
         $("#wsct_antennatype").trigger('change');
+
+
     @endif
 
     </script>

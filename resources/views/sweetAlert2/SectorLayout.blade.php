@@ -1,4 +1,5 @@
 '<form  id="SectorForm" method="POST" action="{{route('sectores.store')}}" >'+
+    '<input type="hidden" id="wsct_id" name="wsct_id" value="{{old("wsct_id")}}">'+
   '{{ csrf_field() }}'+
     '<div class="form-group row">'+
                 '<div class="col-sm-4">'+
