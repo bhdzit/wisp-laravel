@@ -575,7 +575,19 @@ $("#reportFrom").submit(function(e){
                 '</tr>';
               }
           $("#PaysTableBody").html(html);
-          table=$("#paysTable").DataTable();
+          table=$("#paysTable").DataTable({
+            "language": {
+                  "search":         "Buscar:",
+                 "lengthMenu":     "Mostrar : _MENU_ ",
+                 "info":           "Pago _START_ al _END_ de _TOTAL_ Pagos",
+                 "paginate": {
+                    "first":      "Primera",
+                    "last":       "Ultima",
+                    "next":       "Siguiente",
+                    "previous":   "Anterior"
+                },
+            }
+          });
     }
 
     })

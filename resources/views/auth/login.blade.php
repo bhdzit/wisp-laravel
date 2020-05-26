@@ -32,7 +32,7 @@
                                   <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                   <label class="form-check-label" for="remember">
-                                      {{ __('Remember Me') }}
+                                      {{ __('Mantener la sesión iniciada') }}
                                   </label>
                                 </div>
                               </div>
@@ -51,8 +51,8 @@
 
                                               @if (Route::has('password.request'))
                                                   <a class="text-center" href="{{ route('password.request') }}">
-                                                      {{ __('Forgot Your Password?') }}
+                                                      {{ __('¿Olvidó la contraseña?') }}
                                                   </a><br>
                                               @endif
-                                              <a  class="text-center" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                              <a  class="text-center" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
 @endsection

@@ -6,7 +6,7 @@
                         @csrf
 
                           <div class="form-group has-feedback">
-                                <input placeholder="Nombre Completp" id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input placeholder="Nombre Completo" id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -44,11 +44,7 @@
 
                         <div class="row">
                           <div class="col-xs-8">
-                            <div class="checkbox icheck">
-                              <label>
-                                <input type="checkbox"> I agree to the <a href="#">terms</a>
-                              </label>
-                            </div>
+
                           </div>
                           <!-- /.col -->
                           <div class="col-xs-4">

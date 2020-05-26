@@ -61,7 +61,19 @@
     @section('script')
 <script type="text/javascript">
 $(function () {
-    $('#example1').DataTable()
+    $('#example1').DataTable({
+      "language": {
+            "search":         "Buscar:",
+           "lengthMenu":     "Mostrar : _MENU_ ",
+           "info":           "Paquete _START_ al _END_ de _TOTAL_ Paquetes",
+           "paginate": {
+              "first":      "Primera",
+              "last":       "Ultima",
+              "next":       "Siguiente",
+              "previous":   "Anterior"
+          },
+      }
+    })
 
 });
     function addPkg(){
