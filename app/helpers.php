@@ -11,4 +11,7 @@ function setSmall($request){
   if($request->wd_banc)
   echo '<span class="label label-primary pull-right">'.$request->wd_banc.'</span>';
 }
+function getPkg($id){
+  return App\Paquetes::find($id)->wp_name;
+}
 ?>

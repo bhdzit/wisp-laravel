@@ -7,6 +7,9 @@ use DB;
 use App\Paquetes;
 use App\Servicios;
 use App\Clientes;
+use App\Pagos;
+use ArrayObject;
+use PDF;
 class PagosController extends Controller
 {
     /**
@@ -64,6 +67,16 @@ date_default_timezone_set('America/Mexico_City');
     public function update(Request $request, $id)
     {
         //
+    }
+    public function data(Request $request){
+      $pago=Pagos::find($request->get('payid'));
+      $pagos= new ArrayObject();
+      $pagos->append($pago);
+      $customPaper = array(0,0,567.00,150);
+      $pdf = PDF::loadView('layouts.dompdf',compact('request','pagos'))->setPaper($customPaper, 'landscape');
+  //    $pdf->save('my_stored_file.pdf')->stream('download.pdf');
+      return  $pdf->stream();#redirect()->route('pagos.index'); view('layouts.dompdf');
+
     }
 
     /**

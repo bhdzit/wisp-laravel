@@ -32,8 +32,9 @@
                                     <h3 class="box-title">Realizar Pago</h3>
                                   </div>
                                   <!-- /.box-header -->
-                                  <form method="POST" acction="{{route('agregarpago.store')}}">
+                                  <form target="pdf" method="POST" acction="{{route('agregarpago.store')}}">
                                     @csrf
+                                    <input type="hidden" id="clientName" name="clientName" value="">
                                   <div class="box-body">
                                     <table class="table table-bordered table-striped">
                                       <thead>

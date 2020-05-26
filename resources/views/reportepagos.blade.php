@@ -60,7 +60,13 @@
                 <td>{{$pago->wps_pay_type}}@php setSmall($pago)@endphp</td>
                 <td>{{$pago->wps_mes}}</td>
                 <td>{{$pago->wps_date}}</td>
-                <td>   <button type="submit" class="btn btn-primary pull-right"><i class="fas fa-print " aria-hidden="true"></i></button></td>
+                <td>    <form  target="{{route('pagos.data')}}" action="{{route('pagos.data')}}" method="POST">
+                      @csrf
+                      <input type="hidden" name="payid" value="{{$pago->wps_id}}">
+                    <input type="hidden" name="clientName" value="{{$pago->wc_name}} {{$pago->wc_last_name}}">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-print"></i></button>
+                  </form>
+                </td>
                 <td>
                   <form action="{{ url('pagos/'.$pago->wps_id) }}" method="POST">
                     {{ csrf_field() }}
