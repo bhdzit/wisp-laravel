@@ -536,6 +536,24 @@ function setTotal(){
     }
     document.getElementById('totalPay').innerHTML='$ '+price;
 }
+function setSmall(res){
+  console.log(res);
+var text="";
+
+if(res.wps_monto=="0.00" && res.wct_id==null){
+text+= '<span class="label label-success pull-right">Gratis</span>';
+}
+if(res.wct_id){
+text+= '<span class="label label-warning pull-right">Credito</span>';
+}
+if(res.wd_banc){
+text+= '<span class="label label-primary pull-right">'+res.wd_banc+'</span>';
+}
+if(res.wdp_pay){
+  text+='<span class="label label-danger pull-right">Cancelado</span>'
+}
+return text;
+}
 
 $("#reportFrom").submit(function(e){
   e.preventDefault();
@@ -558,18 +576,28 @@ $("#reportFrom").submit(function(e){
         table=$("#suspendTable").DataTable();
     }
     else{
+      $('#thAllPays').removeAttr('hidden');
+        $('#thDeposit').attr('hidden',true);
       if($('#filter').val()==DEP_MONTH){
         $('#thAllPays').attr('hidden',true);
         $('#thDeposit').removeAttr('hidden');
       }
-      $('#thAllPays').removeAttr('hidden');
+
           $('#suspendTable').attr('hidden',true);
           $('#paysTable').removeAttr('hidden');
+          var total=0,efectivo=0,depo=0;
           for(var i in res){
+//                console.log(res[i]);
+                if(!res[i].wdp_pay){
+                            total+=(res[i].wps_monto*1);
+
+                            if(res[i].wps_pay_type== "Efectivo")efectivo+=(res[i].wps_monto*1);
+                            else depo+=(res[i].wps_monto*1);
+                }
                 html+='<tr><form action="#"><td>'+(i*1+1)+'</td>'+
                 '<td>'+res[i].wc_name+' '+res[i].wc_last_name+'</td>'+
                 '<td>'+res[i].wp_name+'</td>'+
-                '<td>'+res[i].wps_pay_type+'</td>'+
+                '<td>'+res[i].wps_pay_type+setSmall(res[i])+'</td>'+
                 '<td>'+res[i].wps_mes+'</td>'+
                 '<td>'+res[i].wps_date+'</td>'+
                 '<td><button type="submit" class="btn btn-primary pull-right"><i class="fas fa-print " aria-hidden="true"></i></button></td>'+
@@ -579,6 +607,10 @@ $("#reportFrom").submit(function(e){
                 '  </form></td>'+
                 '</tr>';
               }
+              $('#totalDep').html('$'+depo);
+              $('#totalPay').html('$'+total);
+              $('#totalCash').html('$'+efectivo)
+                  console.log(total);
           $("#PaysTableBody").html(html);
           table=$("#paysTable").DataTable({
             "language": {

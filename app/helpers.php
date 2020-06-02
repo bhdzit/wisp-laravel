@@ -1,6 +1,8 @@
 <?php
 function setActive($route){
-  return request()->routeIs($route) ? 'active' :'no'.request()->routeIs($route) ;
+  if(request()->segments()){
+  return request()->segments()[0]==$route ? 'active' :'no';
+  }
 }
 function setSmall($request){
   if($request->wps_monto=="0.00" and $request->wct_id==null){
