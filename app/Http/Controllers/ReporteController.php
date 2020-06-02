@@ -130,7 +130,7 @@ class ReporteController extends Controller
         ->join('wisp_services','wps_servicios','=','ws_id_cliente')
         ->join('wisp_clients','wps_servicios','=','wc_id')
         ->join('wisp_pkg','wps_pkg','=','wp_id')
-        ->select(DB::raw('DATE_FORMAT(wps_mes, "%M-%Y") as wps_mes,DATE_FORMAT(wps_date, "%d-%M-%Y") as wps_date,if(wd_banc IS NULL,"Efectivo","Deposito") as wps_pay_type '),'wps_id','wps_servicios','ws_id_cliente','wc_name','wc_last_name','wp_name')
+        ->select(DB::raw('DATE_FORMAT(wps_mes, "%M-%Y") as wps_mes,DATE_FORMAT(wps_date, "%d-%M-%Y") as wps_date,if(wd_banc IS NULL,"Efectivo","Deposito") as wps_pay_type '),'wps_id','wps_servicios','ws_id_cliente','wc_name','wc_last_name','wp_name','wps_monto')
         ->orderBy('wps_date', 'desc')
         ->get();
 
@@ -142,7 +142,7 @@ class ReporteController extends Controller
         ->join('wisp_services','wps_servicios','=','ws_id_cliente')
         ->join('wisp_clients','wps_servicios','=','wc_id')
         ->join('wisp_pkg','wps_pkg','=','wp_id')
-        ->select(DB::raw('DATE_FORMAT(wps_mes, "%M-%Y") as wps_mes,DATE_FORMAT(wps_date, "%d-%M-%Y") as wps_date,if(wd_banc IS NULL,"Efectivo","Deposito") as wps_pay_type '),'wps_id','wps_servicios','ws_id_cliente','wc_name','wc_last_name','wp_name')
+        ->select(DB::raw('DATE_FORMAT(wps_mes, "%M-%Y") as wps_mes,DATE_FORMAT(wps_date, "%d-%M-%Y") as wps_date,if(wd_banc IS NULL,"Efectivo","Deposito") as wps_pay_type '),'wps_id','wps_servicios','ws_id_cliente','wc_name','wc_last_name','wp_name','wps_monto')
         ->where([[DB::raw('month(wps_date)'),date('m')],[DB::raw('year(wps_date)'),date('Y')]])
         ->get();
         break;
@@ -172,7 +172,7 @@ class ReporteController extends Controller
         ->join('wisp_services','wps_servicios','=','ws_id_cliente')
         ->join('wisp_clients','wps_servicios','=','wc_id')
         ->join('wisp_pkg','wps_pkg','=','wp_id')
-        ->select(DB::raw('DATE_FORMAT(wps_mes, "%M-%Y") as wps_mes,DATE_FORMAT(wps_date, "%d-%M-%Y") as wps_date,if(wd_banc IS NULL,"Efectivo","Deposito") as wps_pay_type '),'wps_id','wps_servicios','ws_id_cliente','wc_name','wc_last_name','wp_name')
+        ->select(DB::raw('DATE_FORMAT(wps_mes, "%M-%Y") as wps_mes,DATE_FORMAT(wps_date, "%d-%M-%Y") as wps_date,if(wd_banc IS NULL,"Efectivo","Deposito") as wps_pay_type '),'wps_id','wps_servicios','ws_id_cliente','wc_name','wc_last_name','wp_name','wps_monto')
        ->where('wps_date',null)
         ->get();
         break;
@@ -183,7 +183,7 @@ class ReporteController extends Controller
         ->join('wisp_clients','wps_servicios','=','wc_id')
         ->join('wisp_pkg','wps_pkg','=','wp_id')
         ->whereNotNull('wd_banc')
-        ->select(DB::raw('DATE_FORMAT(wps_mes, "%M-%Y") as wps_mes,DATE_FORMAT(wps_date, "%d-%M-%Y") as wps_date,if(wd_banc IS NULL,"Efectivo","Deposito") as wps_pay_type '),'wps_id','wps_servicios','ws_id_cliente','wc_name','wc_last_name','wp_name')
+        ->select(DB::raw('DATE_FORMAT(wps_mes, "%M-%Y") as wps_mes,DATE_FORMAT(wps_date, "%d-%M-%Y") as wps_date,if(wd_banc IS NULL,"Efectivo","Deposito") as wps_pay_type '),'wps_id','wps_servicios','ws_id_cliente','wc_name','wc_last_name','wp_name','wps_monto')
         ->orderBy('wps_date', 'desc')
         ->get();
         break;

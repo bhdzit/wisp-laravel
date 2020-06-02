@@ -9,7 +9,7 @@
           <form target="{{route('reportepagos.data')}}" action="{{route('reportepagos.data')}}" method="POST">
             @csrf
             <input type="hidden" name="pdf" >
-            <input type="hidden" name="filter" id="filterpdf">
+            <input type="hidden" name="filter" id="filterpdf" value="1">
             <input type="hidden" name="filterTime" id="filterTimepdf">
              <button style="margin-right: 20px;" type="submit" class="btn btn-primary pull-right"><i class="fas fa-print " aria-hidden="true"></i></button>
            </form>
