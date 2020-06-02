@@ -22,6 +22,7 @@ class PagosController extends Controller
 
 date_default_timezone_set('America/Mexico_City');
     return view('pagos',['pagos'=>DB::table('wisp_pays')
+    ->leftJoin('drop_pay','wdp_pay','=','wps_id')
     ->leftJoin('wisp_deposit','wd_pay','=','wps_id')
     ->join('wisp_services','wps_servicios','=','ws_id_cliente')
     ->leftJoin('wisp_credit',function($join){
@@ -29,7 +30,7 @@ date_default_timezone_set('America/Mexico_City');
     })
     ->join('wisp_clients','wps_servicios','=','wc_id')
     ->join('wisp_pkg','wps_pkg','=','wp_id')
-    ->select(DB::raw('DATE_FORMAT(wps_mes, "%M-%Y") as wps_date,if(wd_banc IS NULL,"Efectivo","Deposito") as wps_pay_type'),'wps_id','wps_monto','wps_servicios','ws_id_cliente','wc_name','wc_last_name','wp_name','wd_banc','wct_id')
+    ->select(DB::raw('DATE_FORMAT(wps_mes, "%M-%Y") as wps_date,if(wd_banc IS NULL,"Efectivo","Deposito") as wps_pay_type'),'wps_id','wps_monto','wps_servicios','ws_id_cliente','wc_name','wc_last_name','wp_name','wd_banc','wct_id','wdp_pay')
     ->where('wps_date', date('Y-m-d'))
     ->get(),'paquetes'=>Paquetes::get()]);
     }
@@ -53,8 +54,10 @@ date_default_timezone_set('America/Mexico_City');
      */
     public function show($id)
     {
-      return view('agregarpago',['cliente'=>DB::select('select * from wisp_clients join wisp_services on ws_id_cliente=wc_id where ws_id_cliente=?',[$id])
-      ,'paquetes'=>Paquetes::get()]);
+      return response()->view('errors.404', [], 404);
+//return view('errors.404');
+/*     return view('agregarpago',['cliente'=>DB::select('select * from wisp_clients join wisp_services on ws_id_cliente=wc_id where ws_id_cliente=?',[$id])
+      ,'paquetes'=>Paquetes::get()]);*/
     }
 
     /**
@@ -87,6 +90,7 @@ date_default_timezone_set('America/Mexico_City');
      */
     public function destroy($id)
     {
-        //
+        DB::insert('insert into drop_pay (wdp_pay) values(?)',[$id]);
+       return redirect()->route('pagos.index');;
     }
 }

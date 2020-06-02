@@ -3,7 +3,8 @@ var circlesvg='<svg width="10" height="10"  aria-hidden="true" focusable="false"
 
 var marker;
 var map;
-
+const SUSPEND_TABLE=4;
+const DEP_MONTH=5;
 function showQR(client){
   console.log(client);
   Swal.fire({
@@ -549,15 +550,19 @@ $("#reportFrom").submit(function(e){
     html='';
 
 
-      if($('#filter').val()==4){
-          $("#suspendTable").DataTable();
+      if($('#filter').val()==SUSPEND_TABLE){
+          $('#thAllPays').attr('hidden',true);
           $('#paysTable').attr('hidden',true);
           $("#suspendTable").removeAttr('hidden');
         //$("#depositTBody").html(html);
-        table=$("#deposiTable").DataTable();
+        table=$("#suspendTable").DataTable();
     }
     else{
-//      alert('adad');
+      if($('#filter').val()==DEP_MONTH){
+        $('#thAllPays').attr('hidden',true);
+        $('#thDeposit').removeAttr('hidden');
+      }
+      $('#thAllPays').removeAttr('hidden');
           $('#suspendTable').attr('hidden',true);
           $('#paysTable').removeAttr('hidden');
           for(var i in res){

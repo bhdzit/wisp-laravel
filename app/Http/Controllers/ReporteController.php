@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Pagos;
+use PDF;
 class ReporteController extends Controller
 {
     /**
@@ -15,6 +16,7 @@ class ReporteController extends Controller
     public function index()
     {
         return view('reportepagos',['pagos'=>DB::table('wisp_pays')
+        ->leftJoin('drop_pay','wdp_pay','=','wps_id')
         ->leftJoin('wisp_deposit','wd_pay','=','wps_id')
         ->join('wisp_services','wps_servicios','=','ws_id_cliente')
         ->leftJoin('wisp_credit',function($join){
@@ -22,7 +24,7 @@ class ReporteController extends Controller
         })
         ->join('wisp_clients','wps_servicios','=','wc_id')
         ->join('wisp_pkg','wps_pkg','=','wp_id')
-        ->select(DB::raw('DATE_FORMAT(wps_mes, "%M-%Y") as wps_mes,DATE_FORMAT(wps_date, "%d-%M-%Y") as wps_date,if(wd_banc IS NULL,"Efectivo","Deposito") as wps_pay_type '),'wps_id','wps_monto','wps_servicios','ws_id_cliente','wc_name','wc_last_name','wp_name','wd_banc','wct_id')
+        ->select(DB::raw('DATE_FORMAT(wps_mes, "%M-%Y") as wps_mes,DATE_FORMAT(wps_date, "%d-%M-%Y") as wps_date,if(wd_banc IS NULL,"Efectivo","Deposito") as wps_pay_type '),'wps_id','wps_monto','wps_servicios','ws_id_cliente','wc_name','wc_last_name','wp_name','wd_banc','wct_id','wdp_pay')
         ->orderBy('wps_date', 'desc')
         ->get(),'cortes'=>DB::table('wisp_services')
        ->leftJoin('wisp_pays',function($join){
@@ -78,7 +80,7 @@ class ReporteController extends Controller
         break;
 
         default:
-          // code...
+
           break;
       }
 
@@ -93,7 +95,7 @@ class ReporteController extends Controller
      */
     public function show($id)
     {
-
+      echo 'show';
     }
 
     /**
@@ -120,9 +122,10 @@ class ReporteController extends Controller
     }
     public function data(Request $request){
       date_default_timezone_set('America/Mexico_City');
+      $tableData=null;
       switch (request("filter")) {
         case 1:
-        return DB::table('wisp_pays')
+        $tableData = DB::table('wisp_pays')
         ->leftJoin('wisp_deposit','wd_pay','=','wps_id')
         ->join('wisp_services','wps_servicios','=','ws_id_cliente')
         ->join('wisp_clients','wps_servicios','=','wc_id')
@@ -134,7 +137,7 @@ class ReporteController extends Controller
         break ;
 
         case 2:
-        return DB::table('wisp_pays')
+        $tableData = DB::table('wisp_pays')
         ->leftJoin('wisp_deposit','wd_pay','=','wps_id')
         ->join('wisp_services','wps_servicios','=','ws_id_cliente')
         ->join('wisp_clients','wps_servicios','=','wc_id')
@@ -145,18 +148,26 @@ class ReporteController extends Controller
         break;
 
         case 3:
+        if($request->has('filterTime')){
           $date =  explode(' - ',request('filterTime'));
-        return DB::table('wisp_pays')
+        }
+        else{
+
+              $date =array(date('Y-m-d'),date('Y-m-d'),"sda","asdas");
+    //           var_dump($date);
+        }
+//        $date =  explode(' - ',request('filterTime'));
+        $tableData= DB::table('wisp_pays')
         ->leftJoin('wisp_deposit','wd_pay','=','wps_id')
         ->join('wisp_services','wps_servicios','=','ws_id_cliente')
         ->join('wisp_clients','wps_servicios','=','wc_id')
         ->join('wisp_pkg','wps_pkg','=','wp_id')
-       ->select(DB::raw('DATE_FORMAT(wps_mes, "%M-%Y") as wps_mes,DATE_FORMAT(wps_date, "%d-%M-%Y") as wps_date,if(wd_banc IS NULL,"Efectivo","Deposito") as wps_pay_type '),'wps_id','wps_servicios','ws_id_cliente','wc_name','wc_last_name','wp_name')
+       ->select(DB::raw('DATE_FORMAT(wps_mes, "%M-%Y") as wps_mes,DATE_FORMAT(wps_date, "%d-%M-%Y") as wps_date,if(wd_banc IS NULL,"Efectivo","Deposito") as wps_pay_type '),'wps_id','wps_servicios','ws_id_cliente','wc_name','wc_last_name','wp_name','wps_monto')
        ->whereBetween('wps_date',[$date[0],$date[1]])
         ->get();
         break;
         case 4:
-        return DB::table('wisp_pays')
+        $tableData = DB::table('wisp_pays')
         ->leftJoin('wisp_deposit','wd_pay','=','wps_id')
         ->join('wisp_services','wps_servicios','=','ws_id_cliente')
         ->join('wisp_clients','wps_servicios','=','wc_id')
@@ -166,7 +177,7 @@ class ReporteController extends Controller
         ->get();
         break;
         case 5:
-        return DB::table('wisp_pays')
+        $tableData = DB::table('wisp_pays')
         ->leftJoin('wisp_deposit','wd_pay','=','wps_id')
         ->join('wisp_services','wps_servicios','=','ws_id_cliente')
         ->join('wisp_clients','wps_servicios','=','wc_id')
@@ -178,8 +189,21 @@ class ReporteController extends Controller
         break;
 
         default:
-          // code...
-          break;
+
+        break;
       }
+
+      if($request->has('pdf')){
+
+        $pdf = PDF::loadView('layouts.reportpdf',compact('tableData'));
+    //    $pdf->save('my_stored_file.pdf')->stream('download.pdf');
+        return  $pdf->stream();#redirect()->route('pagos.index');
+//        return view('layouts.reportpdf'); //
+
+      }
+
+
+//      echo "asd";
+  return $tableData;
     }
 }

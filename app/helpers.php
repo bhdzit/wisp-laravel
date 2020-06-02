@@ -10,6 +10,9 @@ function setSmall($request){
   echo '<span class="label label-warning pull-right">Credito</span>';
   if($request->wd_banc)
   echo '<span class="label label-primary pull-right">'.$request->wd_banc.'</span>';
+  if($request->wdp_pay){
+      echo '<span class="label label-danger pull-right">Cancelado</span>';
+  }
 }
 function getPkg($id){
   return App\Paquetes::find($id)->wp_name;

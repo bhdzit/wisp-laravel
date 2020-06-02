@@ -6,10 +6,17 @@
       <div class="box-header">
         <h3 class="box-title">Reporte de pagos</h3>
         <div class="row" >
-        <form action="{{route('reportepagos.data')}}" method="POST" id="reportFrom">
+          <form target="{{route('reportepagos.data')}}" action="{{route('reportepagos.data')}}" method="POST">
+            @csrf
+            <input type="hidden" name="pdf" >
+            <input type="hidden" name="filter" id="filterpdf">
+            <input type="hidden" name="filterTime" id="filterTimepdf">
+             <button style="margin-right: 20px;" type="submit" class="btn btn-primary pull-right"><i class="fas fa-print " aria-hidden="true"></i></button>
+           </form>
+        <form target="{{route('reportepagos.data')}}" action="{{route('reportepagos.data')}}" method="POST" id="reportFrom">
           @csrf
-            <input style="margin-right: 20px;" class="btn btn-primary pull-right" type="submit"  value="Aplicar">
-          <div class="form-group col-md-3 pull-right">
+      <input style="margin-right: 5px;" class="btn btn-primary pull-right" type="submit"  value="Aplicar">
+            <div class="form-group col-md-3 pull-right">
                     <select name="filter" id="filter" class="form-control">
                       <option value="1">Todos los Pagos</option>
                       <option value="2">Pagos de Mes</option>
@@ -19,7 +26,7 @@
                     </select>
                   </div>
                   <div class="form-group col-md-3 pull-right">
-                        <input type="text" name="filterTime" class="form-control pull-right" id="reservationtime" hidden>
+                        <input type="text" name="filterTime" class="form-control pull-right" id="reservationtime" hidden="true">
                   </div>
               </form>
           </div>
@@ -30,12 +37,30 @@
 
       <table id="paysTable" class="table table-bordered table-striped">
         <thead>
-          <tr>
-            <th>Total :</th><th><b id='totalPay'>$ {{$pagos->sum('wps_monto')}}</b></th>
-            <th>Efectivo :</th><th><b id='totalPay'>$ {{$pagos->where('wps_pay_type','=','Efectivo')->sum('wps_monto')}}</b></th>
-            <th>Deposito :</th><th><b id='totalPay'>$ {{$pagos->where('wps_pay_type','=','Deposito')->sum('wps_monto')}}</b></th>
-            <th>Pagos Retardados</th><th><b id='totalPay'>{{$cortes->count()}}</b></th>
+          <tr id="thAllPays">
+            <th colspan="2">Total : <b id='totalPay'>$ {{$pagos->whereNull('wdp_pay')->sum('wps_monto')}}</b></th>
+            <th colspan="2">Efectivo : <b id='totalCash'>$ {{$pagos->where('wps_pay_type','=','Efectivo')->whereNull('wdp_pay')->sum('wps_monto')}}</b></th>
+            <th colspan="2">Deposito :
+              <b id="totalDep">$
+                @php
+                $deposito=$pagos->where('wps_pay_type','=','Deposito')->whereNull('wdp_pay')->sum('wps_monto');
+
+
+                @endphp
+                {{$deposito}}
+            </b></th>
+            <th colspan="2">Pagos Retardados :  <b id='totalSuspend'>{{$cortes->count()}}</b></th>
           </tr>
+
+          <tr id="thDeposit" hidden>
+            <th colspan="2">Total : $ {{$deposito}}</th>
+            <th colspan="2">Oxxo : </th>
+            <th colspan="2">Banamex : </th>
+            <th colspan="2">Coppel : </th>
+          </tr>
+
+
+
           <tr role="row">
                 <th>No.</th>
                 <th>Cliente</th>
@@ -145,6 +170,14 @@ $('#reservationtime').daterangepicker({
   locale: {
      format: 'Y-MM-DD'
    }
+});
+  $('#filterTimepdf').val($('#reservationtime').val());
+$('#reservationtime').on('change',function(evt){
+  $('#filterTimepdf').val(evt.target.value);
+});
+$('#filter').on('change',function(evt){
+  $('#filterpdf').val(evt.target.value);
+
 });
 
 </script>
