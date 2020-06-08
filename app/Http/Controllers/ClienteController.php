@@ -27,7 +27,7 @@ class ClienteController extends Controller
         'sectores'=>DB::table('wisp_sector')
         ->join('wisp_tower','wsct_tower','=','wt_id')
         ->join('wisp_antenna_type','wsct_antenna','=','wa_id')
-        ->select('wisp_sector.*','wt_nombre','wa_name')
+        ->select('wisp_sector.*','wt_nombre','wa_name',DB::raw('INET_NTOA(wsct_address) as ws_ip'))
         ->get(),"paquetes"=>Paquetes::get()]);
     }
 

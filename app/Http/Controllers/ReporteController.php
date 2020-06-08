@@ -15,6 +15,7 @@ class ReporteController extends Controller
      */
     public function index()
     {
+           date_default_timezone_set('America/Mexico_City');
         return view('reportepagos',['pagos'=>DB::table('wisp_pays')
         ->leftJoin('drop_pay','wdp_pay','=','wps_id')
         ->leftJoin('wisp_deposit','wd_pay','=','wps_id')
@@ -26,9 +27,10 @@ class ReporteController extends Controller
         ->join('wisp_pkg','wps_pkg','=','wp_id')
         ->select(DB::raw('DATE_FORMAT(wps_mes, "%M-%Y") as wps_mes,DATE_FORMAT(wps_date, "%d-%M-%Y") as wps_date,if(wd_banc IS NULL,"Efectivo","Deposito") as wps_pay_type '),'wps_id','wps_monto','wps_servicios','ws_id_cliente','wc_name','wc_last_name','wp_name','wd_banc','wct_id','wdp_pay')
         ->orderBy('wps_date', 'desc')
-        ->get(),'cortes'=>DB::table('wisp_services')
+        ->get(),
+        'cortes'=>DB::table('wisp_services')
        ->leftJoin('wisp_pays',function($join){
-          $join->on('wps_mes','=',DB::raw('\'2020-05-01\''))->on('ws_id','=','wps_servicios');
+          $join->on('wps_mes','=',DB::raw('\''.date('Y-m').'-01\''))->on('ws_id','=','wps_servicios');
         })
        ->leftJoin('wisp_clients','ws_id_cliente','=','wc_id')
        ->leftJoin('wisp_pkg','ws_pkg','=','wp_id')

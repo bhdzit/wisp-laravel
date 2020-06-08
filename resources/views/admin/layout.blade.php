@@ -93,7 +93,7 @@
               <a href="#"  href="{{ route('logout') }}"
                  onclick="event.preventDefault();
                                document.getElementById('logout-form').submit();">
-        
+
               <i class="fas fa-sign-out-alt"></i></a>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                   @csrf
@@ -126,7 +126,8 @@
           <li class="{{setActive('sectores')}}"><a href="{{route('sectores.index')}}"><i class="fas fa-wifi"></i> <span> Sectores</span></a></li>
           <li class="{{setActive('paquetes')}}"><a href="{{route('paquetes.index')}}"><i class="fas fa-boxes"></i><span> Paquetes</span></a></li>
           <li class="{{setActive('pagos')}}"><a href="{{route('pagos.index')}}/"><i class="fas fa-receipt"></i> <span> Pagos</span></a></li>
-      <!--    <li class="treeview">
+          <li class="{{setActive('tickets')}}"><a href="tickets"><i class="fas fa-bug"></i><span> Tickets</span></a></li>
+<!--         <li class="treeview">
             <a href="#"><i class="fa fa-link"></i> <span>Paquetes</span>
               <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>

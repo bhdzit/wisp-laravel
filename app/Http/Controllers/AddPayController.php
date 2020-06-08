@@ -56,7 +56,7 @@ class AddPayController extends Controller
       }
       $customPaper = array(0,0,567.00+(50*$numRows),150);
       $pdf = PDF::loadView('layouts.dompdf',compact('request','pagos'))->setPaper($customPaper, 'landscape');
-      $pdf->save('my_stored_file.pdf')->stream('download.pdf');
+      //$pdf->save('my_stored_file.pdf')->stream('download.pdf');
       return  $pdf->stream();#redirect()->route('pagos.index'); view('layouts.dompdf');
     }
 
