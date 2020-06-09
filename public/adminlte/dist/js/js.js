@@ -661,6 +661,13 @@ $(clietnSupendRow[i].children[3].children[0]).submit(function(e){
           data:{"action":suspendAction,"ws_id":id,"credit":creditMonths,"pkg":pkg}
 
     }).done(function(res){
+      Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  showConfirmButton: false,
+  title: 'Operacion Realizada Corectamante',
+  timer: 1500
+})
       console.log(res);
     })
 
