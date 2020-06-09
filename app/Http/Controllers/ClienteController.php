@@ -94,8 +94,8 @@ class ClienteController extends Controller
     public function update(Request $request, $id)
     {
       request()->validate([
-        "wc_name"=>["required","min:8"],
-        "wc_last_name"=>["required","min:8"],
+        "wc_name"=>["required"],
+        "wc_last_name"=>["required"],
         "wc_phone"=>["required","numeric"],
         "wc_phone2"=>["nullable","numeric"],
         "wc_date"=>["required","date_format:Y-m-d"],
