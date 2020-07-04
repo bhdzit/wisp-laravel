@@ -19,4 +19,60 @@ function setSmall($request){
 function getPkg($id){
   return App\Paquetes::find($id)->wp_name;
 }
+function getAvailableIP($sectores,$services){
+
+
+foreach ($sectores as $sector) {
+#    $seg_ip=explode(".",$servis->ip);
+$iplistlength=0;
+  echo '\'<datalist  id="ipdisponiblesec'.$sector->wsct_id.'">';
+  $i=1;
+    $seg_ip=explode(".",$sector->ws_ip);
+  while ($iplistlength<10) {
+
+          #      echo '<option id="1" value="'.$sector->wsct_address.'"';
+          $isIpOnServerList=false;
+          foreach($services as $servis){
+            $newip=''.$seg_ip[0].'.'.$seg_ip[1].'.'.$seg_ip[2].'.'.$i;
+          #    echo '<option id="1" value="'.$servis->ws_ip.'">';
+
+            if($servis->ws_ip==ip2long($newip)){
+              $isIpOnServerList=true;
+            }
+          }
+          if(!$isIpOnServerList){
+           echo '<option id="1" value="'.$seg_ip[0].'.'.$seg_ip[1].'.'.$seg_ip[2].'.'.$i.'">';
+           $iplistlength++;
+          }
+          $i++;
+      }
+  echo '    </datalist>\'+';
+  }
+
+  /*
+    $i=1;
+    $iplistlength=0;
+    $oldsectorid=null;
+    echo '\'<datalist  id="ipdisponiblesec'.$sector->wsct_id.'">';
+          foreach($services as $servis){
+
+             if($sector->wsct_id==$servis->ws_sector){
+              $seg_ip=explode(".",$servis->ip);
+                #  echo '<option id="1">'.$seg_ip[3]." - ".$i;
+                if($seg_ip[3]>$i){
+
+                        for($j=$seg_ip[3]-$i;$j<$seg_ip[3];$j++){
+                                echo '<option id="1" value="'.$seg_ip[0].".".$seg_ip[1].".".$seg_ip[2].".".$i.'-'.$i.'">';
+                                $i++;
+                          }
+                }
+              $i++;
+            }
+      }
+
+
+  }*/
+
+
+}
 ?>

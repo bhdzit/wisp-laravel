@@ -25,6 +25,9 @@ Route::resource('pagos/agregarpago','AddPayController')->middleware('auth');
 Route::resource('pagos/reportepagos','ReporteController')->middleware('auth');
 Route::resource('pagos','PagosController')->middleware('auth');
 Route::resource('tickets','TicketsController');
+Route::resource('compras','ComprasController');
+Route::resource('ingresos','IngresosController');
+Route::resource('egresos','EgresosController');
 Auth::routes();
 
 #Route::get('/home', 'HomeController@index')->name('home');

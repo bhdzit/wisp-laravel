@@ -444,7 +444,7 @@ function toDeg(Value) {
 var index=1;
 var payTable=null;
 $('#clientInput').change(function(evt){
-  console.log($('#clientInput').val());
+
   $('#clientName').val($('#clientInput').val());
       index=1;
    var opt = $('option[value="'+$(this).val()+'"]');
@@ -555,6 +555,7 @@ if(res.wdp_pay){
 return text;
 }
 
+
 $("#reportFrom").submit(function(e){
   e.preventDefault();
   var html="";
@@ -631,6 +632,7 @@ $("#reportFrom").submit(function(e){
 });
 
 
+
 var clietnSupendRow= document.getElementsByClassName("clietnSupendRow");
 var clietnSupendAction= document.getElementsByClassName("clietnSupendAction");
 for(var i=0;i<clietnSupendRow.length;i++){
@@ -672,4 +674,6 @@ $(clietnSupendRow[i].children[3].children[0]).submit(function(e){
     })
 
 });
+
+
 }

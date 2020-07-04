@@ -97,22 +97,13 @@
     '  @enderror'+
     '  </div>'+
     '  <div class="col-sm-4">'+
-        '<input style="margin-bottom:0" type="text" class="form-control swal2-input" id="wc_ip" list="ipdisponiblesec1" name="wc_ip" placeholder="ip" required value="{{old('wc_ip')}}">'+
+        '<input style="margin-bottom:13px" type="text" class="form-control swal2-input" id="wc_ip" list="ipdisponiblesec1" name="wc_ip" placeholder="ip" required value="{{old('wc_ip')}}">'+
         '   @error("wc_ip")'+
         '<div  class=" alert-danger" role="alert">'+
         '  <strong>¡Error al Cargar Cliente!</strong>IP requerida'+
         '</div>'+
         '  @enderror'+
-        @foreach($sectores as $sector)
-        '    <datalist  id="ipdisponiblesec{{$sector->wsct_id}}">'+
-
-              @foreach($clientes as $client)
-                  @if($sector->wsct_id==$client->ws_sector)
-            '      <option id="1" value="{{$client->ws_ip}}">{{$sector->ws_ip}}'+
-                  @endif
-              @endforeach
-        '    </datalist>    '+
-        @endforeach
+        {{getAvailableIP($sectores,$services)}}
     '  </div>'+
     '  <div class="col-sm-4">'+
         '<input style="margin-bottom:0" type="text" class="form-control swal2-input" id="wc_ssid" name="wc_ssid" value="{{old("wc_ssid")}}" placeholder="SSID">'+

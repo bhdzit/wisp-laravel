@@ -19,6 +19,7 @@
                       <th>Paquete</th>
                       <th>Tipo de Contrato</th>
                       <th>Fecha de Contrato</th>
+                      <th>Sector</th>
                       <th>QR</th>
                       <th style="width:60px;">Editar</th>
                       <th style="width:60px;">Eliminar</th>
@@ -32,6 +33,7 @@
                           <td>{{$cliente->wp_name}} </td>
                           <td>{{$cliente->wct_nombre}}</td>
                           <td>{{$cliente->ws_date}}</td>
+                          <td>{{$cliente->wsct_name}}</td>
                           <td><i class="fas fa-qrcode" style=color:#000;  onclick='showQR(JSON.stringify({{json_encode($cliente)}}))'></i></td>
                           <td>
                                 <button class="btn btn-success" onclick="editClient({{json_encode($cliente)}})"><i class="fa fa-btn fa-edit"></i></button>
@@ -107,6 +109,11 @@
           addMarck({lat:coord.lat,lng:coord.lng});
       });
 
+
+      $("#wc_sector").change(function(evt){
+
+          $("#wc_ip").attr('list','ipdisponiblesec'+evt.target.value);
+      });
 
     }
     function editClient(json){

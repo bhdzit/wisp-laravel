@@ -18,26 +18,73 @@
         <div class="row">
                 <!-- /.col (LEFT) -->
                 <div class="col-md-6">
-                  <!-- LINE CHART -->
-                  <div class="box box-info">
+              <div class="nav-tabs-custom">
+                  <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">No.Clientes</a></li>
+                    <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Servicios del Año</a></li>
+                    <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
+                  </ul>
 
-                      <div class="box-header with-border">
-                        <h3 class="box-title">No. Clientes</h3>
 
-                        <div class="box-tools pull-right">
-                          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                          </button>
-                          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                        </div>
-                      </div>
-                      <div class="box-body chart-responsive">
-                        <div class="chart" id="line-chart" style="height: 300px;"></div>
 
-                    <!-- /.box-body -->
+
+                <div class="tab-content">
+                  <div class="tab-pane active" id="tab_1" >
+
+                                      <!-- LINE CHART -->
+                                      <div class="box box-info">
+
+                                          <div class="box-header with-border">
+
+
+
+                                            <div class="box-tools pull-right">
+                                              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                              </button>
+                                              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                            </div>
+                                          </div>
+                                          <div class="box-body chart-responsive">
+                                            <div class="chart" id="line-chart" style="height: 300px;"></div>
+
+                                        <!-- /.box-body -->
+                                      </div>
+                                    </div>
                   </div>
+                  <!-- /.tab-pane -->
+                  <div class="tab-pane active" id="tab_2">
+
+                    <!-- LINE CHART -->
+                    <div class="box box-info">
+
+                        <div class="box-header with-border">
+
+
+
+                          <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                          </div>
+                        </div>
+                        <div class="box-body chart-responsive">
+                          <div class="chart" id="service-year" style="height: 300px;"></div>
+
+                      <!-- /.box-body -->
+                    </div>
+                  </div>
+                  </div>
+
+                  <!-- /.tab-pane -->
                 </div>
+                <!-- /.tab-content -->
+
+
 
                 </div>
+              </div>
+
+
               <div class="col-md-6">
 
             <!-- Widget: user widget style 1 -->
@@ -49,10 +96,10 @@
               </div>
               <div class="box-footer no-padding">
                 <ul class="nav nav-stacked">
-                  <li><a href="#">Instalaciones <span class="pull-right badge bg-blue">31</span></a></li>
-                  <li><a href="#">Servicios <span class="pull-right badge bg-aqua">5</span></a></li>
-                  <li><a href="#">Pagos de Servicios<span class="pull-right badge bg-green">12</span></a></li>
-                  <li><a href="#">Pagos de Clientes<span class="pull-right badge bg-red">842</span></a></li>
+                  <li><a href="#">Instalaciones  del Mes<span class="pull-right badge bg-blue">31</span></a></li>
+                  <li><a href="#">Servicios <span class="pull-right badge bg-aqua">{{$clientes->count()}}</span></a></li>
+                  <li><a href="#">Pagos del Mes<span class="pull-right badge bg-green">{{$monthpays}}</span></a></li>
+                  <li><a href="#">Egresos del Mes<span class="pull-right badge bg-red">842</span></a></li>
                 </ul>
               </div>
             </div>
@@ -74,14 +121,9 @@ var line = new Morris.Line({
   element: 'line-chart',
   resize: true,
   data: [
-/*    @php $previusDate=$clientes[0]->ws_date; @endphp
-    @for($i=0;$i<sizeof($clientes);$i++)
-      {{date('M-Y',strtotime($previusDate))}},{{date('M-Y',strtotime($clientes[$i]->ws_date))}}
-      @if(date('M-Y',strtotime($previusDate))<date('M-Y',strtotime($clientes[$i]->ws_date)))
-        {y: '{{$clientes[$i]->ws_date}}',item1: '{{($i+1)}}'},
-          @php $previusDate=$clientes[$i]->ws_date @endphp
-      @endif
-    @endfor*/
+    @foreach($servicios as $servicio)
+     {y: '{{$servicio->month_est}}',item1: '{{($servicio->num_clients)}}'},
+     @endforeach
 
   ],
   xkey: 'y',
@@ -91,5 +133,23 @@ var line = new Morris.Line({
 
 
 });
+
+var line = new Morris.Line({
+  element: 'service-year',
+  resize: true,
+  data: [
+    @foreach($servicios as $servicio)
+     {y: '{{$servicio->month_est}}',item1: '{{($servicio->num_clients)}}'},
+     @endforeach
+
+  ],
+  xkey: 'y',
+  ykeys: ['item1'],
+  labels: ['Item 1'],
+  lineColors: ['#3c8dbc'],
+
+
+});
+
 </script>
 @stop

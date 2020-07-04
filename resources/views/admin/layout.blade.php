@@ -100,7 +100,7 @@
               </form>
             </li>
             <li>
-              <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+
             </li>
 
           </ul>
@@ -126,7 +126,12 @@
           <li class="{{setActive('sectores')}}"><a href="{{route('sectores.index')}}"><i class="fas fa-wifi"></i> <span> Sectores</span></a></li>
           <li class="{{setActive('paquetes')}}"><a href="{{route('paquetes.index')}}"><i class="fas fa-boxes"></i><span> Paquetes</span></a></li>
           <li class="{{setActive('pagos')}}"><a href="{{route('pagos.index')}}/"><i class="fas fa-receipt"></i> <span> Pagos</span></a></li>
-          <li class="{{setActive('tickets')}}"><a href="tickets"><i class="fas fa-bug"></i><span> Tickets</span></a></li>
+          <li class="{{setActive('compras')}}"><a href="{{route('compras.index')}}/"><i class="fas fa-shopping-cart"></i><span> Compras</span></a></li>
+          <li class="{{setActive('ingresos')}}"><a href="{{route('ingresos.index')}}/"><i class="fas fa-hand-holding-usd"></i><span> Ingresos</span></a></li>
+          <li class="{{setActive('egresos')}}"><a href="{{route('egresos.index')}}/"><i class="fas fa-hand-holding"></i><span> Egresos</span></a></li>
+          <li class="{{setActive('tickets')}}"><a href="{{route('tickets.index')}}"><i class="fas fa-bug"></i><span> Tickets</span></a></li>
+          <li class="{{setActive('tickets')}}"><a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i><span>  Configuracion</span></a></li>
+
 <!--         <li class="treeview">
             <a href="#"><i class="fa fa-link"></i> <span>Paquetes</span>
               <span class="pull-right-container">

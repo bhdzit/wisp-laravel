@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class TicketsController extends Controller
+class IngresosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,9 +13,7 @@ class TicketsController extends Controller
      */
     public function index()
     {
-
-        //
-              return  view('errors.404');
+      return  view('ingresos');
     }
 
     /**

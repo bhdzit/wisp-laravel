@@ -20,9 +20,14 @@ class ClienteController extends Controller
         return view('clientes',[
         'clientes'=>DB::table('wisp_clients')
         ->join('wisp_services','wc_id','=','ws_id_cliente')
+        ->join('wisp_sector','wsct_id','=','ws_sector')
         ->join('wisp_pkg','ws_pkg','=','wp_id')
         ->join('wisp_contract','wct_id','=','ws_contract')
-        ->select(DB::raw('ST_Y(ws_maps) as lat,ST_X(ws_maps) as lng, INET_NTOA(ws_ip) as ws_ip'),'ws_id','wc_name','wc_last_name','wc_phone','wc_phone2','ws_ssid','ws_pass','ws_pkg','wct_id','wct_nombre','ws_sector','wp_name','ws_date','ws_first_pay_date','wp_id')
+        ->select(DB::raw('ST_Y(ws_maps) as lat,ST_X(ws_maps) as lng, INET_NTOA(ws_ip) as ws_ip'),'ws_id','wc_name','wc_last_name','wc_phone','wc_phone2','ws_ssid','ws_pass','ws_pkg','wct_id','wct_nombre','ws_sector','wp_name','ws_date','ws_first_pay_date','wp_id','wsct_name')
+        ->get(),
+        'services'=>DB::table('wisp_services')
+        ->select(DB::raw('INET_NTOA(ws_ip) as ip'),'ws_sector','ws_ip')
+        ->orderBy('ws_ip','ASC')
         ->get(),
         'sectores'=>DB::table('wisp_sector')
         ->join('wisp_tower','wsct_tower','=','wt_id')
