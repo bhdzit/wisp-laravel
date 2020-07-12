@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class IngresosController extends Controller
 {
@@ -13,7 +14,7 @@ class IngresosController extends Controller
      */
     public function index()
     {
-      return  view('ingresos');
+      return  view('ingresos',['ingresos'=>DB::select('select *  from wisp_ingress')]);
     }
 
     /**
@@ -24,7 +25,9 @@ class IngresosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        date_default_timezone_set('America/Mexico_City');
+        DB::insert('insert into wisp_ingress values(null,?,?,?)',[$request->descripcion,$request->precio,date('Y-m-d')]);
+        return  redirect()->route('ingresos.index');
     }
 
     /**
@@ -48,6 +51,8 @@ class IngresosController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $affected = DB::update('update wisp_ingress set wi_desciption = ?,wi_prices=? where wi_id = ?', [$request->descripcion,$request->precio,$id]);
+       return redirect()->route('ingresos.index');
     }
 
     /**
@@ -59,5 +64,7 @@ class IngresosController extends Controller
     public function destroy($id)
     {
         //
+        $deleted = DB::delete('delete from wisp_ingress where wi_id=?',[$id]);
+       return redirect()->route('ingresos.index');
     }
 }

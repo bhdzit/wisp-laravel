@@ -24,10 +24,10 @@ Route::resource('paquetes','PaquetesController')->middleware('auth');
 Route::resource('pagos/agregarpago','AddPayController')->middleware('auth');
 Route::resource('pagos/reportepagos','ReporteController')->middleware('auth');
 Route::resource('pagos','PagosController')->middleware('auth');
-Route::resource('tickets','TicketsController');
-Route::resource('compras','ComprasController');
-Route::resource('ingresos','IngresosController');
-Route::resource('egresos','EgresosController');
+Route::resource('tickets','TicketsController')->middleware('auth');
+Route::resource('compras','ComprasController')->middleware('auth');
+Route::resource('ingresos','IngresosController')->middleware('auth');
+Route::resource('egresos','EgresosController')->middleware('auth');
 Auth::routes();
 
 #Route::get('/home', 'HomeController@index')->name('home');

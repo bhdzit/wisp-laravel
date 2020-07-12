@@ -8,6 +8,7 @@
           <div class="box-header">
             <h3 class="box-title">Tabla de Clientes</h3>
             <button class="btn btn-primary pull-right" onclick="addClient()">Agregar Cliente</button>
+            <button style="margin-right: 20px;" class="btn btn-primary pull-right" onclick="seeClients()">Ver Clientes</button>
           </div>
           <!-- /.box-header -->
           <div class="box-body">
@@ -186,5 +187,55 @@
         $("#wc_contract").val({{old("wc_pkg")}});
           $("#wc_sector").val({{old("wc_sector")}});
     @endif
+
+
+    function seeClients(){
+      Swal.fire({
+      title: 'Agregar Cliente',
+      html:@include('sweetAlert2.SeeAllClientsLayout'),
+      width:'100%',
+      showClass: {
+        popup: 'animated fadeInDown faster'
+      },
+      hideClass: {
+        popup: 'animated fadeOutUp faster'
+      },
+      preConfirm: function(){
+            document.getElementById("send_btn").click();
+            return false;
+          }
+
+    });
+      setMap();
+      var lineString = new H.geo.LineString();
+      var towerpoint={ };
+      @foreach($sectores as $sector)
+        addMarck({lng:{{$sector->lng}},lat:{{$sector->lat}}});
+        var id={{$sector->wsct_id}};
+        towerpoint=Object.assign({ {{$sector->wsct_id}}: {lng:{{$sector->lng}},lat:{{$sector->lat}},color:"#{{$sector->wsct_color}}" } }, towerpoint);
+      //  console.log(towerpoint["8"]);
+      @endforeach
+
+          @foreach($clientes as $cliente)
+          var lat={{$cliente->lat}};
+          var lng={{$cliente->lng}};
+
+        //  addMarck({lat:lat,lng:lng});
+        var cords={lat:lat,lng:lng};
+          var icon = new H.map.Icon(mapmarck);
+          marker = new H.map.Marker(cords, {icon: icon});
+          map.addObject(marker);
+
+          lineString = new H.geo.LineString();
+           lineString.pushPoint({lat:lat, lng:lng});
+           lineString.pushPoint(towerpoint[{{$cliente->ws_sector}}]);
+         map.addObject(new H.map.Polyline(
+          lineString, { style: { lineWidth: 4,strokeColor:towerpoint[{{$cliente->ws_sector}}].color }}
+        ));
+
+          @endforeach
+    }
+
+
     </script>
     @stop

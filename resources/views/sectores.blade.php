@@ -130,11 +130,7 @@
        var a=('{{json_encode(($towers->toArray()),JSON_FORCE_OBJECT)}}');
        a=JSON.parse(a.replace(/&quot;/g,"\""));
       setSectorTowerAndAntennasEvents(a);
-        if(sector.wsct_antenna==1){
 
-            $('#deg').val(sector.wsec_deg);
-            $('#apper').val(sector.wsec_rank);
-        }
     $('#wsct_id').val(sector.wsct_id);
     $('#wsct_name').val(sector.wsct_name);
     $("#wsct_antennatype").val(sector.wsct_antenna);
@@ -144,6 +140,14 @@
     $("#wsct_dist").val(sector.wsct_dist);
     $("#wsct_tower").trigger('change');
     $("#wsct_antennatype").trigger('change');
+    if(sector.wsct_antenna==1){
+
+        $('#deg').val(sector.wsec_deg);
+        $('#apper').val(sector.wsec_rank);
+          $('#apper').trigger('change');
+    }
+    $("#wsct_color").val("#"+sector.wsct_color);
+    $("#wsct_color").trigger('change');
     }
     @if($errors->any())
       addSector();

@@ -46,7 +46,7 @@
               '  @enderror'+
               '  </div>'+
                 '</div><div class="form-group row">'+
-              '<div class="col-sm-4">'+
+              '<div class="col-sm-3">'+
                 '<input style="margin-bottom: 0;" type="text" class="form-control swal2-input" id="wsct_address" name="wsct_address" placeholder="IP" required value="{{ old('wsct_address') }}">'+
                 '@error('wsct_address')'+
                 '<div  class=" alert-danger" role="alert">'+
@@ -54,7 +54,15 @@
                 '</div>'+
                 '@enderror'+
                '</div>'+
-               '<div class="col-sm-4">'+
+               '<div class="col-sm-2">'+
+                 '<input  style="margin-bottom: 0;" type="color" class="form-control swal2-input" id="wsct_color" value="#faaf" name="wsct_color" value="{{ old('wsct_color') }}" placeholder="color" required >'+
+                 '   @error('wsct_description')'+
+                 '<div  class=" alert-danger" role="alert">'+
+                 '  <strong>¡Error al Cargar Sector!</strong>Descripcion de Sector requerido'+
+                 '</div>'+
+                 '  @enderror'+
+                 '</div>'+
+               '<div class="col-sm-3">'+
                  '<input  style="margin-bottom: 0;" type="text" class="form-control swal2-input" id="wsct_description" name="wsct_description" value="{{ old('wsct_description') }}" placeholder="descripcion" required>'+
                  '   @error('wsct_description')'+
                  '<div  class=" alert-danger" role="alert">'+

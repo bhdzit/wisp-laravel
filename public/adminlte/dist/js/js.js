@@ -1,4 +1,4 @@
-const mapmarck='<svg xmlns="http://www.w3.org/2000/svg"  width="100" height="100" > <circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" /> </svg>';
+const mapmarck='<svg width="20" height="20"  aria-hidden="true" focusable="false" data-prefix="fas" data-icon="laptop-house" class="svg-inline--fa fa-laptop-house fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M272,288H208a16,16,0,0,1-16-16V208a16,16,0,0,1,16-16h64a16,16,0,0,1,16,16v37.12C299.11,232.24,315,224,332.8,224H469.74l6.65-7.53A16.51,16.51,0,0,0,480,207a16.31,16.31,0,0,0-4.75-10.61L416,144V48a16,16,0,0,0-16-16H368a16,16,0,0,0-16,16V87.3L263.5,8.92C258,4,247.45,0,240.05,0s-17.93,4-23.47,8.92L4.78,196.42A16.15,16.15,0,0,0,0,207a16.4,16.4,0,0,0,3.55,9.39L22.34,237.7A16.22,16.22,0,0,0,33,242.48,16.51,16.51,0,0,0,42.34,239L64,219.88V384a32,32,0,0,0,32,32H272ZM629.33,448H592V288c0-17.67-12.89-32-28.8-32H332.8c-15.91,0-28.8,14.33-28.8,32V448H266.67A10.67,10.67,0,0,0,256,458.67v10.66A42.82,42.82,0,0,0,298.6,512H597.4A42.82,42.82,0,0,0,640,469.33V458.67A10.67,10.67,0,0,0,629.33,448ZM544,448H352V304H544Z"></path></svg>'
 var circlesvg='<svg width="10" height="10"  aria-hidden="true" focusable="false" data-prefix="far" data-icon="circle" class="svg-inline--fa fa-circle fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200z"></path></svg>';
 
 var marker;
@@ -82,12 +82,9 @@ function getCords(evt){
   //    map.removeEventListener("tap",getCords);
 }
 function addMarck(cords){
-  var svgMarkup = '<svg width="100" height="100" ' +
-      'xmlns="http://www.w3.org/2000/svg">' +
-    '<circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" /></svg>';
 
 
-  var icon = new H.map.Icon("/adminlte/dist/img/zona1.png");
+  var icon = new H.map.Icon("/adminlte/dist/img/zona2.png");
   marker = new H.map.Marker(cords, {icon: icon});
   map.addObject(marker);
 
@@ -103,7 +100,7 @@ function setSectorTowerAndAntennasEvents(json){
 
 
       $("#wsct_tower").change(function(evt){
-          console.log();
+
          var lat=json[selectedTower.selectedIndex-1]["wt_lat"], lng=json[selectedTower.selectedIndex-1]["wt_lng"];
         if(object!=null){
           map.removeObject(object);
@@ -172,7 +169,10 @@ function setSectorTowerAndAntennasEvents(json){
       });
 
 
+      $('#wsct_color').change(function(evt){
 
+        map.getObjects()[1].getObjects()[0].setStyle({fillColor: $('#wsct_color').val(),strokeColor: $('#wsct_color').val()})
+      });
 
 }
 
@@ -195,7 +195,7 @@ function dreawOmniAntenna(lat,lng,dist){
 
   var circle = new H.map.Circle({lat:lat,lng:lng},dist,
         {
-          style: {fillColor: 'rgba(250, 250, 0, 0.7)', lineWidth: 0}
+          style: {fillColor: $('#wsct_color').val(), lineWidth: 0}
         }
       ),
       circleOutline = new H.map.Polyline(
@@ -309,7 +309,7 @@ lineString.pushPoint({lat:lat,lng:lng});
       polyline = new H.map.Polyline(
         lineString,
         {
-          style: {fillColor: 'rgba(150, 100, 0, .8)', lineWidth: 10}
+          style: {lineWidth: 5,strokeColor: $('#wsct_color').val()}
         }
       ),
       verticeGroup = new H.map.Group({
@@ -491,6 +491,7 @@ $('#clientInput').change(function(evt){
                   $('#recentPays').append('<tr><td>'+(i+1)+'</td><td>'+pagosAnteriores[i].fecha+'</td><td>'+pagosAnteriores[i].wp_name+'</td><td><button type="submit" class="btn btn-primary"><i class="fas fa-print"></i></button></td></tr>');
                 }
                 payTable=$('#recentPaysTable').DataTable();
+                $('table').removeClass('hidden');
               });
   }
 });

@@ -58,6 +58,7 @@ class SectoresController extends Controller
       $sector->wsct_segment=$ip[1];
       $sector->wsct_tower=$request->get('wsct_tower');
       $sector->wsct_description=$request->get('wsct_description');
+      $sector->wsct_color=str_replace('#','',$request->get('wsct_color'));
 
       $sector->save();
           #'2952861463'
@@ -110,6 +111,7 @@ class SectoresController extends Controller
       $sector->wsct_segment=$ip[1];
       $sector->wsct_tower=$request->get('wsct_tower');
       $sector->wsct_description=$request->get('wsct_description');
+      $sector->wsct_color=str_replace('#','',$request->get('wsct_color'));
       $sector->save();
       if($request->get('wsct_antennatype')==1){
         #DB::update('update users set votes = 100 where name = ?', ['John']);

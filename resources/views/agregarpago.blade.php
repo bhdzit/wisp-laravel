@@ -36,7 +36,12 @@
                                     @csrf
                                     <input type="hidden" id="clientName" name="clientName" value="">
                                   <div class="box-body">
-                                    <table class="table table-bordered table-striped">
+                                    <table class="table table-bordered table-striped hidden">
+                                          <thead>
+                                            <tr><th colspan="5">Creditos</th></tr>
+                                          </thead>
+                                        <tr><td colspan="5"><span>No hay Creditos</span></td></tr>
+
                                       <thead>
                                         <tr>
                                           <th>#</th>
@@ -49,9 +54,9 @@
                                         <tbody id="payTable">
 
                                         </tbody>
-                                        <tfoot>
+
                                           <tr>
-                                            <td colspan="2">
+                                            <td colspan="3">
                                               <!-- radio -->
                                               <div class="form-group">
                                                 <label>
@@ -68,12 +73,30 @@
                                                 </label>
                                               </div>
                                             </td>
-                                            <td>
+                                            <td colspan="2">
                                               <input type="datetime-local" name="depositDate" class="form-control pull-right" id="reservationtime1">
                                             </td>
+
                                           </tr>
+                                          <thead>
+                                            <tr>
+                                              <th colspan="3">Extras</th>
+                                                <th colspan="2">
+                                                  <div class="form-group">
+                                                    <input type="button" id="btnAddNote" onclick="addNote()" style="margin-right: 10px;" class="btn btn-success pull-right" value="Agregar Nota">
+                                                    <input type="button" onclick="addExtra()" style="margin-right: 10px;" class="btn btn-success pull-right" value="Agregar Extra">
+                                                  </div>
+                                                </th>
+                                            </tr>
+                                          </thead>
+                                              <tbody id="extratbody">
+
+
+
+                                              </tbody>
+                                        <tfoot>
                                           <tr>
-                                            <td colspan="3"><b>TOTAL : </b></td>
+                                            <td colspan="4"><b>TOTAL : </b></td>
                                             <td><b id='totalPay'>$ 0</b></td>
                                           </tr>
                                         </tfoot>
@@ -130,7 +153,7 @@
       checkboxClass: 'icheckbox_flat-blue',
       radioClass   : 'iradio_flat-blue'
     });
-$('#reservationtime').daterangepicker();
+    $('#reservationtime').daterangepicker();
       $('#clientInput').trigger('change');
         function getClientPays(){
 
@@ -179,12 +202,37 @@ $('#reservationtime').daterangepicker();
       +'';
       return JSON.parse(json.substr(0,json.length-1)+'}');
     }
+
     getPrices();
+
     function scanQR(){
-      Swal.fire({
-        titel:'Any fool can use a computer',
-        input:'text'
-    });
+        Swal.fire({
+          titel:'Any fool can use a computer',
+          input:'text'
+          });
+    }
+
+    function addExtra(){
+        $('#extratbody').append('<tr>'+
+          '  <td colspan="4">'+
+          '    <input placeholder="Desscripcion" class="form-control">'+
+        '    </td>'+
+        '    <td colspan="2">'+
+      '        <input placeholder="Costo" class="form-control">'+
+      '      </td>'+
+
+      '    </tr>');
+
+    }
+    function addNote(){
+      document.getElementById("btnAddNote").disabled=true;
+      $('#extratbody').append('<tr>'+
+        '<td colspan="5">'+
+        '  <div class="form-group">'+
+        '    <textarea placeholder="Nota" class="form-control" ></textarea>'+
+        '    </div>'+
+        '  </td>'+
+        '  </tr>');
     }
     </script>
     @stop
