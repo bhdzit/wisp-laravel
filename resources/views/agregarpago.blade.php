@@ -94,6 +94,9 @@
 
 
                                               </tbody>
+                                              <tbody id="notebody">
+                                              
+                                              </tbody>
                                         <tfoot>
                                           <tr>
                                             <td colspan="4"><b>TOTAL : </b></td>
@@ -214,10 +217,10 @@
     var i=1;
     function addExtra(){
         $('#extratbody').append('<tr>'+
-          '  <td colspan="4">'+
+          '  <td colspan="3">'+
           '    <input placeholder="Desscripcion" class="form-control" name="descripcion'+i+'" >'+
         '    </td>'+
-        '    <td colspan="2">'+
+        '    <td colspan="3">'+
       '        <input placeholder="Costo" class="form-control" name="costo'+i+'">'+
       '      </td>'+
 
@@ -227,7 +230,7 @@
     }
     function addNote(){
       document.getElementById("btnAddNote").disabled=true;
-      $('#extratbody').append('<tr>'+
+      $('#notebody').append('<tr>'+
         '<td colspan="5">'+
         '  <div class="form-group">'+
         '    <textarea placeholder="Nota" class="form-control" name="nota'+1+'"></textarea>'+
