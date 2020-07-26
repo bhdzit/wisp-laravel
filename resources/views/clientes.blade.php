@@ -207,13 +207,50 @@
 
     });
       setMap();
-      var lineString = new H.geo.LineString();
+
       var towerpoint={ };
       @foreach($sectores as $sector)
         addMarck({lng:{{$sector->lng}},lat:{{$sector->lat}}});
         var id={{$sector->wsct_id}};
-        towerpoint=Object.assign({ {{$sector->wsct_id}}: {lng:{{$sector->lng}},lat:{{$sector->lat}},color:"#{{$sector->wsct_color}}" } }, towerpoint);
+        towerpoint=Object.assign({ {{$sector->wsct_id}}: {lng:{{$sector->lng}},lat:{{$sector->lat}},color:"#{{$sector->wsct_color}}",sector_type:{{$sector->wsct_antenna}},dist:{{$sector->wsct_dist}} } }, towerpoint);
       //  console.log(towerpoint["8"]);
+      if({{$sector->wsct_antenna}}==2){
+      map.addObject(dreawOmniAntenna({{$sector->lat}},{{$sector->lng}},{{$sector->wsct_dist}},"#{{$sector->wsct_color}}"));
+      }
+      else{
+          var lineString = new H.geo.LineString();
+        var d='{{$sector->wsct_dist}}'*1;
+//        console.log({{$sector->wsec_rank}})
+        var apertura='{{$sector->wsec_rank}}'/2;
+        var deg='{{$sector->wsec_deg}}';
+        var limit=((deg*1)+apertura);
+
+        var i=(deg-apertura)*1;
+            //console.dir(typeof i+"<"+ typeof limit+"||"+deg+","+apertura);
+           for(i;i<limit;i++){
+              //   console.log((deg-apertura)+"<"+limit+"||"+deg+","+apertura);
+               var point=getLatLng(toRad({{$sector->lat}}),d,i,toRad({{$sector->lng}}));
+
+                lineString.pushPoint({lat:point.lat, lng:point.lng});
+        //i++;
+             };
+        lineString.pushPoint({lat:{{$sector->lat}},lng:{{$sector->lng}} });
+        var color="#{{$sector->wsct_color}}";
+
+
+        if(color=="#0"){
+          color="#000000"
+        }
+
+             polyline = new H.map.Polygon(
+                lineString,
+                {
+                  style: {lineWidth: 3,strokeColor: color, fillColor: hex2rgba_convert(color,50)}
+                }
+              );
+              console.log(polyline);
+        map.addObject(polyline);//dreawSectoralAntenna({{$sector->lat}},{{$sector->lng}},{{$sector->wsct_dist}},"#{{$sector->wsct_color}}",30,{{$sector->wsec_deg}}));
+      }
       @endforeach
 
           @foreach($clientes as $cliente)
@@ -221,18 +258,21 @@
           var lng={{$cliente->lng}};
 
         //  addMarck({lat:lat,lng:lng});
+
         var cords={lat:lat,lng:lng};
           var icon = new H.map.Icon(mapmarck);
           marker = new H.map.Marker(cords, {icon: icon});
           map.addObject(marker);
-
           lineString = new H.geo.LineString();
-           lineString.pushPoint({lat:lat, lng:lng});
-           lineString.pushPoint(towerpoint[{{$cliente->ws_sector}}]);
-         map.addObject(new H.map.Polyline(
-          lineString, { style: { lineWidth: 4,strokeColor:towerpoint[{{$cliente->ws_sector}}].color }}
-        ));
-
+          lineString.pushPoint({lat:lat, lng:lng});
+          lineString.pushPoint(towerpoint[{{$cliente->ws_sector}}]);
+          var sectorColor=towerpoint[{{$cliente->ws_sector}}].color;
+          if(sectorColor=="#0"){
+            sectorColor="#000";
+          }
+          map.addObject(new H.map.Polyline(
+          lineString, { style: { lineWidth: 1,strokeColor:sectorColor }}
+          ));
           @endforeach
     }
 

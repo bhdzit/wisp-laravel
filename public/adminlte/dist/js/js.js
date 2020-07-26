@@ -170,10 +170,23 @@ function setSectorTowerAndAntennasEvents(json){
 
 
       $('#wsct_color').change(function(evt){
-
-        map.getObjects()[1].getObjects()[0].setStyle({fillColor: $('#wsct_color').val(),strokeColor: $('#wsct_color').val()})
+        currentColor=hex2rgba_convert($('#wsct_color').val(),50);
+        alert(currentColor);
+        map.getObjects()[1].getObjects()[0].setStyle({fillColor: $('#wsct_color').val(),strokeColor:currentColor})
       });
 
+}
+
+function hex2rgba_convert(hex,opacity){
+  if(hex=="#0"){
+    hex="#000000"
+  }
+ hex = hex.replace('#','');
+ r = parseInt(hex.substring(0, hex.length/3), 16);
+ g = parseInt(hex.substring(hex.length/3, 2*hex.length/3), 16);
+ b = parseInt(hex.substring(2*hex.length/3, 3*hex.length/3), 16);
+ result = 'rgba('+r+','+g+','+b+','+opacity/100+')';
+ return result;
 }
 
 function getSectorialAntennaData(id){
@@ -190,12 +203,19 @@ function getSectorialAntennaData(id){
 
 
 }
-function dreawOmniAntenna(lat,lng,dist){
+function dreawOmniAntenna(lat,lng,dist,color){
 
+
+  if(color==null){
+    color=$('#wsct_color').val();
+
+  }
+
+    var currentColor=hex2rgba_convert(color,50);
 
   var circle = new H.map.Circle({lat:lat,lng:lng},dist,
         {
-          style: {fillColor: $('#wsct_color').val(), lineWidth: 0}
+          style: {fillColor:   currentColor, lineWidth: 0}
         }
       ),
       circleOutline = new H.map.Polyline(
@@ -285,10 +305,14 @@ function dreawOmniAntenna(lat,lng,dist){
 //  alert(circle.getGeometry());
 
 }
-function dreawSectoralAntenna(lat,lng,d){
+function dreawSectoralAntenna(lat,lng,d,color,apertura,deg){
   var lineString = new H.geo.LineString();
   lineString.pushPoint({lat:lat,lng:lng});
-  var apertura=$("#apper").val()/2,deg=$("#deg").val();
+  if(apertura==null){
+    apertura=$("#apper").val()/2;
+    deg=$("#deg").val();
+  }
+
 
   //i=(-88-(45))=-133
   //-88+45=-43
@@ -305,11 +329,18 @@ var i=(deg-apertura)*1;
 //i++;
      };
 lineString.pushPoint({lat:lat,lng:lng});
+if(color==null){
+color=$('#wsct_color').val();
+}
+if(color="#0"){
+  color="#000"
+}
+
      var svgCircle = '',
       polyline = new H.map.Polyline(
         lineString,
         {
-          style: {lineWidth: 5,strokeColor: $('#wsct_color').val()}
+          style: {lineWidth: 3,strokeColor: color, fillColor: '#FFFFCC'}
         }
       ),
       verticeGroup = new H.map.Group({
@@ -403,7 +434,7 @@ $("#wsct_dist").val(parseInt(geoPoint.distance({lat:lat,lng:lng}),10));
 $("#deg").val(parseInt(brng));
   var line = new H.geo.LineString();
   line.pushPoint({lat:lat,lng:lng});
-    var apertura=$("#apper").val()/2;
+    var apertura=apertura/2;
      for(var i=brng-apertura;i<brng+apertura;){
         var point=getLatLng(toRad(lat),geoPoint.distance({lat:lat,lng:lng}),i,toRad(lng));
         line.pushPoint({lat:point.lat, lng:point.lng});

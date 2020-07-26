@@ -108,7 +108,7 @@
                             </div>
                       </div>
 
-                      <div class="col-sm-4">
+                      <div class="col-sm-8">
                             <div class="box">
                                 <div class="box-header with-border">
                                   <h3 class="box-title">Pagos Reciente</h3>
@@ -211,17 +211,18 @@
           input:'text'
           });
     }
-
+    var i=1;
     function addExtra(){
         $('#extratbody').append('<tr>'+
           '  <td colspan="4">'+
-          '    <input placeholder="Desscripcion" class="form-control">'+
+          '    <input placeholder="Desscripcion" class="form-control" name="descripcion'+i+'" >'+
         '    </td>'+
         '    <td colspan="2">'+
-      '        <input placeholder="Costo" class="form-control">'+
+      '        <input placeholder="Costo" class="form-control" name="costo'+i+'">'+
       '      </td>'+
 
       '    </tr>');
+      i++;
 
     }
     function addNote(){
@@ -229,7 +230,7 @@
       $('#extratbody').append('<tr>'+
         '<td colspan="5">'+
         '  <div class="form-group">'+
-        '    <textarea placeholder="Nota" class="form-control" ></textarea>'+
+        '    <textarea placeholder="Nota" class="form-control" name="nota'+1+'"></textarea>'+
         '    </div>'+
         '  </td>'+
         '  </tr>');

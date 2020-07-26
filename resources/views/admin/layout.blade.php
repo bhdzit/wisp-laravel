@@ -53,6 +53,8 @@
     <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+    <link rel = "icon" href ="/adminlte/dist/img/zona.png" type = "image/x-icon">
+
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -62,7 +64,7 @@
       <!-- Logo -->
       <a href="index2.html" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>WISP</b></span>
+          <span class="logo-mini"><img src="/adminlte/dist/img/zona.png" style="width: 48px;"/><b>WISP</b></span>
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg"><b>WISP Admin</b></span>
       </a>

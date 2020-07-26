@@ -68,16 +68,19 @@ class ReporteController extends Controller
         case 3:
         $mes=date('m');
         for($i=0;$i<request('credit');$i++){
-        $pago= new Pagos();
-        $pago->wps_monto='0.00';
-        $pago->wps_date=DB::raw("'".date('Y-m-d')."'");
-        $pago->wps_mes=DB::raw("'".date('Y-').$mes."-01'");
-        $pago->wps_servicios=request('ws_id');
-        $pago->wps_pkg=1;
-        $pago->save();
-      $mes++;
-      }
-        DB::insert('insert into wisp_credit values(null,?,?,?,?,?)',[request('ws_id'),request('credit'),date('Y-m-d'),request('credit')*300,'credito a servicio']);
+                $pago= new Pagos();
+                $pago->wps_monto='0.00';
+                $pago->wps_date=DB::raw("'".date('Y-m-d')."'");
+                $pago->wps_mes=DB::raw("'".date('Y-').$mes."-01'");
+                $pago->wps_servicios=request('ws_id');
+                $pago->wps_pkg=1;
+                $pago->save();
+                $mes++;
+
+                DB::insert('insert into wisp_credit values(null,?,?,?,?,?)',[request('ws_id'),1,date('Y-m-d'),request('credit')*300,'credito a servicio']);
+        }
+
+
 
         break;
 

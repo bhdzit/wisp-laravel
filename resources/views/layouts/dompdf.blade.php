@@ -60,7 +60,14 @@
 
       @endforeach
 
-
+      <br>
+      <h5 style="border-top: 2px solid #000;border-bottom: 2px solid #000;" >Extra</h5>
+      @foreach($extras as $extra)
+      <label style="display: block; text-align: left;">{{$extra["item"]}} : $ {{$extra["costo"]}}</label>
+      @php
+      $total+=$extra["costo"]
+      @endphp
+      @endforeach
       <br>
   <h5 style="border-top: 2px solid #000;border-bottom: 2px solid #000;" ><strong>Corte de servicio a partir del <br>{{'01-'.$date.date('-Y')}}<strong/></h5>
   <br>
