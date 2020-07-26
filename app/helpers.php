@@ -49,30 +49,13 @@ $iplistlength=0;
   echo '    </datalist>\'+';
   }
 
-  /*
-    $i=1;
-    $iplistlength=0;
-    $oldsectorid=null;
-    echo '\'<datalist  id="ipdisponiblesec'.$sector->wsct_id.'">';
-          foreach($services as $servis){
-
-             if($sector->wsct_id==$servis->ws_sector){
-              $seg_ip=explode(".",$servis->ip);
-                #  echo '<option id="1">'.$seg_ip[3]." - ".$i;
-                if($seg_ip[3]>$i){
-
-                        for($j=$seg_ip[3]-$i;$j<$seg_ip[3];$j++){
-                                echo '<option id="1" value="'.$seg_ip[0].".".$seg_ip[1].".".$seg_ip[2].".".$i.'-'.$i.'">';
-                                $i++;
-                          }
-                }
-              $i++;
-            }
-      }
+ 
 
 
-  }*/
-
-
+}
+function setMonths($i)
+{
+$months=array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+return $months[$i];
 }
 ?>
