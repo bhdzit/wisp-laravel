@@ -161,7 +161,7 @@
         function getClientPays(){
 
       var row='  <tr id="payOptions">'
-        +'<td style="width: 30px"> <i id="eliminar" style="color:#F00;" class="fas fa-trash-alt"></i><input type="number" id="serviceId" name="serviceId" hidden ></td>'
+        +'<td style="width: 30px"> <i id="eliminar" style="color:#F00;margin-top: 10px;" class="fas fa-minus-circle"></i><input type="number" id="serviceId" name="serviceId" hidden ></td>'
         +'    <td class="todo-list ui-sortable">'
         +'  <select  class="form-control" id="payMonth">'
         +'    <option value="1">ENE</option>'
@@ -221,7 +221,7 @@
           '    <input placeholder="Desscripcion" class="form-control" name="descripcion'+i+'" >'+
         '    </td>'+
         '    <td colspan="3">'+
-      '        <input placeholder="Costo" class="form-control" name="costo'+i+'">'+
+      '        <input onchange="setTotal()" placeholder="Costo" class="form-control extrasClient" name="costo'+i+'">'+
       '      </td>'+
 
       '    </tr>');

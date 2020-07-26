@@ -473,7 +473,10 @@ function toDeg(Value) {
     return Value *  180/Math.PI;
 }
 var index=1;
+var month=1;
 var payTable=null;
+
+
 $('#clientInput').change(function(evt){
 
   $('#clientName').val($('#clientInput').val());
@@ -506,9 +509,9 @@ $('#clientInput').change(function(evt){
                   d.getElementById('payMethod').name="payMethod"+index;
                   d.getElementById('payMoney').name="pay"+index;
                   d.getElementById('pkgClient').addEventListener("change",function(evt){
-                  //  console.log(evt.path[2].children[3].children[0].children[0]);
-                    evt.path[2].children[3].children[0].children[0].value=getPrices()[evt.target.value].wp_price;
-                    //  setTotal();
+
+                    evt.path[2].children[4].children[0].children[0].value=getPrices()[evt.target.value].wp_price;
+                      setTotal();
                   });
                   if(payTable!=null){
                     payTable.destroy()
@@ -550,13 +553,14 @@ var date=new Date();
      $(this).closest('tr').remove();
   });
   d.getElementById('pkgClient').addEventListener("change",function(evt){
-      evt.path[2].children[3].children[0].children[0].value=getPrices()[evt.target.value].wp_price;
+      evt.path[2].children[4].children[0].children[0].value=getPrices()[evt.target.value].wp_price;
     setTotal();
   });
 
   $('#payTable').append(d);
   setTotal();
   index++;
+  month++;
 }
 function setTotal(){
   var pays=document.getElementsByClassName('pkgClient');
@@ -564,12 +568,17 @@ function setTotal(){
   for(var i=0;i<pays.length;i++){
 
             price+=getPrices()[pays[i].value].wp_price*1;
-            console.log(price);
+            //console.log(price);
     }
+    var extras=document.getElementsByClassName('extrasClient');
+  for(var i=0;i<extras.length;i++){
+    price+=extras[i].value*1;
+  }
+
     document.getElementById('totalPay').innerHTML='$ '+price;
 }
 function setSmall(res){
-  console.log(res);
+ // console.log(res);
 var text="";
 
 if(res.wps_monto=="0.00" && res.wct_id==null){
