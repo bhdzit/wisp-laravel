@@ -61,6 +61,7 @@
       @endforeach
 
       <br>
+      @if($extras!=null)
       <h5 style="border-top: 2px solid #000;border-bottom: 2px solid #000;" >Extra</h5>
       @foreach($extras as $extra)
       <label style="display: block; text-align: left;">{{$extra["item"]}} : $ {{$extra["costo"]}}</label>
@@ -68,6 +69,7 @@
       $total+=$extra["costo"]
       @endphp
       @endforeach
+     @endif 
       <br>
   <h5 style="border-top: 2px solid #000;border-bottom: 2px solid #000;" ><strong>Corte de servicio a partir del <br>{{'01-'.setMonths($date*1).date('-Y')}}<strong/></h5>
   <br>
@@ -78,8 +80,15 @@
   <p style="border-top: 2px solid #000;"></p>
   <br>
 <label>* GRACIAS POR
-  SU PREFERENCIA*</label>
+  SU PREFERENCIA* </label>
+  @if($credenciales!=null)
+  <h5>Ingresa a la pagina </h5>
+  <label>http://peliculas.zonaon.net y disfurta de pliculas y serires</label>
+  <center>
+  <label style="text-align: left;"><strong>Usuario : </strong>:{{$credenciales[0]->wem_usu}}</label>
+  <labe style="text-align: left;"><strong>Contraseña : </strong>{{$credenciales[0]->wem_pass}}</labe>
 <center>
+@endif
 </div>
   </body>
 </html>

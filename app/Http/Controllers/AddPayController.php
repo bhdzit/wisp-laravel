@@ -37,9 +37,9 @@ class AddPayController extends Controller
     public function store(Request $request)
     {
 
-      $numRows=(count($request->all())-5)/4;
+      $numRows=(count($request->all()));
        date_default_timezone_set('America/Mexico_City');
-
+      $sizeOfPage=0;
        $pagos= new ArrayObject();
        $extras= new ArrayObject();
        for($i=0;$i<$numRows;$i++){
@@ -51,21 +51,24 @@ class AddPayController extends Controller
           $pago->wps_servicios=request('serviceId');
           $pago->wps_pkg=request('pkgClient'.($i+1));
           $pagos->append($pago);
-    //      $pago->save();
+          $pago->save();
+          $sizeOfPage++;
           }
           if(request('descripcion'.$i)){
             $extra=["item"=>request('descripcion'.$i),'costo'=>request('costo'.$i)];
             $extras->append($extra);
 //            $extra->
+$sizeOfPage++;
           }
           if(request('payMethod'.($i+1))==2){
-      //   DB::insert('insert into wisp_deposit values(null,?,?,?)',[str_replace("T"," ",request('depositDate')),$pago->wps_id,request('r3')]);#;
+         DB::insert('insert into wisp_deposit values(null,?,?,?)',[str_replace("T"," ",request('depositDate')),$pago->wps_id,request('r3')]);#;
         }
       }
-      $customPaper = array(0,0,567.00+(50*$numRows),150);
-      $pdf = PDF::loadView('layouts.dompdf',compact('request',['pagos','extras']))->setPaper($customPaper, 'landscape');
+      $credenciales=DB::select("select * from wisp_emby where wem_id=?",[$pago->wps_servicios]);
+      $customPaper = array(0,0,667.00+(50*$sizeOfPage),150);
+      $pdf = PDF::loadView('layouts.dompdf',compact('request',['pagos','extras','credenciales']))->setPaper($customPaper, 'landscape');
       //$pdf->save('my_stored_file.pdf')->stream('download.pdf');
-      return $request->all();// $pdf->stream();#redirect()->route('pagos.index'); view('layouts.dompdf');
+      return  $pdf->stream();#redirect()->route('pagos.index'); view('layouts.dompdf');
     //$request->all();//
     }
 

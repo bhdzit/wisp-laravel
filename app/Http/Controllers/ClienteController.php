@@ -180,10 +180,11 @@ class ClienteController extends Controller
           $pass.=rand(0,9);
           $pass.=chr(rand(97,122));
           $pass.=rand(0,9);
+          $usu='ZO#C'.$cliente->ws_id;
+          echo '<script>setClient("'.$usu.'","'.$pass.'");</script>';
+          DB::insert('insert into wisp_emby values(?,?,?)',[$cliente->ws_id,$usu,$pass]);
         }
-        $usu='ZO#C'.$cliente->ws_id;
-        echo '<script>setClient("'.$usu.'","'.$pass.'");</script>';
-        DB::insert('insert into wisp_emby values(?,?,?)',[$cliente->ws_id,$usu,$pass]);
+   
     }
 
     /**
