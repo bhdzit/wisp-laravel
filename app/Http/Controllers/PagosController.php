@@ -74,7 +74,8 @@ date_default_timezone_set('America/Mexico_City');
       $pagos= new ArrayObject();
       $pagos->append($pago);
       $customPaper = array(0,0,567.00,150);
-      $pdf = PDF::loadView('layouts.dompdf',compact('request','pagos'))->setPaper($customPaper, 'landscape');
+      $credenciales=DB::select("select * from wisp_emby where wem_id=?",[$pago->wps_servicios]);
+      $pdf = PDF::loadView('layouts.dompdf',compact('request',['pagos','credenciales']))->setPaper($customPaper, 'landscape');
   //    $pdf->save('my_stored_file.pdf')->stream('download.pdf');
       return  $pdf->stream();#redirect()->route('pagos.index'); view('layouts.dompdf');
 
