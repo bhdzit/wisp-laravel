@@ -39,8 +39,11 @@
                                     <table class="table table-bordered table-striped hidden">
                                           <thead>
                                             <tr><th colspan="5">Creditos</th></tr>
+                                                <tbody id="creditosTable">
+                                          
+                                              </tbody>
                                           </thead>
-                                        <tr><td colspan="5"><span>No hay Creditos</span></td></tr>
+                                   
 
                                       <thead>
                                         <tr>

@@ -65,7 +65,7 @@ class AddPayController extends Controller
       $customPaper = array(0,0,567.00+(50*$numRows),150);
       $pdf = PDF::loadView('layouts.dompdf',compact('request',['pagos','extras']))->setPaper($customPaper, 'landscape');
       //$pdf->save('my_stored_file.pdf')->stream('download.pdf');
-      return  $pdf->stream();#redirect()->route('pagos.index'); view('layouts.dompdf');
+      return $request->all();// $pdf->stream();#redirect()->route('pagos.index'); view('layouts.dompdf');
     //$request->all();//
     }
 
@@ -78,7 +78,10 @@ class AddPayController extends Controller
     public function show($id)
     {
             //  $data=Clientes::where('wc_name',$id);#DB::select('select wc_id from wisp_clients where wc_name = \'?\'',[$id]);
-          return Servicios::where('ws_id_cliente',$id)->get(['ws_pkg','ws_id'])->append('pays','yes')->toArray();
+          return Servicios::where('ws_id_cliente',$id)
+          ->get(['ws_pkg','ws_id'])
+          ->append('pays','yes')
+          ->append('credit','yes');
 
     }
 
