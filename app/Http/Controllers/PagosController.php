@@ -73,7 +73,7 @@ date_default_timezone_set('America/Mexico_City');
       $pago=Pagos::find($request->get('payid'));
       $pagos= new ArrayObject();
       $pagos->append($pago);
-      $customPaper = array(0,0,567.00,150);
+      $customPaper = array(0,0,667.00,150);
       $credenciales=DB::select("select * from wisp_emby where wem_id=?",[$pago->wps_servicios]);
       $extras=null;
       $pdf = PDF::loadView('layouts.dompdf',compact('request',['pagos','extras','credenciales']))->setPaper($customPaper, 'landscape');
