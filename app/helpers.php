@@ -6,7 +6,7 @@ function setActive($route){
 }
 function setSmall($request){
   if($request->wps_monto=="0.00" and $request->wsc_id==null){
-  echo '<span class="label label-success pull-right">Gratis</span>';
+  echo $request->wsc_id.'<span class="label label-success pull-right">Gratis</span>';
   }
   if($request->wsc_id)
   echo '<span class="label label-warning pull-right">Credito</span>';

@@ -220,7 +220,6 @@
       else{
           var lineString = new H.geo.LineString();
         var d='{{$sector->wsct_dist}}'*1;
-//        console.log({{$sector->wsec_rank}})
         var apertura='{{$sector->wsec_rank}}'/2;
         var deg='{{$sector->wsec_deg}}';
         var limit=((deg*1)+apertura);

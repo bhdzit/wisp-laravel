@@ -58,7 +58,7 @@ class AddPayController extends Controller
             $extra=["item"=>request('descripcion'.$i),'costo'=>request('costo'.$i)];
             $extras->append($extra);
 //            $extra->
-$sizeOfPage++;
+          $sizeOfPage++;
           }
           if(request('payMethod'.($i+1))==2){
          DB::insert('insert into wisp_deposit values(null,?,?,?)',[str_replace("T"," ",request('depositDate')),$pago->wps_id,request('r3')]);#;
@@ -68,8 +68,8 @@ $sizeOfPage++;
       $customPaper = array(0,0,667.00+(50*$sizeOfPage),150);
       $pdf = PDF::loadView('layouts.dompdf',compact('request',['pagos','extras','credenciales']))->setPaper($customPaper, 'landscape');
       //$pdf->save('my_stored_file.pdf')->stream('download.pdf');
-      return  $pdf->stream();#redirect()->route('pagos.index'); view('layouts.dompdf');
-    //$request->all();//
+     // return  $pdf->stream();#redirect()->route('pagos.index'); view('layouts.dompdf');
+   return  $request->all();//
     }
 
     /**
@@ -82,7 +82,8 @@ $sizeOfPage++;
     {
             //  $data=Clientes::where('wc_name',$id);#DB::select('select wc_id from wisp_clients where wc_name = \'?\'',[$id]);
           return Servicios::where('ws_id_cliente',$id)
-          ->get(['ws_pkg','ws_id'])
+          ->get(['ws_pkg','ws_id','ws_date'])
+          ->append('last_month_pay','yes')
           ->append('pays','yes')
           ->append('credit','yes');
 

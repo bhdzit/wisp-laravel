@@ -27,12 +27,15 @@
 
                   <div class="row " style="margin-top:25px">
                         <div class="col-sm-12">
-                              <div class="box">
+                              <div class="box"></div>
                                   <div class="box-header with-border">
                                     <h3 class="box-title">Realizar Pago</h3>
+                                    <button style="margin-right: 10px;" onclick="$('#paysForm').submit()" class="btn btn-success pull-right">Realizar pago</button>
+                                    <button style="margin-right: 10px;" onclick="addPayRow()" class="btn btn-success pull-right" href=""><i class="fas fa-plus"></i></button>
                                   </div>
                                   <!-- /.box-header -->
-                                  <form target="pdf" method="POST" acction="{{route('agregarpago.store')}}">
+                                  <form target="pdf" id="paysForm" method="POST" acction="{{route('agregarpago.store')}}">
+                           
                                     @csrf
                                     <input type="hidden" id="clientName" name="clientName" value="">
                                   <div class="box-body">
@@ -58,7 +61,7 @@
 
                                         </tbody>
 
-                                          <tr>
+                                          <tr class="hidden" id="depositRow">
                                             <td colspan="3">
                                               <!-- radio -->
                                               <div class="form-group">
@@ -108,9 +111,9 @@
                                         </tfoot>
                                     </table>
                                   </div>
-                                 <input type="submit" class="btn btn-primary pull-right">
+                                
                                </form>
-                              <button style="margin-right: 10px;" onclick="addPayRow()" class="btn btn-success pull-right" href=""><i class="fas fa-plus"></i></button>
+
                             </div>
                       </div>
 

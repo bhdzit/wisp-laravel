@@ -25,7 +25,7 @@ date_default_timezone_set('America/Mexico_City');
     ->leftJoin('drop_pay','wdp_pay','=','wps_id')
     ->leftJoin('wisp_deposit','wd_pay','=','wps_id')
     ->join('wisp_services','wps_servicios','=','ws_id_cliente')
-    ->leftJoin('wisp_services_credit','wps_id','=','wsc_id')
+    ->leftJoin('wisp_services_credit','wps_id','=','wsc_pay')
     ->join('wisp_clients','wps_servicios','=','wc_id')
     ->join('wisp_pkg','wps_pkg','=','wp_id')
     ->select(DB::raw('DATE_FORMAT(wps_mes, "%M-%Y") as wps_date,if(wd_banc IS NULL,"Efectivo","Deposito") as wps_pay_type'),'wps_id','wps_monto','wps_servicios','ws_id_cliente','wc_name','wc_last_name','wp_name','wd_banc','wsc_id','wdp_pay')
