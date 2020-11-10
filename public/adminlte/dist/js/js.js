@@ -5,6 +5,7 @@ var marker;
 var map;
 const SUSPEND_TABLE = 4;
 const DEP_MONTH = 5;
+const SELECT_DAY_FILTER=2;
 function showQR(client) {
   console.log(client);
   Swal.fire({
@@ -577,7 +578,7 @@ $("#reportFrom").submit(function (e) {
     type: $(this).attr("method"),
     data: $(this).serialize()
   }).done(function (res) {
-    // console.log(res);
+     console.log(res);
     html = '';
 
 

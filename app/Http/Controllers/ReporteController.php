@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use DB;
 use App\Pagos;
 use PDF;
+const ALL_PAYS=1;
+const MONTH_PAYS=3;
+const PAYS_DATE_FILTER=2;
+const MONTH_COTS=4;
+const MONTH_DEPOSITS=5;
 class ReporteController extends Controller
 {
     /**
@@ -14,6 +19,7 @@ class ReporteController extends Controller
      * @return \Illuminate\Http\Response
      */
     
+  
     public function index()
     {
            date_default_timezone_set('America/Mexico_City');
@@ -125,9 +131,10 @@ class ReporteController extends Controller
     }
     public function data(Request $request){
       date_default_timezone_set('America/Mexico_City');
+     
       $tableData=null;
       switch (request("filter")) {
-        case 1:
+        case ALL_PAYS:
         $tableData = DB::table('wisp_pays')
         ->leftJoin('drop_pay','wdp_pay','=','wps_id')
         ->leftJoin('wisp_deposit','wd_pay','=','wps_id')
@@ -141,7 +148,7 @@ class ReporteController extends Controller
 
         break ;
 
-        case 2:
+        case MONTH_PAYS: 
         $tableData = DB::table('wisp_pays')
         ->leftJoin('drop_pay','wdp_pay','=','wps_id')
         ->leftJoin('wisp_deposit','wd_pay','=','wps_id')
@@ -154,7 +161,7 @@ class ReporteController extends Controller
         ->get();
         break;
 
-        case 3:
+        case  PAYS_DATE_FILTER:
         if($request->has('filterTime')){
           $date =  explode(' - ',request('filterTime'));
         }
