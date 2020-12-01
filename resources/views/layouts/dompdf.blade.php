@@ -54,10 +54,13 @@
          @endphp
       <br>
       <label style="display: block; text-align: left;">Servicio No:  00{{$pago->wps_servicios}}</label>
-      <label style="display: block; text-align: left;">Mes Pagado:{{setMonths($date-1)}}-{{$d->format('Y')}}</label>
+      <label style="display: block; text-align: left;">Mes Pagado:{{setMonths($date)}}-{{$d->format('Y')}}</label>
       <label style="display: block; text-align: left;">Plan:  {{getPkg($pago->wps_pkg)}}</label>
       <label style="display: block; text-align: left;">Mesualidad:  $ {{$pago->wps_monto}}</label>
-
+      @php 
+      $d->add(new DateInterval('P1M'));
+      $date=$d->format("m");
+      @endphp
       @endforeach
 
       <br>
@@ -71,7 +74,8 @@
       @endforeach
      @endif 
       <br>
-  <h5 style="border-top: 2px solid #000;border-bottom: 2px solid #000;" ><strong>Corte de servicio a partir del <br>{{'01-'.setMonths($date*1).date('-Y')}}<strong/></h5>
+      
+  <h5 style="border-top: 2px solid #000;border-bottom: 2px solid #000;" ><strong>Corte de servicio a partir del <br>{{'01-'.setMonths($date*1).(date('-Y')-1)}}<strong/></h5>
   <br>
 
   <label style="display: block; text-align: left;">Reconexión:  $ 0.00</label>
