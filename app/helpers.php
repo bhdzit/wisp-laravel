@@ -54,7 +54,8 @@ $iplistlength=0;
 
 }
 function setMonths($i)
-{
+{ 
+  $i=intval(''.$i.'');
 $months=array("","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 return $months[$i];
 }
