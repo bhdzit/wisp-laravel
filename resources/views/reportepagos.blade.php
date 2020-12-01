@@ -4,9 +4,11 @@
   <div class="col-xs-12">
     <div class="box">
       <div class="box-header">
-        <h3 class="box-title">Reporte de pagos</h3>
-        <div class="row" >
+      
+        <div class="box-header with-border"><h3 class="box-title"><Strong>Reporte de pagos</Strong></h3><i style="color: #aeb5b9;margin-left: 3px;" class="fas fa-angle-double-right"></i><a> Pagos del mes</a></div>
+        <div class="row"     style="margin: 16px 16px 0px 16px;" >
           <form target="{{route('reportepagos.data')}}" action="{{route('reportepagos.data')}}" method="POST">
+          
             @csrf
             <input type="hidden" name="pdf" >
             <input type="hidden" name="filter" id="filterpdf" value="1">
@@ -15,20 +17,19 @@
            </form>
         <form target="{{route('reportepagos.data')}}" action="{{route('reportepagos.data')}}" method="POST" id="reportFrom">
           @csrf
-      <input style="margin-right: 5px;" class="btn btn-primary pull-right" type="submit"  value="Aplicar">
-            <div class="form-group col-md-3 pull-right">
+      <input style="margin-right: 5px;" class="btn btn-primary hidden" type="submit"  value="Aplicar" >
+            <div class="form-group col-md-3 ">
                     <select name="filter" id="filter" class="form-control">
-                      <option value="1">Todos los Pagos</option>
-                      <option value="2">Fecha</option>
-                      <option value="3">Pagos de Mes</option>
-                      <option value="4">Cortes del Mes</option>
-                      <option value="5">Deposito del Mes</option>
-                      <option value="6">Meses Gratis</option>
-                      <option value="7">Creditos</option>
+                      <option value="1">Pagos</option>
+                      <option value="2">Depositos</option>
+                      <option value="3">Credito</option>
+                      <option value="4">Meses Gratis</option>
+                      <option value="5">Cortes del Mes</option>
+
                     </select>
                   </div>
-                  <div id="dateDivFilter" class="form-group col-md-3 pull-right" hidden>
-                        <input type="text" name="filterTime" class="form-control pull-right" id="reservationtime">
+                  <div id="dateDivFilter" class="form-group col-md-3 " >
+                        <input type="text" name="filterTime" class="form-control pull-right" id="reservationtime" value="DEl MES">
                   </div>
               </form>
           </div>
@@ -144,6 +145,8 @@
 </div>
 @stop
 @section('script')
+
+
 <script src="/adminlte/bower_components/moment/min/moment.min.js"></script>
 <script src="/adminlte/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
 <!-- bootstrap datepicker -->
@@ -168,10 +171,41 @@ table=$('#paysTable').DataTable({
 })
 
 });
+
 $('#reservationtime').daterangepicker({
   locale: {
-     format: 'Y-MM-DD'
-   }
+     format: 'DD/MMM/Y',
+     "daysOfWeek": [
+        "Dom",
+        "Lun",
+        "Mar",
+        "Mir",
+        "Jue",
+        "Vie",
+        "Sab"
+    ],"monthNames": [
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre"
+    ],
+   },
+   ranges: {
+           'Hoy': [moment(), moment()],
+           'Ayer': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+           'Ultimos 7 Días': [moment().subtract(6, 'days'), moment()],
+           'Ultimos 30 Días': [moment().subtract(29, 'days'), moment()],
+           'Este Mes': [moment().startOf('month'), moment().endOf('month')],
+           'Ultimo Mes': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        }
 });
   $('#filterTimepdf').val($('#reservationtime').val());
 $('#reservationtime').on('change',function(evt){
