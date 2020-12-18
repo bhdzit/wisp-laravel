@@ -39,6 +39,7 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="/adminlte/dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="/css/preloader/preloader-style.css">
 
       <link rel="stylesheet" href="/adminlte/dist/css/fonts.css">
         <link rel="stylesheet" href="/adminlte/dist/css/style.css">

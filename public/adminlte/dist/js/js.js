@@ -3,9 +3,9 @@ var circlesvg = '<svg width="10" height="10"  aria-hidden="true" focusable="fals
 var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octrubre", "Noviembre", "Diciembre"];
 var marker;
 var map;
-const SUSPEND_TABLE = 4;
+const SUSPEND_TABLE = 5;
 const DEP_MONTH = 5;
-const SELECT_DAY_FILTER=2;
+const CUTS_OF_MONTH=5;
 function showQR(client) {
   console.log(client);
   Swal.fire({
@@ -567,7 +567,20 @@ console.log(res);
   }
   return text;
 }
+function showCharingbar(){
+    $("#charging-row").removeAttr("hidden");
+    $("#paysTable").hide();
+    $("#paysTable").css('width', 'inherit');
+    $("#filter-row").attr("hidden",true);
 
+  }
+
+  function hideCharingBar(){
+    $("#charging-row").attr("hidden", true);
+    $("#paysTable").show();
+    $("#paysTable").css('width', 'inherit');
+    $("#filter-row").removeAttr("hidden");
+  }
 
 $("#reportFrom").submit(function (e) {
   e.preventDefault();
@@ -640,7 +653,7 @@ $("#reportFrom").submit(function (e) {
         }
       });
     }
-
+    hideCharingBar();
   })
 });
 
