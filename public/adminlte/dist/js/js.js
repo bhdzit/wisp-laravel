@@ -3,9 +3,10 @@ var circlesvg = '<svg width="10" height="10"  aria-hidden="true" focusable="fals
 var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octrubre", "Noviembre", "Diciembre"];
 var marker;
 var map;
+var NUMERO_DEPOSITOS = 0;
 const SUSPEND_TABLE = 5;
 const DEP_MONTH = 5;
-const CUTS_OF_MONTH=5;
+const CUTS_OF_MONTH = 5;
 function showQR(client) {
   console.log(client);
   Swal.fire({
@@ -467,20 +468,20 @@ function toDeg(Value) {
 }
 function addPayRow() {
   var date = new Date();
-  if(month==13){
-    month=1;
+  if (month == 13) {
+    month = 1;
   }
-  
+
   var a = $(getClientPays());
 
-  if(pkg==null|| serv==null){
-   pkg = document.getElementById('pkgClient').value;
-   serv = document.getElementById('serviceId').value;
+  if (pkg == null || serv == null) {
+    pkg = document.getElementById('pkgClient').value;
+    serv = document.getElementById('serviceId').value;
   }
 
   var row = document.getElementById('payOptions');
   var d = document.createDocumentFragment();
-  
+
   d.appendChild(a[0]);
   d.getElementById('pkgClient').value = pkg;
   d.getElementById('pkgClient').name = "pkgClient" + index;
@@ -492,7 +493,7 @@ function addPayRow() {
   d.getElementById('serviceId').value = serv;
   d.getElementById('eliminar').addEventListener("click", function (evt) {
     $(this).closest('tr').remove();
-    month=evt.path[2].children[1].children[0].value;
+    month = evt.path[2].children[1].children[0].value;
     setTotal();
   });
   d.getElementById('pkgClient').addEventListener("change", function (evt) {
@@ -506,22 +507,36 @@ function addPayRow() {
   month++;
 }
 function creditRow(data) {
-  console.log(data);
   var fecha = data.wps_mes.split("-");
   fecha = meses[fecha[1] - 1] + " - " + fecha[0];
   return '<tr class="creditRow" id="payOptions">'
     + '<td style="width: 30px"  >'
-    + '<input name="creditPayCheckbox'+data.wsc_id+'" type="checkbox" onchange="setTotal()" checked>'
-    + '<input name="creditPay'+data.wps_id+'" type="hidden"  value="'+data.wps_id+'">'
+    + '<input name="creditPayCheckbox' + data.wsc_id + '" type="checkbox" onchange="setTotal()" checked>'
+    + '<input name="creditPay' + data.wps_id + '" type="hidden"  value="' + data.wps_id + '">'
     + '</td>'
     + ' <td colspan="2">'
     + '     <input placeholder="Desscripcion" class="form-control" value="Servicio del mes ' + fecha + '" readonly>'
     + '  </td>'
-    + '  <td><select class="form-control"  id="payMethod">'
+    + '  <td><select class="form-control"  id="payMethod" onchange="payMethodChange(this)">'
     + '       <option value="1">Efectivo</option>'
     + '       <option value="2">Deposito</option></select></td>'
-    + '   <td><b>$<input name="payMoney'+data.wsc_id+'" style="border: 0;width: 50px;" id="payMoney" type="text" readonly value="' + getPrices()[1].wp_price + '"></b></td>'
+    + '   <td><b>$<input name="payMoney' + data.wsc_id + '" style="border: 0;width: 50px;" id="payMoney" type="text" readonly value="' + getPrices()[1].wp_price + '"></b></td>'
     + '</tr>';
+}
+function payMethodChange(evt) {
+  var value_select = evt.value;
+  if (value_select == 2) {
+    NUMERO_DEPOSITOS++;
+  } else {
+    NUMERO_DEPOSITOS--;
+  }
+  if (NUMERO_DEPOSITOS > 0) {
+   $("#depositRow").removeAttr("hidden");
+  }
+  else {
+    $("#depositRow").attr("hidden",true);
+  }
+  console.log(value_select + "," + evt.value);
 }
 function setTotal() {
   var pays = document.getElementsByClassName('pkgClient');
@@ -536,12 +551,12 @@ function setTotal() {
     price += extras[i].value * 1;
   }
   var credit = document.getElementsByClassName("creditRow");
-  for(var i=0;i<credit.length;i++){
-    var precio=credit[i].children[3].children[0].children[0].value;
-    var creditCheckbox=credit[i].children[0].children[0];
+  for (var i = 0; i < credit.length; i++) {
+    var precio = credit[i].children[3].children[0].children[0].value;
+    var creditCheckbox = credit[i].children[0].children[0];
 
-    if(creditCheckbox.checked){
-      price+=precio*1;
+    if (creditCheckbox.checked) {
+      price += precio * 1;
     }
 
 
@@ -550,7 +565,7 @@ function setTotal() {
   document.getElementById('totalPay').innerHTML = '$ ' + price;
 }
 function setSmall(res) {
-console.log(res);
+
   var text = "";
 
   if (res.wps_monto == "0.00" && res.wsc_id == null) {
@@ -567,20 +582,20 @@ console.log(res);
   }
   return text;
 }
-function showCharingbar(){
-    $("#charging-row").removeAttr("hidden");
-    $("#paysTable").hide();
-    $("#paysTable").css('width', 'inherit');
-    $("#filter-row").attr("hidden",true);
+function showCharingbar() {
+  $("#charging-row").removeAttr("hidden");
+  $("#paysTable").hide();
+  $("#paysTable").css('width', 'inherit');
+  $("#filter-row").attr("hidden", true);
 
-  }
+}
 
-  function hideCharingBar(){
-    $("#charging-row").attr("hidden", true);
-    $("#paysTable").show();
-    $("#paysTable").css('width', 'inherit');
-    $("#filter-row").removeAttr("hidden");
-  }
+function hideCharingBar() {
+  $("#charging-row").attr("hidden", true);
+  $("#paysTable").show();
+  $("#paysTable").css('width', 'inherit');
+  $("#filter-row").removeAttr("hidden");
+}
 
 $("#reportFrom").submit(function (e) {
   e.preventDefault();
@@ -591,7 +606,7 @@ $("#reportFrom").submit(function (e) {
     type: $(this).attr("method"),
     data: $(this).serialize()
   }).done(function (res) {
-     console.log(res);
+    console.log(res);
     html = '';
 
 
@@ -637,7 +652,7 @@ $("#reportFrom").submit(function (e) {
       $('#totalDep').html('$' + depo);
       $('#totalPay').html('$' + total);
       $('#totalCash').html('$' + efectivo)
-    
+
       $("#PaysTableBody").html(html);
       table = $("#paysTable").DataTable({
         "language": {
@@ -683,25 +698,25 @@ for (var i = 0; i < clietnSupendRow.length; i++) {
     });
     Swal.fire({
       title: 'Loading cars from data base',
-      allowOutsideClick:false,
+      allowOutsideClick: false,
       timerProgressBar: true,
- });
- swal.showLoading();
- const Toast = Swal.mixin({
-  toast: true,
-  position: 'bottom-end',
-  showConfirmButton: false,
-  timer: 3000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-  }
-})
+    });
+    swal.showLoading();
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'bottom-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
 
 
-  
-    
+
+
     $.ajax({
       url: $(this).attr("action"),
       type: $(this).attr("method"),
@@ -713,7 +728,7 @@ for (var i = 0; i < clietnSupendRow.length; i++) {
         title: 'Operacion Relaizada'
       })
       table.row(':eq(0)').remove().draw();
-    }).fail(function() {
+    }).fail(function () {
       Toast.fire({
         icon: 'error',
         title: 'Error al Realizar la Operacion'
@@ -728,12 +743,16 @@ for (var i = 0; i < clietnSupendRow.length; i++) {
 var index = 1;
 var month = 1;
 var payTable = null;
-var ultimomespagado=1;
-var pkg=null,serv=null;
+var ultimomespagado = 1;
+var pkg = null, serv = null;
 $('#clientInput').change(function (evt) {
 
-  $('#clientName').val($('#clientInput').val());
+  if ($("#clientInput").val().length != 0) showCharingbar();;
+
+  $('#clientName').val($('#clientInput').val().length);
+
   index = 1;
+
   var opt = $('option[value="' + $(this).val() + '"]');
   //  console.log(opt.attr('id'));
   if (opt.attr('id') != undefined) {
@@ -745,47 +764,49 @@ $('#clientInput').change(function (evt) {
     $.ajax({
       url: "agregarpago/" + opt.attr('id'),
     }).done(function (res) {
-    
+
       var date = new Date();
-     pkg = res[0].ws_pkg;
-      if(res[0].last_month_pay){
-       ultimomespagado=(res[0].last_month_pay.split("-")[1]*1)+1;
+      pkg = res[0].ws_pkg;
+      if (res[0].last_month_pay) {
+        ultimomespagado = (res[0].last_month_pay.split("-")[1] * 1) + 1;
       }
-      else{
-        ultimomespagado= new Date().getMonth()+1;
+      else {
+        ultimomespagado = new Date().getMonth() + 1;
       }
-      if(ultimomespagado==13)ultimomespagado=1;
-       month=ultimomespagado;
+      if (ultimomespagado == 13) ultimomespagado = 1;
+      month = ultimomespagado;
       var a = $(getClientPays());
       var d = document.createDocumentFragment();
       var creditos = res[0].credit;
-      console.log(creditos.length);
+
       d.appendChild(a[0]);
       d.getElementById('pkgClient').value = pkg;
       d.getElementById('payMonth').value = ultimomespagado;
       d.getElementById('payMoney').value = getPrices()[pkg].wp_price;
       d.getElementById('serviceId').value = res[0].ws_id;
-      serv=res[0].ws_id;
+      serv = res[0].ws_id;
       d.getElementById('pkgClient').name = "pkgClient" + index;
       d.getElementById('payMonth').name = "payMonth" + index;
       d.getElementById('payMethod').name = "payMethod" + index;
+
       d.getElementById('payMoney').name = "pay" + index;
       d.getElementById('pkgClient').addEventListener("change", function (evt) {
 
         evt.path[2].children[4].children[0].children[0].value = getPrices()[evt.target.value].wp_price;
         setTotal();
       });
-      var hasCredit=false;
+      $('#creditosTable').html("");
+      var hasCredit = false;
       for (var i = 0; i < creditos.length; i++) {
         if (creditos[i].wsc_id != null) {
           $('#creditosTable').append(creditRow(creditos[i]));
-        hasCredit=true;
+          hasCredit = true;
         }
       }
-      if(hasCredit){
+      if (hasCredit) {
         d.getElementById('eliminar').addEventListener("click", function (evt) {
           $(this).closest('tr').remove();
-          month=ultimomespagado;
+          month = ultimomespagado;
           setTotal();
         });
       }
@@ -806,4 +827,5 @@ $('#clientInput').change(function (evt) {
       month++;
     });
   }
+  hideCharingBar();
 });
