@@ -534,10 +534,14 @@ function payMethodChange(evt) {
     NUMERO_DEPOSITOS--;
   }
   if (NUMERO_DEPOSITOS > 0) {
+
    $("#depositRow").removeAttr("hidden");
+   $("#depositDate").attr("required",true);
+  
   }
   else {
     $("#depositRow").attr("hidden",true);
+    $("#depositDate").removeAttr("required");
   }
   console.log(value_select + "," + evt.value);
 }

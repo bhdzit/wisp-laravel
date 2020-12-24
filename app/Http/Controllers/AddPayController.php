@@ -34,10 +34,10 @@ class AddPayController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  
+
   public function store(Request $request)
   {
-    // return request();
+    
     $numRows = (count($request->all()));
     date_default_timezone_set('America/Mexico_City');
     $sizeOfPage = 0;

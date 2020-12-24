@@ -30,9 +30,10 @@
 
             <div class="col-sm-12">
               <div class="box"></div>
+              <form target="pdf" id="paysForm" method="POST" action="{{route('agregarpago.store')}}">
               <div class="box-header with-border">
                 <h3 class="box-title">Realizar Pago</h3>
-                <button style="margin-right: 10px;" onclick="$('#paysForm').submit()" class="btn btn-success pull-right">Realizar pago</button>
+                <button style="margin-right: 10px;" type="submit" class="btn btn-success pull-right">Realizar pago</button>
                 <button style="margin-right: 10px;" onclick="addPayRow()" class="btn btn-success pull-right" href=""><i class="fas fa-plus"></i></button>
               </div>
               <!-- /.box-header -->
@@ -53,7 +54,7 @@
                 </div>
               </div>
 
-              <form target="pdf" id="paysForm" method="POST" acction="{{route('agregarpago.store')}}">
+              
 
                 @csrf
                 <input type="hidden" id="clientName" name="clientName" value="">
@@ -101,7 +102,7 @@
                         </div>
                       </td>
                       <td colspan="2">
-                        <input type="datetime-local" name="depositDate" class="form-control pull-right" id="reservationtime1">
+                        <input type="datetime-local" name="depositDate" id="depositDate" class="form-control pull-right" id="reservationtime1"  >
                       </td>
 
                     </tr>
