@@ -3,10 +3,12 @@ var circlesvg = '<svg width="10" height="10"  aria-hidden="true" focusable="fals
 var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octrubre", "Noviembre", "Diciembre"];
 var marker;
 var map;
+var NUMERO_CREDITOS=0;
 var NUMERO_DEPOSITOS = 0;
 const SUSPEND_TABLE = 5;
 const DEP_MONTH = 5;
 const CUTS_OF_MONTH = 5;
+
 function showQR(client) {
   console.log(client);
   Swal.fire({
@@ -509,10 +511,11 @@ function addPayRow() {
 function creditRow(data) {
   var fecha = data.wps_mes.split("-");
   fecha = meses[fecha[1] - 1] + " - " + fecha[0];
+  NUMERO_CREDITOS++;
   return '<tr class="creditRow" id="payOptions">'
     + '<td style="width: 30px"  >'
-    + '<input name="creditPayCheckbox' + data.wsc_id + '" type="checkbox" onchange="setTotal()" checked>'
-    + '<input name="creditPay' + data.wps_id + '" type="hidden"  value="' + data.wps_id + '">'
+    + '<input name="creditPayCheckbox' +NUMERO_CREDITOS+ '" type="checkbox" onchange="setTotal()" checked>'
+    + '<input name="creditPay' + NUMERO_CREDITOS + '" type="hidden"  value="' + data.wps_id + '">'
     + '</td>'
     + ' <td colspan="2">'
     + '     <input placeholder="Desscripcion" class="form-control" value="Servicio del mes ' + fecha + '" readonly>'
@@ -798,7 +801,7 @@ $('#clientInput').change(function (evt) {
       $('#creditosTable').html("");
       var hasCredit = false;
       for (var i = 0; i < creditos.length; i++) {
-        if (creditos[i].wsc_id != null) {
+        if (creditos[i].wsc_id != null&&creditos[i]=='0.00') {
           $('#creditosTable').append(creditRow(creditos[i]));
           hasCredit = true;
         }
