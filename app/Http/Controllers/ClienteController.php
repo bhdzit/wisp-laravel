@@ -92,7 +92,7 @@ class ClienteController extends Controller
        
       async function setClient(usuario,pass){
              let xmlhttp = new XMLHttpRequest();   // El objeto que te provee el browser
-             xmlhttp.open("POST", "http://10.10.1.2/emby/Users/New?api_key=50c386f40d804f35be90080b78c7357d"); // le dices que quieres hacer un POST y a que path relativo
+             xmlhttp.open("POST", "http://10.10.1.2/emby/Users/New?api_key=7a92615f34ab478786b43b35666b6636"); // le dices que quieres hacer un POST y a que path relativo
              xmlhttp.setRequestHeader("Content-Type", "application/json"); // le dices que vas a enviar un JSON
              let obj = {
                          "Name": usuario
@@ -121,7 +121,7 @@ class ClienteController extends Controller
                      "SimultaneousStreamLimit":1};
      
                      let xmlhttp = new XMLHttpRequest();   // El objeto que te provee el browser
-             xmlhttp.open("POST", "http://10.10.1.2/emby/Users/"+data.Id+"/Policy?api_key=348cdfd97c0e4277b40b61cb004aa5c9"); // le dices que quieres hacer un POST y a que path relativo
+             xmlhttp.open("POST", "http://10.10.1.2/emby/Users/"+data.Id+"/Policy?api_key=7a92615f34ab478786b43b35666b6636"); // le dices que quieres hacer un POST y a que path relativo
              xmlhttp.setRequestHeader("Content-Type", "application/json"); // le dices que vas a enviar un JSON
               // Supongamos este es tu objeto
              let jsonData = JSON.stringify(json); // Conviertes el objeto a JSON
@@ -138,7 +138,7 @@ class ClienteController extends Controller
                  };
      
                      let xmlhttp = new XMLHttpRequest();   // El objeto que te provee el browser
-             xmlhttp.open("POST", "http://10.10.1.2/emby/Users/"+data.Id+"/Password?api_key=348cdfd97c0e4277b40b61cb004aa5c9"); // le dices que quieres hacer un POST y a que path relativo
+             xmlhttp.open("POST", "http://10.10.1.2/emby/Users/"+data.Id+"/Password?api_key=7a92615f34ab478786b43b35666b6636"); // le dices que quieres hacer un POST y a que path relativo
              xmlhttp.setRequestHeader("Content-Type", "application/json"); // le dices que vas a enviar un JSON
               // Supongamos este es tu objeto
              let jsonData = JSON.stringify(json); // Conviertes el objeto a JSON
