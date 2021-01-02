@@ -57,7 +57,7 @@
               
 
                 @csrf
-                <input type="hidden" id="clientName" name="clientName" value="">
+                <input type="hidden" id="clientName" name="clientName" >
                 <div class="box-body">
                   <table class="table table-bordered table-striped hidden">
                     <thead>

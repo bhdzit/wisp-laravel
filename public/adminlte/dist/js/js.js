@@ -756,7 +756,7 @@ $('#clientInput').change(function (evt) {
 
   if ($("#clientInput").val().length != 0) showCharingbar();;
 
-  $('#clientName').val($('#clientInput').val().length);
+  $('#clientName').val($('#clientInput').val());
 
   index = 1;
 

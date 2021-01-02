@@ -133,7 +133,7 @@
           <li class="{{setActive('ingresos')}}"><a href="{{route('ingresos.index')}}/"><i class="fas fa-hand-holding-usd"></i><span> Ingresos</span></a></li>
           <li class="{{setActive('egresos')}}"><a href="{{route('egresos.index')}}/"><i class="fas fa-hand-holding"></i><span> Egresos</span></a></li>
           <li class="{{setActive('tickets')}}"><a href="{{route('tickets.index')}}"><i class="fas fa-bug"></i><span> Tickets</span></a></li>
-          <li class="{{setActive('tickets')}}"><a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i><span>  Configuracion</span></a></li>
+          <li class="{{setActive('configuracion')}}"><a href="{{route('configuracion.index')}}"><i class="fa fa-gears"></i><span>  Configuracion</span></a></li>
 
 <!--         <li class="treeview">
             <a href="#"><i class="fa fa-link"></i> <span>Paquetes</span>
