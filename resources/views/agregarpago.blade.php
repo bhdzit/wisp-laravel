@@ -30,34 +30,35 @@
 
             <div class="col-sm-12">
               <div class="box"></div>
-              <form target="pdf" id="paysForm" method="POST" action="{{route('agregarpago.store')}}">
+
               <div class="box-header with-border">
                 <h3 class="box-title">Realizar Pago</h3>
-                <button style="margin-right: 10px;" type="submit" class="btn btn-success pull-right">Realizar pago</button>
+                <button style="margin-right: 10px;" onclick="$('#paysForm').submit()" class="btn btn-success pull-right">Realizar pago</button>
                 <button style="margin-right: 10px;" onclick="addPayRow()" class="btn btn-success pull-right" href=""><i class="fas fa-plus"></i></button>
               </div>
-              <!-- /.box-header -->
-              <div class="row" id="charging-row" hidden>
-                <div class="charging">
-                  <div class="col-lg-12 col-md-12 col-sm-4 col-xs-12">
-                    <div class="preloader-single mt-b-30">
-                      <div class="ts_preloading_box">
-                        <div id="ts-preloader-absolute02">
-                          <div class="tsperloader2" id="tsperloader2_four"></div>
-                          <div class="tsperloader2" id="tsperloader2_three"></div>
-                          <div class="tsperloader2" id="tsperloader2_two"></div>
-                          <div class="tsperloader2" id="tsperloader2_one"></div>
+              <form target="pdf" id="paysForm" method="POST" action="{{route('agregarpago.store')}}">
+                <!-- /.box-header -->
+                <div class="row" id="charging-row" hidden>
+                  <div class="charging">
+                    <div class="col-lg-12 col-md-12 col-sm-4 col-xs-12">
+                      <div class="preloader-single mt-b-30">
+                        <div class="ts_preloading_box">
+                          <div id="ts-preloader-absolute02">
+                            <div class="tsperloader2" id="tsperloader2_four"></div>
+                            <div class="tsperloader2" id="tsperloader2_three"></div>
+                            <div class="tsperloader2" id="tsperloader2_two"></div>
+                            <div class="tsperloader2" id="tsperloader2_one"></div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              
+
 
                 @csrf
-                <input type="hidden" id="clientName" name="clientName" >
+                <input type="hidden" id="clientName" name="clientName">
                 <div class="box-body">
                   <table class="table table-bordered table-striped hidden">
                     <thead>
@@ -102,7 +103,7 @@
                         </div>
                       </td>
                       <td colspan="2">
-                        <input type="datetime-local" name="depositDate" id="depositDate" class="form-control pull-right" id="reservationtime1"  >
+                        <input type="datetime-local" name="depositDate" id="depositDate" class="form-control pull-right" id="reservationtime1">
                       </td>
 
                     </tr>
@@ -180,8 +181,7 @@
   <!-- bootstrap datepicker -->
   <script src="/adminlte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
   <script type="text/javascript">
-     
-     $("#charging-row").attr("hidden", true);
+    $("#charging-row").attr("hidden", true);
 
     //Flat red color scheme for iCheck
     $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({

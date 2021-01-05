@@ -43,9 +43,6 @@
       <br>
       <h5><b>{{$request->get('clientName')}}<b/></h5>
       <label style="font-size:17px; border-bottom: 2px solid #000;">Fecha : {{date('d-m-Y h:i')}}</label>
-
-
-
       @foreach($pagos as $pago)
         @php
         $total+=$pago->wps_monto;
@@ -75,7 +72,7 @@
      @endif 
       <br>
       
-  <h5 style="border-top: 2px solid #000;border-bottom: 2px solid #000;" ><strong>Corte de servicio a partir del <br>{{'01-'.setMonths($date*1).(date('-Y')-1)}}<strong/></h5>
+  <h5 style="border-top: 2px solid #000;border-bottom: 2px solid #000;" ><strong>Corte de servicio a partir del <br>{{'01-'.setMonths($date*1).(date('-Y'))}}<strong/></h5>
   <br>
 
   <label style="display: block; text-align: left;">Reconexión:  $ 0.00</label>

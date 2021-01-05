@@ -38,7 +38,10 @@ class AddPayController extends Controller
   public function store(Request $request)
   {
     
+    
     $numRows = (count($request->all()));
+    echo $numRows;
+    return  $request->all();
     date_default_timezone_set('America/Mexico_City');
     $sizeOfPage = 0;
     $year = date('Y');
