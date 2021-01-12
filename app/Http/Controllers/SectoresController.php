@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Business;
 use Illuminate\Http\Request;
 use App\Sectores;
 use App\Torres;
@@ -22,7 +23,8 @@ class SectoresController extends Controller
         ->leftjoin('wisp_sec_ant','wsec_id','=','wsct_id')
         ->select(DB::raw(' INET_NTOA(wsct_address) as wsct_ip'),'wisp_sector.*','wt_nombre','wa_name','wisp_sec_ant.*')
         ->get(),
-      'towers'=>Torres::get(['wt_id','ST_X(\'wt_point\')'])]);
+      'towers'=>Torres::get(['wt_id','ST_X(\'wt_point\')']),
+      "business"=>Business::first()]);
 
     }
 

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Business;
 use App\Paquetes;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,7 @@ class PaquetesController extends Controller
     public function index()
     {
 
-        return view('paquetes',['paquetes'=>Paquetes::get()]);
+        return view('paquetes',['paquetes'=>Paquetes::get(),"business"=>Business::first()]);
     }
 
     /**

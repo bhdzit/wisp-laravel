@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Business;
 use App\Torres;
 use App\Paquetes;
 use App\Servicios;
@@ -34,7 +36,7 @@ class ClienteController extends Controller
         ->join('wisp_antenna_type','wsct_antenna','=','wa_id')
         ->leftjoin("wisp_sec_ant","wsct_id","=","wsec_id")
         ->select('wisp_sector.*','wt_nombre','wa_name','wsct_id','wisp_sec_ant.*',DB::raw('INET_NTOA(wsct_address) as ws_ip,ST_X(wt_point) as lat,ST_Y(wt_point) as lng'))
-        ->get(),"paquetes"=>Paquetes::get()]);
+        ->get(),"paquetes"=>Paquetes::get(),"business"=>Business::first()]);
     }
 
     /**

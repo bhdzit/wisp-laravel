@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Business;
 use App\Torres;
 use Illuminate\Http\Request;
 use DB;
@@ -21,7 +23,7 @@ class TorresController extends Controller
     {
     //  Alert::html(@include('sweetAlert2.TowerLayout'),'asdsa');
 
-        return view('torres',['torres'=>Torres::get(['wt_id','ST_X(\'wt_point\')'])]);
+        return view('torres',['torres'=>Torres::get(['wt_id','ST_X(\'wt_point\')']),"business"=>Business::first()]);
     }
 
     /**

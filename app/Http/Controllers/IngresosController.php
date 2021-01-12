@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Business;
 use Illuminate\Http\Request;
 use DB;
 
@@ -14,7 +15,7 @@ class IngresosController extends Controller
      */
     public function index()
     {
-      return  view('ingresos',['ingresos'=>DB::select('select *  from wisp_ingress')]);
+      return  view('ingresos',['ingresos'=>DB::select('select *  from wisp_ingress'),"business"=>Business::first()]);
     }
 
     /**

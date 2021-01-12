@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Business;
 use Illuminate\Http\Request;
 use DB;
 class EgresosController extends Controller
@@ -13,7 +14,7 @@ class EgresosController extends Controller
      **/
      public function index()
      {
-       return  view('egresos',['egresos'=>DB::select('select *  from wisp_expenses')]);
+       return  view('egresos',['egresos'=>DB::select('select *  from wisp_expenses'),"business"=>Business::first()]);
      }
 
      /**

@@ -599,7 +599,9 @@ function showCharingbar() {
 
 function hideCharingBar() {
   $("#charging-row").attr("hidden", true);
+  if ($('#filter').val() != SUSPEND_TABLE) {
   $("#paysTable").show();
+  }
   $("#paysTable").css('width', 'inherit');
   $("#filter-row").removeAttr("hidden");
 }
@@ -613,7 +615,7 @@ $("#reportFrom").submit(function (e) {
     type: $(this).attr("method"),
     data: $(this).serialize()
   }).done(function (res) {
-    console.log(res);
+   // console.log(res);
     html = '';
 
 
@@ -623,6 +625,7 @@ $("#reportFrom").submit(function (e) {
       $("#suspendTable").removeAttr('hidden');
       //$("#depositTBody").html(html);
       table = $("#suspendTable").DataTable();
+     
     }
     else {
       $('#thAllPays').removeAttr('hidden');

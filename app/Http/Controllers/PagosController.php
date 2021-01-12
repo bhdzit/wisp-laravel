@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Business;
 use Illuminate\Http\Request;
 use DB;
 use App\Paquetes;
@@ -30,7 +31,7 @@ date_default_timezone_set('America/Mexico_City');
     ->join('wisp_pkg','wps_pkg','=','wp_id')
     ->select(DB::raw('DATE_FORMAT(wps_mes, "%M-%Y") as wps_date,if(wd_banc IS NULL,"Efectivo","Deposito") as wps_pay_type'),'wps_id','wps_monto','wps_servicios','ws_id_cliente','wc_name','wc_last_name','wp_name','wd_banc','wsc_id','wdp_pay')
     ->where('wps_date', date('Y-m-d'))
-    ->get(),'paquetes'=>Paquetes::get()]);
+    ->get(),'paquetes'=>Paquetes::get(),"business"=>Business::first()]);
     }
 
     /**

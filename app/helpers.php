@@ -1,4 +1,8 @@
 <?php
+
+use App\Business;
+use App\User;
+
 function setActive($route){
   if(request()->segments()){
   return request()->segments()[0]==$route ? 'active' :'no';
@@ -19,8 +23,12 @@ function setSmall($request){
 function getPkg($id){
   return App\Paquetes::find($id)->wp_name;
 }
-function getAvailableIP($sectores,$services){
 
+
+
+
+
+function getAvailableIP($sectores,$services){
 
 foreach ($sectores as $sector) {
 #    $seg_ip=explode(".",$servis->ip);

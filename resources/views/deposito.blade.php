@@ -48,7 +48,7 @@
                                     <h3 class="box-title">Deposito de Pago</h3>
                                   </div>
                                   <!-- /.box-header -->
-                                  <form method="POST" acction="{{route('agregarpago.store')}}">
+                                  <form method="POST" action="{{route('agregarpago.store')}}">
                                     @csrf
                                   <div class="box-body">
                                     <table class="table table-bordered table-striped">

@@ -65,7 +65,7 @@
       <!-- Logo -->
       <a href="index2.html" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><img src="/adminlte/dist/img/zona.png" style="width: 48px;"/><b>WISP</b></span>
+          <span class="logo-mini"><img src="{{asset('/storage/imagenes/'.$business->wb_perfil_img)}}" style="width: 48px;"/><b>WISP</b></span>
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg"><b>WISP Admin</b></span>
       </a>
@@ -85,7 +85,7 @@
               <!-- Menu Toggle Button -->
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <!-- The user image in the navbar-->
-                <img src="/adminlte/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                <img src="{{asset('/storage/imagenes/'.auth()->user()->perfil_img)}}" class="user-image" alt="User Image">
                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
                 <span class="hidden-xs">{{auth()->user()->name}}</span>
               </a>
@@ -165,7 +165,7 @@
       Anything you want
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2020 <a href="#">Mictlan Dev</a>.</strong> All rights reserved.
   </footer>
 
   <!-- Control Sidebar -->

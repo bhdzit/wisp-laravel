@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Business;
 use Illuminate\Http\Request;
 use DB;
 class HomeController extends Controller
@@ -39,6 +40,6 @@ class HomeController extends Controller
                   ->join('wisp_pkg','wps_pkg','=','wp_id')
                   ->select(DB::raw('DATE_FORMAT(wps_mes, "%M-%Y") as wps_mes,DATE_FORMAT(wps_date, "%d-%M-%Y") as wps_date,if(wd_banc IS NULL,"Efectivo","Deposito") as wps_pay_type '),'wps_id','wps_servicios','ws_id_cliente','wc_name','wc_last_name','wp_name','wps_monto','wdp_pay','wd_banc')
                   ->where([[DB::raw('month(wps_date)'),date('m')],[DB::raw('year(wps_date)'),date('Y')]])
-                  ->get()->count()]);
+                  ->get()->count(),"business"=>Business::find(1)]);
     }
 }

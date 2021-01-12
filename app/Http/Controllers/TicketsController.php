@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Business;
 use Illuminate\Http\Request;
 
 class TicketsController extends Controller
@@ -15,7 +16,7 @@ class TicketsController extends Controller
     {
 
         //
-              return  view('errors.404');
+              return  view('errors.404',["business"=>Business::find(1)]);
     }
 
     /**
