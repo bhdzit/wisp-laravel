@@ -3,7 +3,7 @@ var circlesvg = '<svg width="10" height="10"  aria-hidden="true" focusable="fals
 var meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octrubre", "Noviembre", "Diciembre"];
 var marker;
 var map;
-var NUMERO_CREDITOS=0;
+var NUMERO_CREDITOS = 0;
 var NUMERO_DEPOSITOS = 0;
 const SUSPEND_TABLE = 5;
 const DEP_MONTH = 5;
@@ -514,7 +514,7 @@ function creditRow(data) {
   NUMERO_CREDITOS++;
   return '<tr class="creditRow" id="payOptions">'
     + '<td style="width: 30px"  >'
-    + '<input name="creditPayCheckbox' +NUMERO_CREDITOS+ '" type="checkbox" onchange="setTotal()" checked>'
+    + '<input name="creditPayCheckbox' + NUMERO_CREDITOS + '" type="checkbox" onchange="setTotal()" checked>'
     + '<input name="creditPay' + NUMERO_CREDITOS + '" type="hidden"  value="' + data.wps_id + '">'
     + '</td>'
     + ' <td colspan="2">'
@@ -535,12 +535,12 @@ function payMethodChange(evt) {
   }
   if (NUMERO_DEPOSITOS > 0) {
 
-   $("#depositRow").removeAttr("hidden");
-   $("#depositDate").attr("required",true);
-  
+    $("#depositRow").removeAttr("hidden");
+    $("#depositDate").attr("required", true);
+
   }
   else {
-    $("#depositRow").attr("hidden",true);
+    $("#depositRow").attr("hidden", true);
     $("#depositDate").removeAttr("required");
   }
   console.log(value_select + "," + evt.value);
@@ -600,7 +600,7 @@ function showCharingbar() {
 function hideCharingBar() {
   $("#charging-row").attr("hidden", true);
   if ($('#filter').val() != SUSPEND_TABLE) {
-  $("#paysTable").show();
+    $("#paysTable").show();
   }
   $("#paysTable").css('width', 'inherit');
   $("#filter-row").removeAttr("hidden");
@@ -615,7 +615,7 @@ $("#reportFrom").submit(function (e) {
     type: $(this).attr("method"),
     data: $(this).serialize()
   }).done(function (res) {
-   // console.log(res);
+    // console.log(res);
     html = '';
 
 
@@ -625,7 +625,7 @@ $("#reportFrom").submit(function (e) {
       $("#suspendTable").removeAttr('hidden');
       //$("#depositTBody").html(html);
       table = $("#suspendTable").DataTable();
-     
+
     }
     else {
       $('#thAllPays').removeAttr('hidden');
@@ -808,7 +808,7 @@ $('#clientInput').change(function (evt) {
       $('#creditosTable').html("");
       var hasCredit = false;
       for (var i = 0; i < creditos.length; i++) {
-        if (creditos[i].wsc_id != null&&creditos[i]=='0.00') {
+        if (creditos[i].wsc_id != null && creditos[i] == '0.00') {
           $('#creditosTable').append(creditRow(creditos[i]));
           hasCredit = true;
         }
@@ -827,10 +827,21 @@ $('#clientInput').change(function (evt) {
       $('#payTable').html(d);
       setTotal();
       index++;
-      var pagosAnteriores = res[0].pays;
+
+      let pagosAnteriores = res[0].pays;
+      let last_month_pay = res[0].last_month_pay;
+      console.log(last_month_pay);
+      last_month_pay=new Date(last_month_pay);
+      console.log(last_month_pay);
+      if (last_month_pay.getMonth()< new Date().getMonth()) {
+        alert("No se pago el mes Anterior");
+      }
+//      console.log(last_month_pay, new Date());
+           
+
       $('#recentPays').html('');
       for (var i = 0; i < pagosAnteriores.length; i++) {
-        $('#recentPays').append('<tr><td>' + (i + 1) + '</td><td>' + pagosAnteriores[i].fecha + '</td><td>' + pagosAnteriores[i].wp_name + '</td><td><button type="submit" class="btn btn-primary"><i class="fas fa-print"></i></button></td></tr>');
+        $('#recentPays').append('<tr><td>' + (i + 1) + '</td><td>' + pagosAnteriores[i].fecha.toUpperCase() + '</td><td>' + pagosAnteriores[i].wp_name + '</td><td><button type="submit" class="btn btn-primary"><i class="fas fa-print"></i></button></td></tr>');
       }
       payTable = $('#recentPaysTable').DataTable();
       $('table').removeClass('hidden');

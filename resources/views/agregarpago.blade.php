@@ -248,6 +248,10 @@
         titel: 'Any fool can use a computer',
         input: 'text'
       });
+
+      document.getElementsByClassName("swal2-input")[0].addEventListener("keypress",function(e){
+      
+      });
     }
     var i = 1;
 

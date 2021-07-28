@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Business;
 use Illuminate\Http\Request;
 use DB;
 use App\Pagos;
@@ -43,7 +44,8 @@ class ReporteController extends Controller
         ->leftJoin('wisp_pkg', 'ws_pkg', '=', 'wp_id')
         ->select(DB::raw('DATE_FORMAT(wps_mes, "%M-%Y") as wps_mes'), 'ws_id', 'wp_price', 'wps_servicios', 'wps_date', 'wc_name', 'wc_last_name')
         ->where('wps_id', null)
-        ->get(), 'total' => DB::select('SELECT sum(wps_monto) as total FROM wisp.wisp_pays')
+        ->get(), 'total' => DB::select('SELECT sum(wps_monto) as total FROM wisp.wisp_pays'),
+        "business"=>Business::first()
     ]);
   }
 

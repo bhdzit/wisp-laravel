@@ -13,6 +13,7 @@ class Servicios extends Model
 
         public function getPaysAttribute($id){
           date_default_timezone_set('America/Mexico_City');
+          setlocale(LC_TIME, "es_ES");
           return DB::select('call paytable(?,?)',[$this->attributes['ws_date'],$this->attributes['ws_id']]);
         }
 
