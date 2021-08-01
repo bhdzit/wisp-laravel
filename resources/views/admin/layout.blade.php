@@ -56,7 +56,8 @@
     <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
     <link rel="icon" href="/adminlte/dist/img/zona.png" type="image/x-icon">
-
+ <!-- bootstrap wysihtml5 - text editor -->
+ <link rel="stylesheet" href="/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -144,7 +145,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu" style="display: none;">
-                            <li class="active"><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i>Ver Clientes</a></li>
+                            <li class="active"><a href="enviarmsj"><i class="fa fa-circle-o"></i>Ver Clientes</a></li>
                             <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Enviar Msj</a></li>
                             <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Usuarios Emby</a></li>
                             

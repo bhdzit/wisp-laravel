@@ -7,6 +7,7 @@ use App\Torres;
 use App\Paquetes;
 use App\Servicios;
 use App\Clientes;
+use App\Sectores;
 use DB;
 use Illuminate\Http\Request;
 
@@ -147,5 +148,22 @@ class ClienteController extends Controller
     {
         Servicios::destroy($id);
         return redirect()->route('clientes.index');
+    }
+    
+
+    public function getSeendMsjView(){
+    
+      return view("enviarmsj",[
+      "business"=>Business::first(),
+      "clientes"=>DB::table('wisp_clients')
+      ->leftjoin('wisp_services','wc_id','=','ws_id_cliente')
+      ->leftjoin('wisp_sector','wsct_id','=','ws_sector')
+      ->leftjoin('wisp_tower','wsct_tower',"=",'wt_id')
+      ->select("wisp_clients.*",'wisp_sector.*',"wisp_tower.wt_nombre","wisp_tower.wt_id")
+      ->get(),
+      "torres"=>Torres::get(),
+      "Sectores"=>Sectores::get()
+    ]);
+
     }
 }

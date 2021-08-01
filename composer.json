@@ -2,6 +2,7 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
+    
     "keywords": [
         "framework",
         "laravel"
@@ -17,7 +18,8 @@
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
-        "realrashid/sweet-alert": "^3.1"
+        "realrashid/sweet-alert": "^3.1",
+        "twilio/sdk": "^6.27"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
