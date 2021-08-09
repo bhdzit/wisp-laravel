@@ -68,7 +68,7 @@
             <!-- Logo -->
             <a href="index2.html" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><img src="{{ asset('/storage/imagenes/' . $business ?? ''->wb_perfil_img) }}"
+                <span class="logo-mini"><img src="{{ asset('/storage/imagenes/default.png') }}"
                         style="width: 48px;" /><b>WISP</b></span>
                 <!-- logo for regular state and mobile devices -->
                 <span class="logo-lg"><b>WISP Admin</b></span>
@@ -89,10 +89,10 @@
                             <!-- Menu Toggle Button -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <!-- The user image in the navbar-->
-                                <img src="{{ asset('/storage/imagenes/' . auth()->user()->perfil_img) }}"
+                                <img src="{{ asset('/storage/imagenes/default.png') }}"
                                     class="user-image" alt="User Image">
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                <span class="hidden-xs">{{ auth()->user()->name }}</span>
+                                <span class="hidden-xs">Carlos Alberto</span>
                             </a>
 
                         </li>
@@ -133,8 +133,7 @@
                             <span> Dashboard</span></a></li>
                     <li class="{{ setActive('torres') }}"><a href="{{ route('torres.index') }}"><i
                                 class="fas fa-broadcast-tower"></i><span> Torres</span></a></li>
-                    <li class="{{ setActive('clientes') }}"><a href="{{ route('clientes.index') }}"><i
-                                class="fas fa-users"></i> <span> Clientes</span></a></li>
+                  
 
                     <li class="treeview" style="height: auto;">
                         <a href="#">
@@ -145,12 +144,13 @@
                             </span>
                         </a>
                         <ul class="treeview-menu" style="display: none;">
-                            <li class="active"><a href="enviarmsj"><i class="fa fa-circle-o"></i>Ver Clientes</a></li>
-                            <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Enviar Msj</a></li>
-                            <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Usuarios Emby</a></li>
+                            <li class="{{ setActive('clientes') }}"><a href="{{ route('clientes.index') }}"><i class="fa fa-circle-o"></i>Ver Clientes</a></li>
+                            <li class="{{ setActive('enviarmsj') }}"><a href="enviarmsj"><i class="fa fa-circle-o"></i> Enviar Msj</a></li>
+                            <li><a href="emby"><i class="fa fa-circle-o"></i> Usuarios Emby</a></li>
                             
                         </ul>
                     </li>
+
                     <li class="{{ setActive('sectores') }}"><a href="{{ route('sectores.index') }}"><i
                                 class="fas fa-wifi"></i> <span> Sectores</span></a></li>
                     <li class="{{ setActive('paquetes') }}"><a href="{{ route('paquetes.index') }}"><i

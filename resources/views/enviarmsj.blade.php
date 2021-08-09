@@ -47,50 +47,55 @@
                         <div class="form-group  col-sm-4 ">
                             <label> </label>
                             <div class="box-footer p-0">
-                                <button type="submit" class="btn btn-info pull-right">Enviar</button>
+                                <button onclick="document.getElementById('clientsMsj').submit()" type="submit" class="btn btn-info pull-right">Enviar</button>
                             </div>
 
                         </div>
 
                     </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="input-group m-5 direct-chat-messages">
+                    <form action="enviarmsj" method="POST" id="clientsMsj">
+                    @csrf
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="input-group m-5 direct-chat-messages">
 
-                                <input id="search" type="text" name="message" placeholder="Buscar" class="form-control">
-                                <span class="input-group-btn">
-                                    <button type="submit" class="btn btn-warning btn-flat"><i
-                                            class="fas fa-search"></i></button>
-                                </span>
+                                    <input id="search" type="text" name="message" placeholder="Buscar" class="form-control">
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-warning btn-flat"><i
+                                                class="fas fa-search"></i></button>
+                                    </span>
+                                </div>
+                                <div class="direct-chat-info clearfix">
+
+                                    <input id="selectAllcheckbox" class="pull-right" type="checkbox"><span
+                                        class="direct-chat-timestamp pull-right ">Todos :</span>
+                                </div>
+                                <div class="direct-chat-messages">
+
+                                    <ul class="nav nav-stacked">
+
+                                        <!-- Message. Default to the left -->
+                                        @php $i=1;@endphp
+                                        @foreach ($clientes as $cliente)
+                                            <li class="client-phone " data-cli-sec="{{ $cliente->wsct_id }}"
+                                                data-cli-torre="{{ $cliente->wsct_tower }}"><a
+                                                    href="#">{{ $cliente->wc_name . ' ' . $cliente->wc_last_name . ' / ' . $cliente->wc_phone }}
+                                                    <span class="pull-right "><input name="num[]" value="{{$cliente->wc_phone}}" type="checkbox"></span></a></li>
+                                        @endforeach
+                                    </ul>
+                                    <!-- /.direct-chat-msg -->
+                                </div>
+
                             </div>
-                            <div class="direct-chat-info clearfix">
-
-                                <input id="selectAllcheckbox" class="pull-right" type="checkbox"><span class="direct-chat-timestamp pull-right ">Todos :</span>
+                            <div class="box-body pad col-sm-5">
+                                <form>
+                                    <textarea id="editor1" name="editor1" rows="10" cols="80">
+                                                 This is my textarea to be replaced with CKEditor.
+                                                </textarea>
+                                </form>
                             </div>
-                            <div class="direct-chat-messages">
-
-                                <ul class="nav nav-stacked">
-
-                                    <!-- Message. Default to the left -->
-                                    @foreach ($clientes as $cliente)
-                                        <li class="client-phone " data-cli-sec="{{ $cliente->wsct_id }}"
-                                            data-cli-torre="{{ $cliente->wsct_tower }}"><a
-                                                href="#">{{ $cliente->wc_name . ' ' . $cliente->wc_last_name . ' / ' . $cliente->wc_phone }}
-                                                <span class="pull-right "><input type="checkbox"></span></a></li>
-                                    @endforeach
-                                </ul>
-                                <!-- /.direct-chat-msg -->
-                            </div>
-
                         </div>
-                        <div class="box-body pad col-sm-5">
-                            <form>
-                                <textarea id="editor1" name="editor1" rows="10" cols="80">
-                                             This is my textarea to be replaced with CKEditor.
-                                            </textarea>
-                            </form>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
     </section>
@@ -154,9 +159,9 @@
         });
 
 
-        document.getElementById("selectAllcheckbox").addEventListener("change", function(evt){
+        document.getElementById("selectAllcheckbox").addEventListener("change", function(evt) {
             for (let i = 0; i < clientes.length; i++) {
-               clientes[i].children[0].children[0].children[0].checked=evt.target.checked;
+                clientes[i].children[0].children[0].children[0].checked = evt.target.checked;
             }
         });
         $(function() {
