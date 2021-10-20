@@ -56,8 +56,8 @@
     <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
     <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
     <link rel="icon" href="/adminlte/dist/img/zona.png" type="image/x-icon">
- <!-- bootstrap wysihtml5 - text editor -->
- <link rel="stylesheet" href="/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link rel="stylesheet" href="/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -89,8 +89,8 @@
                             <!-- Menu Toggle Button -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <!-- The user image in the navbar-->
-                                <img src="{{ asset('/storage/imagenes/default.png') }}"
-                                    class="user-image" alt="User Image">
+                                <img src="{{ asset('/storage/imagenes/default.png') }}" class="user-image"
+                                    alt="User Image">
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
                                 <span class="hidden-xs">Carlos Alberto</span>
                             </a>
@@ -133,9 +133,9 @@
                             <span> Dashboard</span></a></li>
                     <li class="{{ setActive('torres') }}"><a href="{{ route('torres.index') }}"><i
                                 class="fas fa-broadcast-tower"></i><span> Torres</span></a></li>
-                  
 
-                    <li class="treeview" style="height: auto;">
+
+                    <!--   <li class="treeview" style="height: auto;">
                         <a href="#">
                             <i class="fas fa-users"></i>
                             <span>Clientes</span>
@@ -149,15 +149,16 @@
                             <li><a href="emby"><i class="fa fa-circle-o"></i> Usuarios Emby</a></li>
                             
                         </ul>
-                    </li>
-
+                    </li>-->
+                    <li class="{{ setActive('clientes') }}"><a href="{{ route('clientes.index') }}"><i
+                                class="fas fa-users"></i> <span> Clientes</span></a></li>
                     <li class="{{ setActive('sectores') }}"><a href="{{ route('sectores.index') }}"><i
                                 class="fas fa-wifi"></i> <span> Sectores</span></a></li>
                     <li class="{{ setActive('paquetes') }}"><a href="{{ route('paquetes.index') }}"><i
                                 class="fas fa-boxes"></i><span> Paquetes</span></a></li>
                     <li class="{{ setActive('pagos') }}"><a href="{{ route('pagos.index') }}/"><i
                                 class="fas fa-receipt"></i> <span> Pagos</span></a></li>
-                    <li class="{{ setActive('compras') }}"><a href="{{ route('compras.index') }}/"><i
+                   <!-- <li class="{{ setActive('compras') }}"><a href="{{ route('compras.index') }}/"><i
                                 class="fas fa-shopping-cart"></i><span> Compras</span></a></li>
                     <li class="{{ setActive('ingresos') }}"><a href="{{ route('ingresos.index') }}/"><i
                                 class="fas fa-hand-holding-usd"></i><span> Ingresos</span></a></li>
@@ -166,7 +167,7 @@
                     <li class="{{ setActive('tickets') }}"><a href="{{ route('tickets.index') }}"><i
                                 class="fas fa-bug"></i><span> Tickets</span></a></li>
                     <li class="{{ setActive('configuracion') }}"><a href="{{ route('configuracion.index') }}"><i
-                                class="fa fa-gears"></i><span> Configuracion</span></a></li>
+                                class="fa fa-gears"></i><span> Configuracion</span></a></li>-->
 
                     <!--         <li class="treeview">
         <a href="#"><i class="fa fa-link"></i> <span>Paquetes</span>
@@ -222,7 +223,7 @@
     <script src="/adminlte/dist/js/js.js"></script>
     <script src="/adminlte/dist/js/qrcode.js"></script>
     @yield('script')
-   
+
 
 </body>
 
