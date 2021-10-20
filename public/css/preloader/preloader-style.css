@@ -8798,3 +8798,7 @@ to {
  -moz-transform: scale(0.5);
 }
 }
+.swal2-loader {
+    width: 10.2em !important;
+    height: 10.2em !important;
+}

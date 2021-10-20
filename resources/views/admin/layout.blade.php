@@ -48,7 +48,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <script src="https://kit.fontawesome.com/015cfc4544.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
     <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
@@ -222,7 +222,7 @@
     <script src="/adminlte/dist/js/js.js"></script>
     <script src="/adminlte/dist/js/qrcode.js"></script>
     @yield('script')
-    @include('sweetalert::alert')
+   
 
 </body>
 

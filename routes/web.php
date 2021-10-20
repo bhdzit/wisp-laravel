@@ -19,7 +19,8 @@ Route::get('home','HomeController@index')->middleware('auth');
 Route::resource('clientes','ClienteController')->middleware('auth');
 Route::get('enviarmsj','ClienteController@getSeendMsjView');
 Route::post('enviarmsj','ClienteController@seendMsj');
-
+Route::get('emby','ClienteController@getGenEmbyUserView');
+Route::post('genembyusr','ClienteController@genEmbyUser');
 Route::resource('torres','TorresController')->middleware('auth');
 Route::resource('sectores', 'SectoresController')->middleware('auth');
 Route::resource('paquetes','PaquetesController')->middleware('auth');

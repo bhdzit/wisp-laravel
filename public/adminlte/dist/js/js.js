@@ -850,3 +850,64 @@ $('#clientInput').change(function (evt) {
   }
   hideCharingBar();
 });
+
+
+
+
+let torres = document.querySelectorAll("[data-torre]");
+
+
+document.getElementById("torres").addEventListener("change", function(evt) {
+
+    for (let i = 0; i < torres.length; i++) {
+        let torreDeSector = torres[i].getAttribute("data-torre");
+        if (evt.target.value != torreDeSector) {
+            torres[i].setAttribute("hidden", "true");
+        } else {
+            torres[i].removeAttribute("hidden", "true");
+        }
+    }
+    document.getElementById("sectores").selectedIndex = 0;
+    setClientFilter();
+});
+
+document.getElementById("sectores").addEventListener("change", setClientFilter);
+
+let clientes = document.getElementsByClassName("client-phone");
+
+function setClientFilter() {
+
+    let torreSelecionada = document.getElementById("torres").value;
+    let sectorSelecionado = document.getElementById("sectores").value;
+
+    for (let i = 0; i < clientes.length; i++) {
+        let torre = clientes[i].getAttribute("data-cli-torre");
+        let sector = clientes[i].getAttribute("data-cli-sec");
+        if ((torre == torreSelecionada || torreSelecionada == 0) && (sectorSelecionado == 0 || sector ==
+                sectorSelecionado)) {
+            clientes[i].classList.remove("hidden");
+        } else {
+            clientes[i].classList.add("hidden");
+        }
+    }
+}
+
+
+document.getElementById("search").addEventListener("keyup", function(evt) {
+    for (let i = 0; i < clientes.length; i++) {
+        if (clientes[i].children[0].textContent.includes(evt.target.value)) {
+            clientes[i].classList.remove("hidden");
+            console.log(clientes[i].children[0].textContent);
+
+        } else {
+            clientes[i].classList.add("hidden");
+        }
+    }
+});
+
+
+document.getElementById("selectAllcheckbox").addEventListener("change", function(evt) {
+    for (let i = 0; i < clientes.length; i++) {
+        clientes[i].children[0].children[0].children[0].checked = evt.target.checked;
+    }
+});

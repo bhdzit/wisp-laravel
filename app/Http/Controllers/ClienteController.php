@@ -172,17 +172,50 @@ class ClienteController extends Controller
     abort(404);
     $sid = "AC5b5ec936ea6da87bdfef3bf7355f699a";
     $token = "33a666e63e46344feb3b33602afef0e2";
-    $twilio = new Client($sid, $token); 
+    $twilio = new Client($sid, $token);
     return $request->input('num.*');
-    $message = $twilio->messages 
-                      ->create("whatsapp:+5217713814046", // to 
-                               array( 
-                                   "from" => "whatsapp:+14155238886",       
-                                   "body" => "Hello" 
-                               ) 
-                      ); 
+    $message = $twilio->messages
+      ->create(
+        "whatsapp:+5217713814046", // to 
+        array(
+          "from" => "whatsapp:+14155238886",
+          "body" => "Hello"
+        )
+      );
 
     //print($message->sid);
     return $message->sid;
+  }
+
+  public function getGenEmbyUserView()
+  {
+    $usuariosSinAcceso = Clientes::leftjoin("wisp_emby", "wem_id", "=", "wc_id")->whereNull("wem_id")
+      ->leftjoin('wisp_services', 'wc_id', '=', 'ws_id_cliente')
+      ->leftjoin('wisp_sector', 'wsct_id', '=', 'ws_sector')
+      ->leftjoin('wisp_tower', 'wsct_tower', "=", 'wt_id')
+      ->select("wisp_clients.*", 'wisp_sector.*', "wisp_tower.wt_nombre", "wisp_tower.wt_id", "wisp_services.ws_id")
+      ->get();
+    return view("emby", [
+      "clientes" => $usuariosSinAcceso, "torres" => Torres::get(),
+      "Sectores" => Sectores::get()
+    ]);
+  }
+
+  public function genEmbyUser(Request $request)
+  {
+    $usuarios = $request->input('usu.*');
+$json="[";
+    foreach ($usuarios as $usuario) {
+      $pass = "";
+      $pass .= chr(rand(97, 122));
+      $pass .= rand(0, 9);
+      $pass .= chr(rand(97, 122));
+      $pass .= rand(0, 9);
+      $usu = 'AO#C1' . $usuario;
+      $json.= "{\"usu\":\"$usu\",\"pass\":\"$pass\"},";
+    }
+   
+    $json=substr($json,0,strlen($json)-1)."]";
+    return $json;
   }
 }
