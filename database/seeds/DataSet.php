@@ -25,9 +25,9 @@ class DataSet extends Seeder
         $faker = Faker::create();
         User::create([
             'name' => 'Bryan Eliut Hernandez Moran',
-            'email' => 'bhdzit97@gmail.com',
+            'email' => 'demo@redzonaon.com',
             'email_verified_at' => $faker->date,
-            'password' => Hash::make('IT25697.'),
+            'password' => Hash::make('Demo1234.'),
         ]);
 
         $latitudes_productos = [
