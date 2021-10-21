@@ -24,6 +24,10 @@ Route::post('genembyusr','ClienteController@genEmbyUser');
 Route::resource('torres','TorresController')->middleware('auth');
 Route::resource('sectores', 'SectoresController')->middleware('auth');
 Route::resource('paquetes','PaquetesController')->middleware('auth');
+
+Route::post("pagos/data","PagosController@data")->name("pagos.data");
+Route::post("reportepagos.data","ReporteControlle@data")->name("reportepagos.data");
+
 Route::resource('pagos/agregarpago','AddPayController')->middleware('auth');
 Route::resource('pagos/reportepagos','ReporteController')->middleware('auth');
 Route::resource('pagos','PagosController')->middleware('auth');
