@@ -855,8 +855,8 @@ $('#clientInput').change(function (evt) {
 
 
 let torres = document.querySelectorAll("[data-torre]");
-
-
+//console.log("asdasd",torres);
+if(document.getElementById("torres")!=null){
 document.getElementById("torres").addEventListener("change", function(evt) {
 
     for (let i = 0; i < torres.length; i++) {
@@ -911,3 +911,4 @@ document.getElementById("selectAllcheckbox").addEventListener("change", function
         clientes[i].children[0].children[0].children[0].checked = evt.target.checked;
     }
 });
+}
