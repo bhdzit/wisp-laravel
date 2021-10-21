@@ -756,7 +756,7 @@ var payTable = null;
 var ultimomespagado = 1;
 var pkg = null, serv = null;
 $('#clientInput').change(function (evt) {
-
+  document.getElementById("mesAnteriorSinPagoNot").setAttribute("hidden",true);
   if ($("#clientInput").val().length != 0) showCharingbar();;
 
   $('#clientName').val($('#clientInput').val());
@@ -830,18 +830,18 @@ $('#clientInput').change(function (evt) {
 
       let pagosAnteriores = res[0].pays;
       let last_month_pay = res[0].last_month_pay;
-      console.log(last_month_pay);
-      last_month_pay=new Date(last_month_pay);
-      console.log(last_month_pay);
-      if (last_month_pay.getMonth()< new Date().getMonth()) {
-        alert("No se pago el mes Anterior");
+      if(last_month_pay)
+      last_month_pay=last_month_pay.split("-")[1];
+      if (last_month_pay< new Date().getMonth()+1) {
+        document.getElementById("mesAnteriorSinPagoNot").removeAttribute("hidden");
       }
 //      console.log(last_month_pay, new Date());
            
-
+      console.log(pagosAnteriores);
       $('#recentPays').html('');
       for (var i = 0; i < pagosAnteriores.length; i++) {
-        $('#recentPays').append('<tr><td>' + (i + 1) + '</td><td>' + pagosAnteriores[i].fecha.toUpperCase() + '</td><td>' + pagosAnteriores[i].wp_name + '</td><td><button type="submit" class="btn btn-primary"><i class="fas fa-print"></i></button></td></tr>');
+        if(pagosAnteriores[i].wps_id==null)pagosAnteriores[i].wps_id="#";
+        $('#recentPays').append('<tr><td>' + (i + 1) + '</td><td>' + pagosAnteriores[i].fecha.toUpperCase() + '</td><td>' + pagosAnteriores[i].wp_name + '</td><td><a href="../verpago/'+pagosAnteriores[i].wps_id+'" class="btn btn-primary"><i class="fas fa-print"></i></a></td></tr>');
       }
       payTable = $('#recentPaysTable').DataTable();
       $('table').removeClass('hidden');

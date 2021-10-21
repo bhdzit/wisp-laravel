@@ -10,6 +10,7 @@ use App\Servicios;
 use App\Clientes;
 use App\Pagos;
 use ArrayObject;
+use Facade\FlareClient\Http\Client;
 use PDF;
 class PagosController extends Controller
 {
@@ -93,5 +94,20 @@ date_default_timezone_set('America/Mexico_City');
     {
         DB::insert('insert into drop_pay (wdp_pay) values(?)',[$id]);
        return redirect()->route('pagos.index');;
+    }
+
+    public function verPago($id){
+        $request=new Request();
+        $pago=Pagos::find($id);
+        $cliente=Clientes::leftjoin("wisp_services","ws_id_cliente","=","wc_id")->where("ws_id","=",$pago->wps_servicios)->first();
+        $request->request->add(["clientName"=>$cliente->wc_name." ".$cliente->wc_last_name]);
+        $pagos= new ArrayObject();
+        $pagos->append($pago);
+        $customPaper = array(0,0,667.00,150);
+        $credenciales=DB::select("select * from wisp_emby where wem_id=?",[$pago->wps_servicios]);
+        $extras=null;
+        $pdf = PDF::loadView('layouts.dompdf',compact('request',['pagos','extras','credenciales']))->setPaper($customPaper, 'landscape');
+    //    $pdf->save('my_stored_file.pdf')->stream('download.pdf');
+        return  $pdf->stream();
     }
 }

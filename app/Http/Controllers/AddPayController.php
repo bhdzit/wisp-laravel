@@ -26,6 +26,7 @@ class AddPayController extends Controller
       ->join('wisp_pkg', 'ws_pkg', '=', 'wp_id')
       ->join('wisp_contract', 'wct_id', '=', 'ws_contract')
       ->select(DB::raw('ST_Y(ws_maps) as lat,ST_X(ws_maps) as lng, INET_NTOA(ws_ip) as ws_ip'), 'ws_id', 'wc_name', 'wc_id', 'wc_last_name', 'wc_phone', 'ws_pkg', 'wct_id', 'wct_nombre', 'ws_sector', 'wp_name', 'ws_date', 'wp_id')
+      ->where("ws_first_pay_date","<",now())
       ->get(), 'paquetes' => Paquetes::get(),"business"=>Business::first()]);
   }
 

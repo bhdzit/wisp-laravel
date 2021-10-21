@@ -27,7 +27,9 @@
 
         <div class="row " style="margin-top:25px">
           <div class="box-body">
-
+            <div id="mesAnteriorSinPagoNot"  class="alert alert-warning" hidden role="alert">
+              <strong>No se pago el mes Anterior</strong> 
+            </div>
             <div class="col-sm-12">
               <div class="box"></div>
 
@@ -35,7 +37,9 @@
                 <h3 class="box-title">Realizar Pago</h3>
                 <button style="margin-right: 10px;" onclick="$('#paysForm').submit()" class="btn btn-success pull-right">Realizar pago</button>
                 <button style="margin-right: 10px;" onclick="addPayRow()" class="btn btn-success pull-right" href=""><i class="fas fa-plus"></i></button>
+                
               </div>
+              
               <form target="pdf" id="paysForm" method="POST" action="{{route('agregarpago.store')}}">
                 <!-- /.box-header -->
                 <div class="row" id="charging-row" hidden>

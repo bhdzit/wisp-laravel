@@ -32,6 +32,7 @@ Route::resource('compras','ComprasController')->middleware('auth');
 Route::resource('ingresos','IngresosController')->middleware('auth');
 Route::resource('egresos','EgresosController')->middleware('auth');
 Route::resource('configuracion','ConfiguracionController')->middleware('auth');
+Route::get('verpago/{id}',"PagosController@verPago");
 Auth::routes();
 
 #Route::get('/home', 'HomeController@index')->name('home');
