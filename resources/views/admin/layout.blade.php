@@ -158,7 +158,9 @@
                                 class="fas fa-boxes"></i><span> Paquetes</span></a></li>
                     <li class="{{ setActive('pagos') }}"><a href="{{ route('pagos.index') }}/"><i
                                 class="fas fa-receipt"></i> <span> Pagos</span></a></li>
-                   <!-- <li class="{{ setActive('compras') }}"><a href="{{ route('compras.index') }}/"><i
+                    <li class="{{ setActive('router') }}"><a href="{{ route('router.index') }}/">
+                        <i class="fas fa-network-wired"></i><span> Routers</span></a></li>
+                    <!-- <li class="{{ setActive('compras') }}"><a href="{{ route('compras.index') }}/"><i
                                 class="fas fa-shopping-cart"></i><span> Compras</span></a></li>
                     <li class="{{ setActive('ingresos') }}"><a href="{{ route('ingresos.index') }}/"><i
                                 class="fas fa-hand-holding-usd"></i><span> Ingresos</span></a></li>
@@ -189,7 +191,7 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <section class="content">
-            @yield('content')
+                @yield('content')
             </section>
         </div>
         <!-- /.content-wrapper -->

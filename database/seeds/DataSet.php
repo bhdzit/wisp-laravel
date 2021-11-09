@@ -24,7 +24,7 @@ class DataSet extends Seeder
         //
         $faker = Faker::create();
         User::create([
-            'name' => 'Bryan Eliut Hernandez Moran',
+            'name' => 'Usuario Demo',
             'email' => 'demo@redzonaon.com',
             'email_verified_at' => $faker->date,
             'password' => Hash::make('Demo1234.'),
