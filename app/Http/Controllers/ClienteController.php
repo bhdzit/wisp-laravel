@@ -53,7 +53,6 @@ class ClienteController extends Controller
   {
     request()->validate([
       "wc_name" => ["required"],
-      "wc_last_name" => ["required"],
       "wc_phone" => ["required", "numeric"],
       "wc_phone2" => ["nullable", "numeric"],
       "wc_date" => ["required", "date_format:Y-m-d"],

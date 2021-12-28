@@ -38,6 +38,7 @@ Route::resource('egresos','EgresosController')->middleware('auth');
 Route::resource('configuracion','ConfiguracionController')->middleware('auth');
 Route::get('verpago/{id}',"PagosController@verPago");
 Route::get('routers','RouterController@getRouterView')->name("router.index");
+Route::post("routers/verificarCredencialesRouter",'RouterController@verificarCredencialesRouter')->name("router.validar");
 Auth::routes();
 
 #Route::get('/home', 'HomeController@index')->name('home');

@@ -2,21 +2,13 @@
   '<input type="hidden" id="wc_id" name="wc_id" value="{{old("wc_id")}}">'+
   '@csrf'+
 '<div class="form-group row">'+
-    '  <div class="col-sm-6">'+
+    '  <div class="col-sm-12">'+
     '<input style="margin-bottom:0" type="text" class="form-control swal2-input" id="wc_name" name="wc_name" placeholder="Nombre" required value="{{old('wc_name')}}">'+
     '   @error("wc_name")'+
     '<div  class=" alert-danger" role="alert">'+
     '  <strong>¡Error al Cargar Cliente!</strong>Nombre de Cliente requerido'+
     '</div>'+
     '  @enderror'+
-    '  </div>'+
-    '  <div class="col-sm-6">'+
-        '<input style="margin-bottom:0" type="text" class="form-control swal2-input" id="wc_last_name" name="wc_last_name" placeholder="Apellido" required value="{{old('wc_last_name')}}">'+
-        '   @error("wc_last_name")'+
-        '<div  class=" alert-danger" role="alert">'+
-        '  <strong>¡Error al Cargar Cliente!</strong>Apellido de Cliente requerido'+
-        '</div>'+
-        '  @enderror'+
     '  </div>'+
     '</div><div class="form-group row">'+
     '  <div class="col-sm-3">'+
@@ -97,7 +89,7 @@
     '  @enderror'+
     '  </div>'+
     '  <div class="col-sm-4">'+
-        '<input style="margin-bottom:13px" type="text" class="form-control swal2-input" id="wc_ip" list="ipdisponiblesec1" name="wc_ip" placeholder="ip" required value="{{old('wc_ip')}}">'+
+        '<input style="margin-bottom:13px" type="text" class="form-control swal2-input" id="wc_ip" list="ipdisponiblesec1" name="wc_ip" placeholder="ip" value="{{old('wc_ip')}}">'+
         '   @error("wc_ip")'+
         '<div  class=" alert-danger" role="alert">'+
         '  <strong>¡Error al Cargar Cliente!</strong>IP requerida'+
@@ -105,22 +97,7 @@
         '  @enderror'+
         {{getAvailableIP($sectores,$services)}}
     '  </div>'+
-    '  <div class="col-sm-4">'+
-        '<input style="margin-bottom:0" type="text" class="form-control swal2-input" id="wc_ssid" name="wc_ssid" value="{{old("wc_ssid")}}" placeholder="SSID">'+
-        '   @error("wc_ssid")'+
-        '<div  class=" alert-danger" role="alert">'+
-        '  <strong>¡Error al Cargar Cliente!</strong>Fecha de Primer pago requerida'+
-        '</div>'+
-        '  @enderror'+
-    '  </div>'+
-    '  <div class="col-sm-4">'+
-        '<input style="margin-bottom:0" type="text" class="form-control swal2-input" id="wc_pass" name="wc_pass" value="{{old("wc_pass")}}" placeholder="PASSWORD">'+
-        '   @error("wc_pass")'+
-        '<div  class=" alert-danger" role="alert">'+
-        '  <strong>¡Error al Cargar Cliente!</strong>Contraseña  requerida'+
-        '</div>'+
-        '  @enderror'+
-    '  </div>'+
+
     '<input type="hidden" class="form-control swal2-input" id="wc_point" name="wc_point" required value="{{old("wc_point")}}" >'+
     '  <div class="col-sm-12 ">'+
     '<div style="width: 100%; height: 380px" id="mapContainer"></div>'+

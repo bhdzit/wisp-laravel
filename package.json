@@ -1,43 +1,64 @@
 {
-    "private": true,
-    "scripts": {
-        "dev": "npm run development",
-        "development": "mix",
-        "watch": "mix watch",
-        "watch-poll": "mix watch -- --watch-options-poll=1000",
-        "hot": "mix watch --hot",
-        "prod": "npm run production",
-        "production": "mix --production"
-    },
-    "devDependencies": {
-        "axios": "^0.24.0",
-        "cross-env": "^7.0.3",
-        "jquery": "^3.6.0",
-        "laravel-mix": "^6.0.39",
-        "lodash": "^4.17.21",
-        "popper.js": "^1.12",
-        "resolve-url-loader": "^4.0.0",
-        "sass": "^1.43.4",
-        "sass-loader": "^8.0.0",
-        "vue": "^2.6.14",
-        "vue-loader": "^15.9.8",
-        "vue-template-compiler": "^2.6.14"
-    },
-    "dependencies": {
-        "core-decorators": "^0.20.0",
-        "crypto-browserify": "^3.12.0",
-        "dgram": "^1.0.1",
-        "dns": "^0.2.2",
-        "domain-browser": "^4.22.0",
-        "fs": "0.0.1-security",
-        "mikronode": "^2.3.11",
-        "net": "^1.0.2",
-        "node-routeros": "^1.6.9",
-        "path": "^0.12.7",
-        "path-browserify": "^1.0.1",
-        "rxjs": "^5.3.0",
-        "rxjs-compat": "^6.6.7",
-        "sweetalert2": "^11.1.10",
-        "timers-browserify": "^2.0.12"
-    }
+  "name": "wisp-laravel",
+  "version": "1.0.0",
+  "description": "Wisp Admin",
+  "private": true,
+  "main": "webpack.mix.js",
+  "directories": {
+    "test": "tests"
+  },
+  "license": "MIT license",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:bhdzit/wisp-laravel.git"
+  },
+  "scripts": {
+    "dev": "npm run development",
+    "development": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "prod": "npm run production",
+    "production": "mix --production"
+  },
+  "devDependencies": {
+    "axios": "^0.21.4",
+    "laravel-mix": "^6.0.6",
+    "lodash": "^4.17.19",
+    "postcss": "^8.1.14",
+    "resolve-url-loader": "^4.0.0",
+    "sass": "^1.43.4",
+    "sass-loader": "^12.1.0",
+    "vue-loader": "^15.9.8",
+    "vue-template-compiler": "^2.6.14",
+    "webpack-system-register": "^1.6.0"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.10.2",
+    "bootstrap": "^5.1.3",
+    "browserify-fs": "^1.0.0",
+    "child_process": "^1.0.2",
+    "core-decorators": "^0.12.3",
+    "crypto-browserify": "^3.12.0",
+    "dgram-browserify": "0.0.13",
+    "dns": "^0.2.2",
+    "domain": "0.0.1",
+    "es6-promise": "^4.2.8",
+    "fs": "0.0.1-security",
+    "jquery": "^3.6.0",
+    "jquery.js": "0.0.2-security",
+    "mikronode": "^2.3.11",
+    "mikronode-ng": "^1.0.11",
+    "net": "^1.0.2",
+    "node-routeros": "^1.6.9",
+    "path": "^0.12.7",
+    "popper.js": "^1.16.1",
+    "request": "^2.79.0",
+    "routeros-client": "^1.1.2",
+    "rxjs": "^5.3.0",
+    "sweetalert2": "^11.1.10",
+    "timers-browserify": "^2.0.12",
+    "tls": "0.0.1",
+    "vue": "^2.6.14"
+  }
 }

@@ -17,7 +17,7 @@ class CreateWispClientsTable extends Migration {
 		{
 			$table->integer('wc_id', true);
 			$table->string('wc_name', 30);
-			$table->string('wc_last_name', 30);
+			$table->string('wc_last_name')->nullable();
 			$table->decimal('wc_phone', 10, 0)->nullable();
 			$table->decimal('wc_phone2', 10, 0)->nullable();
 		});

@@ -25,7 +25,7 @@ class CreateWispServicesTable extends Migration {
 			$table->integer('ws_sector')->index('ws_sector');
 			$table->string('ws_ssid', 60)->nullable();
 			$table->string('ws_pass', 60)->nullable();
-			$table->integer('ws_ip')->unsigned();
+			$table->integer('ws_ip')->unsigned()->nullable();
 			$table->integer('ws_isActive')->default(1);
 		});
 	}
