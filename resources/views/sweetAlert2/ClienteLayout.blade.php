@@ -20,14 +20,6 @@
     '  @enderror'+
     '  </div>'+
     '  <div class="col-sm-3">'+
-        '<input style="margin-bottom:0" type="text" class="form-control swal2-input" id="wc_phone2" name="wc_phone2" placeholder="Telefono 2" value="{{old('wc_phone2')}}">'+
-        '   @error("wc_phone2")'+
-        '<div  class=" alert-danger" role="alert">'+
-        '  <strong>¡Error al Cargar Cliente!</strong>Formato de Telefono erroneo'+
-        '</div>'+
-        '  @enderror'+
-    '  </div>'+
-    '  <div class="col-sm-3">'+
     '<strong>Fecha de Instalacion</strong>'+
         '<input style="margin-bottom:0" style="margin-top:0" type="date" class="form-control swal2-input" id="wc_date" name="wc_date" required value="{{old('wc_date')}}" >'+
         '   @error("wc_date")'+
@@ -88,15 +80,7 @@
     '</div>'+
     '  @enderror'+
     '  </div>'+
-    '  <div class="col-sm-4">'+
-        '<input style="margin-bottom:13px" type="text" class="form-control swal2-input" id="wc_ip" list="ipdisponiblesec1" name="wc_ip" placeholder="ip" value="{{old('wc_ip')}}">'+
-        '   @error("wc_ip")'+
-        '<div  class=" alert-danger" role="alert">'+
-        '  <strong>¡Error al Cargar Cliente!</strong>IP requerida'+
-        '</div>'+
-        '  @enderror'+
-        {{getAvailableIP($sectores,$services)}}
-    '  </div>'+
+    
 
     '<input type="hidden" class="form-control swal2-input" id="wc_point" name="wc_point" required value="{{old("wc_point")}}" >'+
     '  <div class="col-sm-12 ">'+

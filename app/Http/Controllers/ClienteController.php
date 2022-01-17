@@ -54,20 +54,17 @@ class ClienteController extends Controller
     request()->validate([
       "wc_name" => ["required"],
       "wc_phone" => ["required", "numeric"],
-      "wc_phone2" => ["nullable", "numeric"],
       "wc_date" => ["required", "date_format:Y-m-d"],
       "wc_pay_date" => ["required", "date_format:Y-m-d"],
       "wc_pkg" => ["required", "numeric"],
       "wc_point" => ["required"],
       "wc_contract" => ["required", "numeric"],
       "wc_sector" => ["required", "numeric"],
-      "wc_ip" => ["required", 'regex:/^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/']
     ]);
     $cliente = new Clientes();
     $cliente->wc_name = $request->get('wc_name');
     $cliente->wc_last_name = $request->get('wc_last_name');
     $cliente->wc_phone = $request->get('wc_phone');
-    $cliente->wc_phone2 = $request->get('wc_phone2');
     $cliente->save();
     $servicio = new Servicios;
     $servicio->ws_id_cliente = $cliente->wc_id;
@@ -77,9 +74,6 @@ class ClienteController extends Controller
     $servicio->ws_maps = \DB::raw("POINT(" . $request->get('wc_point') . ")");
     $servicio->ws_contract = $request->get('wc_contract');
     $servicio->ws_sector = $request->get('wc_sector');
-    $servicio->ws_ssid = $request->get('wc_ssid');
-    $servicio->ws_pass = $request->get('wc_pass');
-    $servicio->ws_ip = \DB::raw("INET_ATON('" . $request->get('wc_ip') . '\')');
     $servicio->save();
     return redirect()->route('clientes.index');;
   }
